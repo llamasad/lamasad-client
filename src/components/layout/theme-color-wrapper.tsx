@@ -6,7 +6,7 @@ function ThemeColorWraper({children}:{children:ReactNode}) {
    
     
     return <>{children}
-    <div className="box w-[100px] h-[100px] bg-white"></div>
+    <div className="box w-[100px]  h-[100px] bg-white"></div>
     </>;
 
 }
