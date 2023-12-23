@@ -1,23 +1,18 @@
 'use client';
-
-import Image from 'next/image';
-import gsap from 'gsap';
+import Preview from '@/components/one-time-use/preview';
+import DashedWrap from '@/components/wrapper-components/dashed-wrap';
+import MainContent from '@/components/paragraph-container/main-content';
+import ExplainWhy from '@/components/paragraph-container/explain-why.tsx';
 export default function Home() {
-    console.log(gsap);
-    const onEnter = ({ currentTarget }: React.MouseEvent<HTMLElement>) => {
-        gsap.to(currentTarget, { backgroundColor: '#e77614', scale: 1.2 });
-    };
-
-    const onLeave = ({ currentTarget }: React.MouseEvent<HTMLElement>) => {
-        gsap.to(currentTarget, { backgroundColor: '#28a92b', scale: 1 });
-    };
-
     return (
-        // <div className="app flex-row">
-        //     <div className="box" onMouseEnter={onEnter} onMouseLeave={onLeave}>
-        //         Hover Me
-        //     </div>
-        // </div>
-<></>
-        );
+        <div className="mb:w-mb-body tl:w-tl-body lt:w-lt-body dt:w-dt-body mx-auto">
+            <DashedWrap>
+                <MainContent />
+            </DashedWrap>
+            <ExplainWhy />
+            <Preview />
+
+            <div className="h-[500vw]"></div>
+        </div>
+    );
 }
