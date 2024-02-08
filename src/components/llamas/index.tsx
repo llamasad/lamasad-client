@@ -1,3 +1,4 @@
+'use client';
 import gsap from 'gsap';
 import { Xanh_Mono } from 'next/font/google';
 import { useEffect, useRef, useState } from 'react';
@@ -102,6 +103,7 @@ function Llamas() {
         <svg
             onClick={() => {
                 setTypeMove('run');
+                setMove((state) => state + 150);
             }}
             className="llamas cursor-pointer absolute w-[60px] left-[-60px] bottom-[-9px]"
             viewBox="0 0 500 500"

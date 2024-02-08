@@ -5,6 +5,7 @@ const images = {
     logo: require('./logo.svg'),
     llama: require('./Llamasad.png'),
     llamaBones: require('./bonellama.png'),
+    imgTest: require('./test.png'),
 };
 
 export default images;

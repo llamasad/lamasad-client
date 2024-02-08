@@ -1,0 +1,36 @@
+{
+    "Index": {
+        "title": "Hello world!"
+    },
+    "Navigation": {
+        "skill": "Skill",
+        "showcase": "Showcase",
+        "comunity": "Comunity"
+    },
+    "Home": {
+        "MainContent": {
+            "description": "Llamasad is a website digital platform showcase of my profile, delivering engaging content.",
+            "extraDescription": "This platform serves as a comprehensive repository for my professional curriculum vitae, as well as a personal space for tracking and reflecting on my ongoing professional development.",
+            "release": "“release from 12/12/2023”"
+        },
+        "ExplainWhy": {
+            "title": "What is the origin or meaning of the name “Llamasad” ?",
+            "answer": "The Llamas, a distinct breed of camel, serves as a symbol of tenacity and intellectual curiosity. This creature embodies my approach to work, reflecting my perseverance and propensity for thoughtful deliberation.In fact, I chanced upon a video that showcased a camel unexpectedly spitting in the face of an unsuspecting tourist. This peculiar incident piqued my interest, and I decided to adopt it as my unique alias."
+        },
+
+        "BrieIntroduction": {
+            "title": "Preview section",
+            "description": {
+                "sectionUp": "The following is a summary of what you need in ",
+                "sectionDown": "a developer like me on my website"
+            },
+            "thinking": {
+                "title": "My thinking",
+                "firstContent": "I go beyond simple library",
+                "secondContent": "things that float on the surface we see.",
+                "thirdContent": "driven by a desire to understand the “why” behind their functionality.",
+                "fourthContent": "My inside-out approach enables me to build solutions that are robust and effective while continuously expanding my knowledge base"
+            }
+        }
+    }
+}

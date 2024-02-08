@@ -125,7 +125,7 @@ function IconThemeTrans() {
     return (
         <button
             ref={eleRef}
-            className="text-inherit fixed bottom-[10px] left-[10px]"
+            className="text-inherit fixed z-30 bottom-[10px] left-[10px]"
             onClick={() => {
                 dispatch(themeSlice.actions.toggle());
             }}

@@ -3,6 +3,7 @@
 @tailwind utilities;
 @import url('../assets/fonts/fonts.css');
 :root {
+    --pimary-color: #2f81f7;
     --color: #413f3e;
     --title-color: #000000;
     --weak-color: #8c8c8c88;
@@ -23,4 +24,23 @@ body {
     overflow-x: hidden;
     color: var(--color);
     background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+.bg-\[\#27cf21\] {
+    background-color: #27cf21;
+}
+
+.bg-\[\#216ccf\] {
+    background-color: #216ccf;
+}
+.bg-\[\#d11111\] {
+    background-color: #d11111;
+}
+.bg-\[\#cfb821\] {
+    background-color: #cfb821;
+}
+.bg-\[\#7517d4\] {
+    background-color: #7517d4;
+}
+.macbook-blue-coating.trigger {
+    background-color: #1f75e6c0;
 }

@@ -1,102 +1,58 @@
-'use client';
 import Image from 'next/image';
 import images from '@/assets/images';
 import gsap from 'gsap';
-import Tippy from '@tippyjs/react/headless';
-
+//import Tippy from '@tippyjs/react/headless';
 import { useEffect, useRef, useState } from 'react';
+import LanguageOption from '../language-option';
 import observerTheme from '@/util/cookies/theme/observers/theme-observer';
 import Llamas from '../llamas';
-import { GithubIcon, ArrowIcon } from '../icons';
+import { useTranslations } from 'next-intl';
+import LogoIcon from '../animation/logo-icon';
+import StaticLink from '../navigation/staic-link';
+import { GithubIcon } from '../icons';
+import Link from 'next/link';
 function Header() {
-    const logoTween = useRef<gsap.core.Timeline | null>(null);
-    const [iconKey, setIconKey] = useState(() => {
-        const theme = document.body.getAttribute('theme-data');
-        let key = `${theme}Logo` as 'darkLogo' | 'lightLogo';
-        return key;
-    });
-
-    const iconRef = useRef<HTMLImageElement>(null);
-    let icon = images[iconKey];
-    useEffect(() => {
-        const tl = gsap.timeline();
-        tl.to('.logo_hover', { rotateY: 90, duration: 0.5 });
-        tl.to('.logo_hover-lama', { opacity: 1, duration: 0 });
-        tl.to('.logo_hover-l', { opacity: 0, duration: 0 }, '<');
-        tl.to('.logo_hover', { rotateY: 180, duration: 0.5 });
-        tl.pause();
-        logoTween.current = tl;
-    }, []);
-    useEffect(() => {
-        gsap.fromTo(iconRef.current, { y: -100 }, { y: 0, duration: 1, ease: 'bounce.out' });
-    }, [iconKey]);
-    useEffect(() => {
-        const observer = observerTheme((mutation) => {
-            setIconKey(() => {
-                const theme = document.body.getAttribute('theme-data');
-                let key = `${theme}Logo` as 'darkLogo' | 'lightLogo';
-                return key;
-            });
-        });
-        return () => {
-            observer.disconnect();
-        };
-    }, []);
+    const t = useTranslations('Navigation');
     return (
         <>
-            <div className="h-[67px]"></div>
-            <header className="fixed top-0 left-0 h-[66px] border-b-[1px] border-weak backdrop-blur-2xl w-full z-10">
+            <div className="h-[61px]"></div>
+            <header className="fixed top-0 left-0 h-[60px] border-b-[1px] border-weak backdrop-blur-2xl w-full z-10">
                 <div className="   h-full">
                     <div className="lg  m-auto dt:w-dt-body lt:w-lt-body tl:w-tl-body mb:w-mb-body  select-none flex h-full justify-between items-center">
                         <div className="h-full flex">
-                            <div
-                                className=" h-[46px] relative h-[46px] top-[9px]"
-                                onMouseEnter={() => {
-                                    if (logoTween.current) {
-                                        logoTween.current.play();
-                                    }
-                                }}
-                                onMouseLeave={() => {
-                                    if (logoTween.current) {
-                                        logoTween.current.reverse();
-                                    }
-                                }}
-                            >
-                                <div className=" logo_hover ">
-                                    <Image
-                                        draggable="false"
-                                        ref={iconRef}
-                                        src={icon}
-                                        width={46}
-                                        className="logo_hover-l cursor-pointer h-full"
-                                        alt="logo"
-                                    />
-                                    <Image
-                                        draggable="false"
-                                        src={images.lamasadImg}
-                                        width={46}
-                                        className="logo_hover-lama cursor-pointer h-[46px] rounded-[10px] top-0 absolute overflow-hidden opacity-0"
-                                        alt="logo"
-                                    />
-                                </div>
-                            </div>
                             <Llamas />
-                            <h1 className="ml-[6px] cursor-pointer text-tl font-iconFont text-3xl  h-full flex items-center justify-content-center">
-                                lamasad
-                            </h1>
+                            <StaticLink href={'/'} className="flex h-full">
+                                <LogoIcon />
+                                <h1 className="ml-[6px] cursor-pointer text-tl font-iconFont text-3xl  h-full flex items-center justify-content-center">
+                                    lamasad
+                                </h1>
+                            </StaticLink>
                             <div className="flex items-center justify-content-center ">
-                                <span className="ml-[20px] text-lg font-base cursor-pointer hover:text-tl">Skill</span>
-                                <span className="ml-[20px] text-lg font-base cursor-pointer hover:text-tl">
-                                    Showcase
+                                <span className="ml-[20px] text-[16px] font-normal cursor-pointer hover:text-tl">
+                                    <StaticLink className="static-link" href="/skill">
+                                        {t('skill')}
+                                    </StaticLink>
                                 </span>
-                                <span className="ml-[20px] text-lg font-base cursor-pointer hover:text-tl">
-                                    Comunity
+                                <span className="ml-[20px] text-[16px] font-normal cursor-pointer hover:text-tl">
+                                    <StaticLink className="static-link" href="/showcase">
+                                        {' '}
+                                        {t('showcase')}
+                                    </StaticLink>
+                                </span>
+                                <span className="ml-[20px] text-[16px] font-normal cursor-pointer hover:text-tl">
+                                    <StaticLink className="static-link" href={'/comunity'}>
+                                        {' '}
+                                        {t('comunity')}
+                                    </StaticLink>
                                 </span>
                             </div>
                         </div>
-                        <div className="flex items-center">
-                            <GithubIcon className="mr-[6px] w-5  h-5" />
-                            <Tippy
+                        <div className="flex items-center ">
+                            <Link href={'https://github.com/llamasad'}>
+                                <GithubIcon className="w-5 h-5 mr-[6px] hover:text-tl" />
+                            </Link>
+                            <LanguageOption />
+                            {/* <Tippy
                                 trigger="click"
                                 hideOnClick={true}
                                 interactive={true}
@@ -123,7 +79,7 @@ function Header() {
                                     EN
                                     <ArrowIcon className="language-arrow w-[8px] ml-[3px] h-[8px]" />
                                 </div>
-                            </Tippy>
+                            </Tippy> */}
                         </div>
                     </div>
                 </div>

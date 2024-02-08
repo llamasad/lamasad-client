@@ -8,7 +8,11 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            transitionProperty: {
+                size: 'width,height',
+            },
             colors: {
+                pimary: 'var(--pimary-color)',
                 current: 'currentColor',
                 bg: 'rgb(var(--foreground-rgb))',
                 tl: 'var(--title-color)',

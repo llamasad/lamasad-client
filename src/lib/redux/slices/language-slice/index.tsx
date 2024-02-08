@@ -4,7 +4,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 /* Instruments */
 
 const initialState: languageSliceState = {
-    type: 'VN',
+    type: 'en',
 };
 
 export const languageSlice = createSlice({
@@ -25,7 +25,9 @@ export const languageSlice = createSlice({
 });
 
 /* Types */
-export type language = 'VN' | 'EN';
+export type language = 'vi' | 'en';
+export const languages = ['vi', 'en'];
 export interface languageSliceState {
     type: language;
 }
+export * from './selector';

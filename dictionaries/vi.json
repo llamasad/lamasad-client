@@ -1,0 +1,36 @@
+{
+    "Index": {
+        "title": "vn"
+    },
+    "Navigation": {
+        "skill": "Kỹ năng",
+        "showcase": "Trưng bày",
+        "comunity": "cộng đồng"
+    },
+    "Home": {
+        "MainContent": {
+            "description": "Llamasad là một nền tảng kỹ thuật số trang web giới thiệu hồ sơ của tôi, cung cấp những nội dung hấp dẫn.",
+            "extraDescription": "Nền tảng này đóng vai trò như một kho lưu trữ toàn diện cho sơ yếu lý lịch nghề nghiệp của tôi, cũng như không gian cá nhân để theo dõi và phản ánh quá trình phát triển nghề nghiệp đang diễn ra của tôi.",
+            "release": "“ra mắt vào 12/12/2023”"
+        },
+        "ExplainWhy": {
+            "title": "Nguồn gốc hay ý nghĩa của cái tên “Llamasad” là gì?",
+            "answer": "Llamas, một giống lạc đà đặc biệt, được coi là biểu tượng của sự ngoan cường và trí tò mò trí tuệ. Sinh vật này thể hiện cách tiếp cận công việc của tôi, phản ánh sự kiên trì và thiên hướng cân nhắc chu đáo của tôi. Trên thực tế, tôi tình cờ xem được một đoạn video quay cảnh một con lạc đà bất ngờ nhổ nước bọt vào mặt một khách du lịch không nghi ngờ. Sự việc đặc biệt này đã khơi dậy sự quan tâm của tôi và tôi quyết định lấy nó làm bí danh duy nhất của mình."
+        },
+
+        "BrieIntroduction": {
+            "title": "Phần xem trước",
+            "description": {
+                "sectionUp": "Sau đây là tóm tắt những gì bạn cần ở một nhà phát",
+                "sectionDown": "triển như tôi trên trang web của tôi"
+            },
+            "thinking": {
+                "title": "Tư duy của tôi",
+                "firstContent": "Tôi vượt xa những thứ thư viện đơn giản",
+                "secondContent": "Trôi nổi trên bề mặt mà chúng tôi thấy.",
+                "thirdContent": "Được thúc đẩy bởi mong muốn hiểu “lý do” đằng sau chức năng của chúng.",
+                "fourthContent": "Cách tiếp cận từ trong ra ngoài của tôi cho phép tôi xây dựng các giải pháp mạnh mẽ và hiệu quả đồng thời liên tục mở rộng nền tảng kiến thức của mình"
+            }
+        }
+    }
+}

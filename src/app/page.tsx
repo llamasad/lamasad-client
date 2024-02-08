@@ -1,18 +1,5 @@
-'use client';
-import Preview from '@/components/one-time-use/preview';
-import DashedWrap from '@/components/wrapper-components/dashed-wrap';
-import MainContent from '@/components/paragraph-container/main-content';
-import ExplainWhy from '@/components/paragraph-container/explain-why.tsx';
-export default function Home() {
-    return (
-        <div className="mb:w-mb-body tl:w-tl-body lt:w-lt-body dt:w-dt-body mx-auto">
-            <DashedWrap>
-                <MainContent />
-            </DashedWrap>
-            <ExplainWhy />
-            <Preview />
-
-            <div className="h-[500vw]"></div>
-        </div>
-    );
+import { redirect } from 'next/navigation'; // This page only renders when the app is built statically (output: 'export')
+export default function RootPage() {
+    redirect('/en');
+    return <></>;
 }

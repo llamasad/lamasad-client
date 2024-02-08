@@ -5,8 +5,14 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import BorderSolidScale from '@/components/animation/border-solid-scale';
 import images from '@/assets/images';
-
-function Thinking({ getSectionSpace }: { getSectionSpace: Function }) {
+type content = {
+    title: string;
+    firstContent: string;
+    secondContent: string;
+    thirdContent: string;
+    fourthContent: string;
+};
+function Thinking({ getSectionSpace, content }: { content: content; getSectionSpace: Function }) {
     const imgRef = useRef<HTMLImageElement>(null);
     useEffect(() => {
         let tlForHeader = gsap.timeline({
@@ -127,7 +133,7 @@ function Thinking({ getSectionSpace }: { getSectionSpace: Function }) {
             <div className="section_scroll-x w-[100vw] relative mb-[100px] flex flex-row justify-center  items-center">
                 <BorderSolidScale getSectionSpace={getSectionSpace} index={1} />
                 <AngleBracket className="think-bracket--left " height="120px" />
-                <p className="thinking-header font-bold text-[0] "> My thinking</p>
+                <p className="thinking-header font-bold text-[0] "> {content.title}</p>
                 <AngleBracket className="think-bracket--right  relative top-[-1px]" height="120px " direction="left" />
             </div>
             <div className="overflow-hidden z-10 section_scroll-x w-[100vw] relative mb-[100px] flex flex-col justify-center  items-center">
@@ -140,24 +146,19 @@ function Thinking({ getSectionSpace }: { getSectionSpace: Function }) {
                     alt=""
                 />
                 <div className="absolute top-[200px] text-[30px] text-tl left-[10px]">
-                    <p className="thinking-text--1  translate-x-[-450px] font-medium ">
-                        I go beyond simple library usage
-                    </p>
+                    <p className="thinking-text--1  translate-x-[-550px] font-medium ">{content.firstContent}</p>
                     <p className="thinking-text--2 relative top-[20px] font-medium  translate-x-[-530px]">
-                        things that float on the surface we see
+                        {content.secondContent}
                     </p>
                 </div>
                 <p className="thinking-text--3 absolute bottom-[60px] left-[50%] font-medium translate-x-[-50%] whitespace-nowrap text-[30px] text-tl">
-                    {'driven by a desire to understand the "why" behind their functionality.'}
+                    {content.thirdContent}
                 </p>
             </div>
             <div className="section_scroll-x w-[100vw] relative mb-[100px]  flex flex-col justify-center  items-center">
                 <Image src={images.llamaBones} className="thinking-img-bones--fixed" height={400} width={400} alt="" />
                 <div className=" overflow-hidden  absolute left-[50%] text-[40px] font-medium text-tl">
-                    <p className="thinking-text--4">
-                        My inside-out approach enables me to build solutions that are robust and effective while
-                        continuously expanding my knowledge base
-                    </p>
+                    <p className="thinking-text--4">{content.fourthContent}</p>
                 </div>
             </div>
         </>
