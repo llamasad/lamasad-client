@@ -17,7 +17,7 @@ function getLocale(request: NextRequest): string | undefined {
 
         // Use negotiator and intl-localematcher to get best locale
         let languages = new Negotiator({ headers: negotiatorHeaders }).languages(locales);
-
+        console.log(new Negotiator({ headers: negotiatorHeaders }));
         const locale = matchLocale(languages, locales, i18n.defaultLocale);
 
         return locale;
@@ -45,7 +45,6 @@ export default async function middleware(request: NextRequest) {
     // Redirect if there is no locale
     if (pathnameIsMissingLocale) {
         const locale = getLocale(request);
-        console.log(locale);
         // e.g. incoming request is /products
         // The new URL is now /en-US/products
         return NextResponse.redirect(
@@ -63,7 +62,7 @@ export default async function middleware(request: NextRequest) {
     return response;
 }
 
-// export const config = {  
+// export const config = {
 //     // Match only internationalized pathnames
 //     matcher: ['/', '/(vi|en)/:path*'],
 // };

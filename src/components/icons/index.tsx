@@ -249,6 +249,47 @@ const OpenIcon = ({ className }: iconProps) => {
         </svg>
     );
 };
+
+const DeleteTextIcon = ({ className }: iconProps) => {
+    return (
+        <svg
+            className={classNames(className, '')}
+            width="16"
+            data-e2e=""
+            height="16"
+            viewBox="0 0 48 48"
+            fill="rgba(22, 24, 35, .34)"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M24 46C36.1503 46 46 36.1503 46 24C46 11.8497 36.1503 2 24 2C11.8497 2 2 11.8497 2 24C2 36.1503 11.8497 46 24 46ZM15.1466 30.7323L21.8788 24.0001L15.1466 17.2679C14.756 16.8774 14.756 16.2442 15.1466 15.8537L15.8537 15.1466C16.2442 14.756 16.8774 14.756 17.2679 15.1466L24.0001 21.8788L30.7323 15.1466C31.1229 14.756 31.756 14.756 32.1466 15.1466L32.8537 15.8537C33.2442 16.2442 33.2442 16.8774 32.8537 17.2679L26.1214 24.0001L32.8537 30.7323C33.2442 31.1229 33.2442 31.756 32.8537 32.1466L32.1466 32.8537C31.756 33.2442 31.1229 33.2442 30.7323 32.8537L24.0001 26.1214L17.2679 32.8537C16.8774 33.2442 16.2442 33.2442 15.8537 32.8537L15.1466 32.1466C14.756 31.756 14.756 31.1229 15.1466 30.7323Z"
+            ></path>
+        </svg>
+    );
+};
+const MicroIcon = ({ className }: iconProps) => {
+    return (
+        <svg
+            className={classNames('', className)}
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            data-icon="microphone"
+            data-container-transform="translate(3)"
+            viewBox="0 0 16 20"
+            x="0px"
+            y="0px"
+        >
+            <path
+                fill="currentColor"
+                d="M4.5 0c-1.4 0-2.5 1.1-2.5 2.5v5c0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.5v-5c0-1.4-1.1-2.5-2.5-2.5zm-4.125 6.188a.5.5 0 0 0-.375.5v.813c0 2.302 1.763 4.184 4 4.438v3.063h-2c-.6 0-1 .4-1 1h7c0-.6-.4-1-1-1h-2v-3.063c2.237-.254 4-2.136 4-4.438v-.813a.5.5 0 1 0-1 0v.813c0 1.927-1.573 3.5-3.5 3.5s-3.5-1.573-3.5-3.5v-.813a.5.5 0 0 0-.563-.5.5.5 0 0 0-.063 0z"
+                transform="translate(3)"
+            />
+        </svg>
+    );
+};
+
 const TabControlIcon = ({ className }: iconProps) => {
     return (
         <svg className={className} viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
@@ -315,6 +356,79 @@ const MinimizeIcon = ({ className }: iconProps) => {
                 d="M 259.977 268.434 L 387.457 417.564 L 132.497 417.564 L 259.977 268.434 Z"
                 transform="matrix(0.707107, 0.707107, -0.707107, 0.707107, -63.776882, -34.945254)"
             ></path>
+        </svg>
+    );
+};
+const LanguageIcon = ({ className }: iconProps) => {
+    return (
+        <svg className={classNames(className, '')} viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+            <text
+                style={{
+                    fill: '#333',
+                    fontFamily: 'Arial, sans-serif',
+                    fontSize: '24.3px',
+                    whiteSpace: 'pre',
+                    transformBox: 'fill-box',
+                    transformOrigin: '50% 50%',
+                }}
+                x="34.722"
+                y="221.701"
+                transform="matrix(11.179448, -0.000092, 0.288258, 10.319783, 90.741333, 83.703629)"
+            >
+                A
+            </text>
+            <text
+                style={{
+                    whiteSpace: 'pre',
+                    fill: '#333',
+                    fontFamily: 'Arial, sans-serif',
+                    fontSize: '24.3px',
+                }}
+                x="215.278"
+                y="65.104"
+                transform="matrix(15.40007, 0, 0, 14.676361, -3089.625488, -571.367737)"
+            >
+                A
+            </text>
+        </svg>
+    );
+};
+const BookOpenIcon = ({ className }: iconProps) => {
+    return (
+        <svg
+            className={classNames(className, '')}
+            width="800px"
+            height="800px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M3 6.1519V19.3095C3.99197 18.8639 5.40415 18.4 7 18.4C8.58915 18.4 9.9999 18.8602 11 19.3094V6.1519C10.7827 6.02653 10.4894 5.8706 10.1366 5.71427C9.31147 5.34869 8.20352 5 7 5C5.26385 5 3.74016 5.72499 3 6.1519ZM13 6.1519V19.3578C13.9977 18.9353 15.41 18.5 17 18.5C18.596 18.5 20.0095 18.9383 21 19.3578V6.1519C20.2598 5.72499 18.7362 5 17 5C15.7965 5 14.6885 5.34869 13.8634 5.71427C13.5106 5.8706 13.2173 6.02653 13 6.1519ZM12 4.41985C11.7302 4.26422 11.3734 4.07477 10.9468 3.88572C9.96631 3.45131 8.57426 3 7 3C4.69187 3 2.76233 3.97065 1.92377 4.46427C1.30779 4.82687 1 5.47706 1 6.11223V20.0239C1 20.6482 1.36945 21.1206 1.79531 21.3588C2.21653 21.5943 2.78587 21.6568 3.30241 21.3855C4.12462 20.9535 5.48348 20.4 7 20.4C8.90549 20.4 10.5523 21.273 11.1848 21.6619C11.6757 21.9637 12.2968 21.9725 12.7959 21.6853C13.4311 21.32 15.0831 20.5 17 20.5C18.5413 20.5 19.9168 21.0305 20.7371 21.4366C21.6885 21.9075 23 21.2807 23 20.0593V6.11223C23 5.47706 22.6922 4.82687 22.0762 4.46427C21.2377 3.97065 19.3081 3 17 3C15.4257 3 14.0337 3.45131 13.0532 3.88572C12.6266 4.07477 12.2698 4.26422 12 4.41985Z"
+                fill="#000000"
+            />
+        </svg>
+    );
+};
+const LockIcon = ({ className }: iconProps) => {
+    return (
+        <svg
+            className={classNames(className, '')}
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            x="0px"
+            y="0px"
+            viewBox="0 0 72 90"
+            enable-background="new 0 0 72 72"
+        >
+            <g>
+                <path
+                    fill="currentColor"
+                    d="M60.4,30.7h-3.9c-0.5,0-1-0.4-1-1v-9.2c0-10.6-8.2-19.6-18.8-20C25.6,0.1,16.4,9,16.4,20.1v9.7   c0,0.5-0.4,1-1,1h-3.9c-1.5,0-2.7,1.2-2.7,2.7v35.4c0,1.5,1.2,2.7,2.7,2.7h48.8c1.5,0,2.7-1.2,2.7-2.7V33.4   C63.1,31.9,61.9,30.7,60.4,30.7z M22.5,20.1c0-7.7,6.4-13.9,14.2-13.5c7.3,0.4,12.9,6.6,12.9,13.9v9.3c0,0.5-0.4,1-1,1H23.4   c-0.5,0-1-0.4-1-1V20.1z"
+                />
+            </g>
         </svg>
     );
 };
@@ -394,4 +508,9 @@ export {
     TabManagerIcon,
     PlusIcon,
     ReloadIcon,
+    LockIcon,
+    BookOpenIcon,
+    LanguageIcon,
+    MicroIcon,
+    DeleteTextIcon,
 };
