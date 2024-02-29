@@ -26,6 +26,8 @@ function IconThemeTrans() {
             // Define the end values for each theme
             const themes = {
                 light: {
+                    ' --cooler-color': '#c9c9c9',
+
                     '--color': '#413f3e',
                     '--title-color': '#000000',
                     '--foreground-rgb': '0, 0, 0',
@@ -33,6 +35,8 @@ function IconThemeTrans() {
                     '--background-end-rgb': '255, 255, 255',
                 },
                 dark: {
+                    ' --cooler-color': '#272827',
+
                     '--title-color': '#ffffff',
                     '--color': '#cac5c0',
                     '--foreground-rgb': '255, 255, 255',

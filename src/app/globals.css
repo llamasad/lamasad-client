@@ -10,9 +10,11 @@
     --foreground-rgb: 0, 0, 0;
     --background-start-rgb: 214, 219, 220;
     --background-end-rgb: 255, 255, 255;
+    --cooler-color: #c9c9c9;
 }
 
 body[theme-data='dark'] {
+    --cooler-color: #272827;
     --color: #cac5c0;
     --title-color: #ffffff;
     --foreground-rgb: 255, 255, 255;

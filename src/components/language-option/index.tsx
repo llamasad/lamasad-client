@@ -20,7 +20,7 @@ function LanguageOption() {
     const switchLanguage = (ev: React.ChangeEvent<HTMLSelectElement>) => {
         const nextLocale = ev.target.value as 'en' | 'vi';
         startTransition(() => {
-            console.log(pathname, nextLocale);
+            console.log(nextLocale);
             router.replace('/', { locale: nextLocale });
             dispatch(languageSlice.actions.switch(nextLocale));
         });

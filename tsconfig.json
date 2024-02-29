@@ -24,6 +24,14 @@
             "@/*": ["./src/*"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/middleware.js"],
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        "src/middleware.js",
+        "src/app/[locale]/showcase/@modal/(.)product/task-manager",
+        "src/app/[locale]/showcase/product/task-manager"
+    ],
     "exclude": ["node_modules"]
 }

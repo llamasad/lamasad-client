@@ -6,7 +6,6 @@ import Header from '@/components/layout/header';
 import ThemeColorWraper from '@/components/wrapper-components/theme-color-wrapper';
 import { Providers as StoreProvider } from '@/lib/provide';
 import PluginInit from '@/components/plugin-init';
-import { useTranslations } from 'next-intl';
 import LoadingLineProvider from '@/components/provider/loading-bar-provider';
 const roboto = Roboto({
     weight: ['300', '400', '500', '700'],

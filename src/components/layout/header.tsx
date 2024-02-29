@@ -14,7 +14,7 @@ import Link from 'next/link';
 function Header() {
     const t = useTranslations('Navigation');
     return (
-        <>
+        <div className="header">
             <div className="h-[61px]"></div>
             <header className="fixed top-0 left-0 h-[60px] border-b-[1px] border-weak backdrop-blur-2xl w-full z-10">
                 <div className="   h-full">
@@ -47,6 +47,7 @@ function Header() {
                                 </span>
                             </div>
                         </div>
+
                         <div className="flex items-center ">
                             <Link href={'https://github.com/llamasad'}>
                                 <GithubIcon className="w-5 h-5 mr-[6px] hover:text-tl" />
@@ -84,7 +85,7 @@ function Header() {
                     </div>
                 </div>
             </header>
-        </>
+        </div>
     );
 }
 

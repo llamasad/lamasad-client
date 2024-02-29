@@ -11,6 +11,7 @@ import ListTechnology from '@/components/list-technology';
 function SkillPage() {
     return (
         <div>
+            {' '}
             <DevProcessApp />
             <ListTechnology />
         </div>

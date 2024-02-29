@@ -23,7 +23,7 @@ function Project({
     return (
         <>
             <Link
-                href={'/en/showcase/product/1234'}
+                href={'/en/showcase/product/task-manager'}
                 className={`w-[calc(33.3%-12px)] px-[20px] bg-no-repeat bg-contain overflow-hidden  rounded-lg hover:shadow text-current hover:shadow-weak  h-[300px] cursor-pointer`}
             >
                 <div className="mt-[20px] flex  h-[70%] bg-weak rounded-lg relative overflow-hidden ">

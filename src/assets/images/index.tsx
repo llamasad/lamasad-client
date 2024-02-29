@@ -2,6 +2,7 @@ const images = {
     darkLogo: require('./dark-logo.svg'),
     lightLogo: require('./light-logo.svg'),
     lamasadImg: require('./llamasad.jpg'),
+    loginRegisterBG: require('./polifolli-office-fin.jpg'),
     logo: require('./logo.svg'),
     llama: require('./Llamasad.png'),
     llamaBones: require('./bonellama.png'),

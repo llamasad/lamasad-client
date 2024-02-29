@@ -1,6 +1,17 @@
 'use client';
 
-import React, { ReactNode, memo, useCallback, useEffect, useLayoutEffect, useRef } from 'react';
+import React, {
+    Dispatch,
+    ReactNode,
+    SetStateAction,
+    createContext,
+    memo,
+    useCallback,
+    useContext,
+    useEffect,
+    useLayoutEffect,
+    useRef,
+} from 'react';
 import {
     MinusIcon,
     TabControlIcon,
@@ -19,24 +30,36 @@ import {
     LanguageIcon,
 } from '@/components/icons';
 import { useMediaQuery } from 'react-responsive';
+
 import classNames from 'classnames';
 import { useState } from 'react';
 import gsap from 'gsap';
 import interact from 'interactjs';
 import Overlay from '@/components/overlay';
 import resizeObserver from '@/util/cookies/theme/observers/resize-observer';
-import { useRouter } from 'next/navigation';
-function MacbookWrapper({ children }: { children: ReactNode }) {
-    const Route = useRouter();
+import { useRouter, usePathname } from 'next/navigation';
 
-    const [typeOfDisplay, setTypeOfDisplay] = useState<'desktop' | 'laptop' | 'tablet' | 'mobile' | null>(null);
+import { productUrlSlice, selectUrl } from '@/lib/redux/slices/product-url-slice';
+import { useDispatch, useSelector } from '@/lib/redux';
+import Link from 'next/link';
+const LinkContext = createContext<Dispatch<SetStateAction<string[]>>>(() => {});
+export type MacbookDisplayType = 'mobile' | 'desktop' | 'laptop' | 'tablet' | null;
+
+export const ResponsiveContext = createContext<MacbookDisplayType>(null);
+function MacbookWrapper({ children, url }: { children: ReactNode; url: string }) {
+    const [routeAhead, setRouteAhead] = useState<string[]>([]);
+    const pathName = usePathname();
+    const Route = useRouter();
+    const baseUrl = useSelector(selectUrl);
+    const dispatch = useDispatch();
+    const [typeOfDisplay, setTypeOfDisplay] = useState<MacbookDisplayType>(null);
     const [fullSize, setFullSize] = useState<boolean>(true);
     const isDesktopScreen = useMediaQuery({ query: '(min-width: 1280px)' });
     const isLaptopScreen = useMediaQuery({ query: '(min-width: 1024px)' });
     const isTabletScreen = useMediaQuery({ query: '(min-width: 640px)' });
     const isMobileScreen = useMediaQuery({ query: '(max-width: 639px)' });
     const positionRef = useRef<{ x: number; y: number } | null>(null);
-    // const responsive=useCallback()
+    console.log(routeAhead);
     const getDevice = useCallback(() => {
         if (isDesktopScreen) {
             return 1280;
@@ -48,7 +71,24 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
             return 360;
         }
     }, [isDesktopScreen, isLaptopScreen, isTabletScreen, isMobileScreen]);
+    useEffect(() => {
+        const partsBaseUrl = baseUrl.split('/');
+        const partsUrl = pathName.split('/');
+        const inputValue = document.querySelector('.macbook-search_value') as HTMLInputElement;
+        partsUrl.splice(0, 5);
+        partsBaseUrl.splice(0, 1);
 
+        if (partsUrl.length !== partsBaseUrl.length && partsUrl.length > 0) {
+            inputValue.innerText = `${url}/${partsUrl.join('')}`;
+            dispatch(productUrlSlice.actions.init(`${url}/${partsUrl.join('')}`));
+        } else if (partsUrl.length !== partsBaseUrl.length && partsUrl.length <= 0) {
+            dispatch(productUrlSlice.actions.init(url));
+            inputValue.innerText = url;
+        }
+    }, [pathName]);
+    useLayoutEffect(() => {
+        dispatch(productUrlSlice.actions.init(url));
+    }, []);
     useLayoutEffect(() => {
         var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
@@ -348,11 +388,11 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
         const input = document.querySelector('.macbook-search') as HTMLSpanElement;
         const lockIcon = document.querySelector('.macbook-lock') as HTMLElement;
         const macbookWrapper = document.querySelector('.macbook-search-wrapper') as HTMLElement;
-        if (input && inputValue && input.classList.contains('text-center') && macbookWrapper && lockIcon) {
+        if (input.classList.contains('text-center')) {
             input.classList.remove('text-center');
-            let padding = ((macbookWrapper.offsetWidth -
-                (document.querySelector('.macbook-search_value') as HTMLSpanElement).offsetWidth) /
-                2) as number;
+        }
+        if (input && inputValue && macbookWrapper && lockIcon) {
+            let padding = ((macbookWrapper.offsetWidth - inputValue.offsetWidth) / 2) as number;
             console.log(padding);
             input.style.paddingLeft = padding + 'px';
             lockIcon.style.left = padding - 15 + 'px';
@@ -366,12 +406,12 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
                     { 'resize-drag_macbook ': fullSize },
                 )}
             >
+                <div className="absolute top-[-4px] w-full h-[8px]"></div>
                 {typeOfDisplay === 'desktop' || typeOfDisplay === 'laptop' || typeOfDisplay === 'tablet' ? (
                     <header
-                        className={classNames(
-                            ' h-[44px] backdrop-blur-2xl bg-[#cccccc]  flex items-center justify-between ',
-                            { 'resize-drag_macbook-header': fullSize },
-                        )}
+                        className={classNames(' h-[44px]  bg-[#cccccc]  flex items-center justify-between ', {
+                            'resize-drag_macbook-header': fullSize,
+                        })}
                     >
                         <div className="flex items-center">
                             {typeOfDisplay !== 'tablet' && (
@@ -405,7 +445,12 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
                                                             x: positionRef.current.x + macbookWidth / 2,
                                                             y: positionRef.current.y + macbookHeight / 2,
                                                             onComplete: () => {
-                                                                Route.back();
+                                                                const parts = pathName.split('/');
+                                                                parts.splice(0, 4);
+
+                                                                parts.forEach(() => {
+                                                                    Route.back();
+                                                                });
                                                             },
                                                         },
                                                     );
@@ -417,7 +462,11 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
                                                         x: macbookWidth / 2,
                                                         y: macbookHeight / 2,
                                                         onComplete: () => {
-                                                            Route.back();
+                                                            const parts = pathName.split('/');
+                                                            parts.splice(0, 4);
+                                                            parts.forEach(() => {
+                                                                Route.back();
+                                                            });
                                                         },
                                                     });
                                                 }
@@ -429,7 +478,12 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
                                         <ExitIcon className="text-[#0000006a] group-hover:block hidden text-center w-[8px] translate-x-[3.5px]" />
                                     </span>
 
-                                    <span className="macbook-header_item group minus-macbook bg-[#ffbd44] cursor-pointer w-[15px] rounded-full inline-block h-[15px]">
+                                    <span
+                                        onClick={() => {
+                                            console.log(pathName);
+                                        }}
+                                        className="macbook-header_item group minus-macbook bg-[#ffbd44] cursor-pointer w-[15px] rounded-full inline-block h-[15px]"
+                                    >
                                         <MinusIcon className="text-[#000000aa] text-center w-[8px] group-hover:block hidden translate-x-[3px]" />
                                     </span>
                                     <span
@@ -502,23 +556,52 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
                                     </span>
                                 </div>
                             )}
-
                             <TabControlIcon
                                 className={classNames(
                                     { 'ml-4': typeOfDisplay === 'tablet', 'ml-[8px]': typeOfDisplay !== 'tablet' },
                                     'macbook-header_item  h-[28px] text-[#cccccc] cursor-not-allowed translate-y-[0.5px] ',
                                 )}
                             />
-                            <ArrowIcon className="macbook-header_item ml-[16px] h-[14px] text-[#333] w-[14px] cursor-not-allowed rotate-90" />
-                            <ArrowIcon className="macbook-header_item ml-[16px] h-[14px] text-[#333] w-[14px] cursor-not-allowed rotate-[-90deg] " />
+                            <span
+                                onClick={() => {
+                                    if (baseUrl !== url) {
+                                        dispatch(productUrlSlice.actions.back());
+                                        Route.back();
+                                        setRouteAhead([baseUrl, ...routeAhead]);
+                                    }
+                                }}
+                            >
+                                <ArrowIcon
+                                    className={classNames(
+                                        'macbook-header_item ml-[16px] h-[14px] text-[#000] w-[14px] cursor-pointer rotate-90',
+                                        { 'text-zinc-400': baseUrl === url },
+                                    )}
+                                />
+                            </span>
+                            <span
+                                onClick={() => {
+                                    Route.forward();
+                                    if (routeAhead.length !== 0) {
+                                        routeAhead.pop();
+                                        setRouteAhead(routeAhead);
+                                    }
+                                }}
+                            >
+                                <ArrowIcon
+                                    className={classNames(
+                                        'macbook-header_item ml-[16px] h-[14px] text-[#000] w-[14px] cursor-pointer rotate-[-90deg] ',
+                                        { 'text-zinc-400': routeAhead.length === 0 },
+                                    )}
+                                />
+                            </span>{' '}
                         </div>
-                        <div className=" flex items-center">
+                        <div className="flex items-center">
                             {typeOfDisplay !== 'tablet' && (
                                 <ShieldIcon className="macbook-header_item w-[20px] text-[#333] cursor-not-allowed h-[20px]" />
                             )}
                             <div className="macbook-search-wrapper macbook-header_item flex ml-[12px] w-[420px] cursor-pointer items-center bg-[#bdbdbd] rounded overflow-hidden pr-[8px]">
                                 <span className="macbook-search_value whitespace-pre absolute top-[-10000px]">
-                                    https://concacgido.com
+                                    {baseUrl}
                                 </span>
                                 <div className="relative">
                                     <LanguageIcon className="macbook-language absolute w-[20px] left-[4px] top-0 top-[-9px]" />
@@ -545,7 +628,10 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
                                                     .offsetWidth) /
                                                 2 +
                                             'px';
-
+                                        console.log(
+                                            (document.querySelector('.macbook-search_value') as HTMLSpanElement)
+                                                .innerText,
+                                        );
                                         setTimeout(() => {
                                             document.querySelector('.macbook-language')?.classList.remove('hidden');
                                             document.querySelector('.macbook-lock')?.classList.remove('hidden');
@@ -555,7 +641,7 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
                                         document.querySelector('.macbook-micro')?.classList.add('hidden');
                                         document.querySelector('.macbook-reload')?.classList.remove('hidden');
                                     }}
-                                    value={'https://concacgido.com'}
+                                    value={baseUrl}
                                 />
                                 <div className="flex">
                                     <DeleteTextIcon className="macbook-delete-text hidden w-[30px] " />
@@ -574,14 +660,14 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
                 ) : (
                     <header
                         className={classNames(
-                            'macbook-search-wrapper h-[44px] backdrop-blur-2xl bg-[#cccccc]  flex items-center justify-between ',
+                            ' h-[36px] pb-[4px] backdrop-blur-2xl bg-[#cccccc]  flex items-center justify-between ',
                             { 'resize-drag_macbook-header': fullSize },
                         )}
                     >
                         {' '}
-                        <div className=" macbook-header_item flex mx-[12px] w-full cursor-pointer items-center bg-[#bdbdbd] rounded overflow-hidden pr-[8px]">
+                        <div className="macbook-search-wrapper macbook-header_item flex mx-[12px] w-full cursor-pointer items-center bg-[#bdbdbd] rounded overflow-hidden pr-[8px]">
                             <span className="macbook-search_value whitespace-pre absolute top-[-10000px]">
-                                https://concacgido.com
+                                {baseUrl}
                             </span>
                             <div className="relative">
                                 <LanguageIcon className="macbook-language absolute w-[20px] left-[4px] top-0 top-[-9px]" />
@@ -619,7 +705,7 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
                                     document.querySelector('.macbook-micro')?.classList.add('hidden');
                                     document.querySelector('.macbook-reload')?.classList.remove('hidden');
                                 }}
-                                value={'https://concacgido.com'}
+                                value={baseUrl}
                             />
                             <div className="flex">
                                 <DeleteTextIcon className="macbook-delete-text hidden w-[30px] " />
@@ -638,7 +724,9 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
                         'w-mb-body': typeOfDisplay === 'mobile',
                     })}
                 >
-                    {children}
+                    <ResponsiveContext.Provider value={typeOfDisplay}>
+                        <LinkContext.Provider value={setRouteAhead}>{children}</LinkContext.Provider>
+                    </ResponsiveContext.Provider>{' '}
                 </div>
             </div>
             <div className="macbook-blue-coating absolute rounded-xl border-[2px] border-solid border-[#1f75e6] z-[21] translate-y-[-6px]"></div>
@@ -647,5 +735,28 @@ function MacbookWrapper({ children }: { children: ReactNode }) {
         </div>
     );
 }
+export function LinkForMacWrap({
+    children,
+    href,
+    className,
+}: {
+    children: ReactNode;
+    href: string;
+    className: string;
+}) {
+    const setState = useContext(LinkContext);
+    console.log(setState);
 
+    return (
+        <Link
+            onClick={() => {
+                setState([]);
+            }}
+            href={href}
+            className={className}
+        >
+            {children}
+        </Link>
+    );
+}
 export default memo(MacbookWrapper);
