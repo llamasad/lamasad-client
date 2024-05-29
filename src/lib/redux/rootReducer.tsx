@@ -3,6 +3,7 @@ import { combineReducers, Reducer } from '@reduxjs/toolkit';
 import { themeSlice } from './slices/theme-slice';
 import { languageSlice } from './slices/language-slice';
 import { productUrlSlice } from './slices/product-url-slice';
+import { TMUserSlice } from './slices/tm-user-slice';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { type ThemeSliceState } from './slices/theme-slice';
@@ -23,5 +24,6 @@ const rootReducer = combineReducers({
     theme: themePersistedReducer,
     language: languagePersistedReducer,
     productUrl: productUrlSlice.reducer,
+    TMUser: TMUserSlice.reducer,
 });
 export default rootReducer;

@@ -2,26 +2,30 @@
 
 import { ReactNode, useEffect } from 'react';
 import HeaderTaskManager from '@/components/products/task-manager/header';
+import useTypeUserFetch from '@/hooks/use-type-user-fetcher';
+import UserHeaderTaskManager from '@/components/products/task-manager/user-header';
 
-import { ArrowIcon } from '@/components/icons';
-import { useRouter } from 'next/navigation';
-function Layout({ children }: { children: ReactNode }) {
-    const Route = useRouter();
+function Layout({ children, auth }: { children: ReactNode; auth: ReactNode }) {
+    const { type, isError, isLoading } = useTypeUserFetch();
     useEffect(() => {
         function popStateHandle(event: any) {
             location.reload();
         }
         window.addEventListener('popstate', popStateHandle);
-        (document.querySelector('.header') as HTMLDivElement).style.display = 'none';
+        const header = document.querySelector('.header') as HTMLDivElement;
+        if (header) {
+            header.style.display = 'none';
+        }
         return () => {
-            (document.querySelector('.header') as HTMLDivElement).style.display = 'block';
             window.removeEventListener('popstate', popStateHandle);
         };
     }, []);
+    if (isLoading) return <div>Loading...</div>;
     return (
         <>
-            <HeaderTaskManager />
-
+            {type === 'custom' && <HeaderTaskManager />}
+            {type === 'user' && <UserHeaderTaskManager />}
+            {type === 'userNonAuth' && auth}
             {children}
         </>
     );

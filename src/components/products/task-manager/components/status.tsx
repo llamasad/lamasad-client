@@ -2,6 +2,17 @@
 import { ResponsiveContext, MacbookDisplayType } from '@/components/wrapper-components/macbook-wrapper';
 import classNames from 'classnames';
 import { useContext } from 'react';
+interface type {
+    color: string;
+    text: string;
+}
+export interface TypeOfSatatusInterface {
+    todo: type;
+    yetToStart: type;
+    inProgress: type;
+    onHold: type;
+    completed: type;
+}
 export const TypeOfSatatus = {
     todo: { color: '#bd0fb1', text: 'To do' },
     yetToStart: { color: '#a3990b', text: 'Yet to start' },

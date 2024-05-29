@@ -14,6 +14,20 @@ interface iconProps {
     translateX?: string;
 }
 
+const EditIcon = ({ className }: iconProps) => {
+    return (
+        <svg className={className} xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="edit">
+            <path
+                fill="currentColor"
+                d="M3.5,24h15A3.51,3.51,0,0,0,22,20.487V12.95a1,1,0,0,0-2,0v7.537A1.508,1.508,0,0,1,18.5,22H3.5A1.508,1.508,0,0,1,2,20.487V5.513A1.508,1.508,0,0,1,3.5,4H11a1,1,0,0,0,0-2H3.5A3.51,3.51,0,0,0,0,5.513V20.487A3.51,3.51,0,0,0,3.5,24Z"
+            ></path>
+            <path
+                fill="currentColor"
+                d="M9.455,10.544l-.789,3.614a1,1,0,0,0,.271.921,1.038,1.038,0,0,0,.92.269l3.606-.791a1,1,0,0,0,.494-.271l9.114-9.114a3,3,0,0,0,0-4.243,3.07,3.07,0,0,0-4.242,0l-9.1,9.123A1,1,0,0,0,9.455,10.544Zm10.788-8.2a1.022,1.022,0,0,1,1.414,0,1.009,1.009,0,0,1,0,1.413l-.707.707L19.536,3.05Zm-8.9,8.914,6.774-6.791,1.4,1.407-6.777,6.793-1.795.394Z"
+            ></path>
+        </svg>
+    );
+};
 const GithubIconTemp = ({ className }: iconProps, ref: ForwardedRef<SVGSVGElement>) => {
     return (
         <svg ref={ref} viewBox="0 0 16 16" className={className} fill="currentColor" aria-hidden="true">
@@ -21,6 +35,21 @@ const GithubIconTemp = ({ className }: iconProps, ref: ForwardedRef<SVGSVGElemen
         </svg>
     );
 };
+const ErrorIcon = ({ className }: iconProps) => (
+    <svg
+        className={classNames('', className)}
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        id="error"
+    >
+        <path
+            fill="currentColor"
+            d="M16 0C7.164 0 0 7.164 0 16s7.164 16 16 16 16-7.164 16-16S24.836 0 16 0zm0 30C8.28 30 2 23.72 2 16S8.28 2 16 2s14 6.28 14 14-6.28 14-14 14zm0-24a2 2 0 0 0-2 2v10a2 2 0 0 0 4 0V8a2 2 0 0 0-2-2zm-2 17.968a2 2 1080 1 0 4 0 2 2 1080 1 0-4 0z"
+        ></path>
+    </svg>
+);
 const GithubIcon = forwardRef(GithubIconTemp);
 const AngleBracket = ({ direction = 'right', width, height, className, translateX = '' }: iconProps) => {
     const direct = { left: '180', right: '0', bottom: '90', top: '-90' };
@@ -160,11 +189,176 @@ const ArrowIcon = ({ className }: iconProps) => {
             viewBox="0 0 330 330"
         >
             <path
+                fill="currentColor"
                 id="XMLID_225_"
                 d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393
    c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393
    s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"
             />
+        </svg>
+    );
+};
+const TagsIcon = ({ className }: iconProps) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            className={className}
+            width="20"
+            height="20"
+            id="tags"
+        >
+            <path
+                className="scale-[0.045]"
+                width={20}
+                height={20}
+                fill="currentColor"
+                d="M472 239.2s-.1 0 0 0L282.1 48.1l-1.4-1.4h-.5c-7.5-7.2-16.1-10.9-27.1-11.1l-89.9-3.3-3.9-.1c-10.1.1-20 4.1-27.7 11.8l-27.1 27.2c7.4-6.6 16.6-10 26-10.1l3.8.1 89.8 3.3c11 .2 19.7 3.9 27.2 11.1h.5l1.4 1.4L443 268.1c10 10.8 10.7 28.2 0 38.9l29-28.9c10.6-10.7 10-28.1 0-38.9z"
+            ></path>
+            <path
+                className="scale-[0.045]"
+                fill="currentColor"
+                d="M428 282.5h.3L238.6 91.4l-1.3-1.4h-.3c-7.5-7.2-15.9-10.9-26.9-11.1L120 75.6l-4-.1c-9.2.1-18.2 3.4-25.6 9.8-.3.3-.7.6-1 .9l-1.2 1.2-44.3 44.5C35.8 140 32 150.8 32 161.4v.1l.1 3.8 5.9 87.9v1.9c1 7.9 4.2 15.6 9.6 22l5.1 4.9L239 470.4l2.8 2.8c10.7 9.4 27.1 9 37.3-1.3l13.1-13.2c.5-.4.9-.8 1.4-1.3l26.9-27c-.2.1-.3.2-.5.4l108.3-109.3c10.6-10.7 10.7-28.2-.3-39zm-317.4-143c6.6-4 14.3-6.3 22.6-6.3 23.9 0 43.4 19.4 43.4 43.4 0 8.3-2.3 16-6.3 22.6-7.6 12.5-21.3 20.8-37 20.8-23.9 0-43.4-19.4-43.4-43.4-.1-15.8 8.2-29.5 20.7-37.1z"
+            ></path>
+        </svg>
+    );
+};
+const TaskIcon = ({ className }: iconProps) => {
+    return (
+        <svg
+            className={className}
+            xmlns="http://www.w3.org/2000/svg"
+            data-name="LINE COLOR"
+            viewBox="0 0 24 24"
+            id="task"
+        >
+            <path
+                fill="currentColor"
+                d="M7,9.75a.75.75,0,0,1-.53-.22.78.78,0,0,1-.16-.24.73.73,0,0,1,0-.58.75.75,0,0,1,1.38,0A.75.75,0,0,1,7.75,9a.72.72,0,0,1-.06.29.78.78,0,0,1-.16.24A.75.75,0,0,1,7,9.75Z"
+            ></path>
+            <rect width="8" height="1.5" x="10" y="8.25" fill="currentColor"></rect>
+            <path
+                fill="currentColor"
+                d="M7,14.75a.75.75,0,0,1-.53-.22.63.63,0,0,1-.16-.24A.72.72,0,0,1,6.25,14a.75.75,0,0,1,.22-.53.77.77,0,0,1,1.06,0,.75.75,0,0,1,.22.53.72.72,0,0,1-.06.29.74.74,0,0,1-.4.4A.72.72,0,0,1,7,14.75Z"
+            ></path>
+            <rect width="8" height="1.5" x="10" y="13.25" fill="currentColor"></rect>
+            <path
+                fill="currentColor"
+                d="M7,19.75a.72.72,0,0,1-.29-.06.74.74,0,0,1-.4-.4.73.73,0,0,1,0-.58.75.75,0,0,1,1.38,0,.73.73,0,0,1,0,.58.63.63,0,0,1-.16.24A.75.75,0,0,1,7,19.75Z"
+            ></path>
+            <rect width="8" height="1.5" x="10" y="18.25" fill="currentColor"></rect>
+            <path
+                fill="currentColor"
+                d="M20,2.25H15.75V1A.76.76,0,0,0,15,.25H9A.76.76,0,0,0,8.25,1V2.25H4A.76.76,0,0,0,3.25,3V23a.76.76,0,0,0,.75.75H20a.76.76,0,0,0,.75-.75V3A.76.76,0,0,0,20,2.25ZM9.75,1.75h4.5v2.5H9.75Zm9.5,20.5H4.75V3.75h3.5V5A.76.76,0,0,0,9,5.75h6A.76.76,0,0,0,15.75,5V3.75h3.5Z"
+            ></path>
+        </svg>
+    );
+};
+const MessageIcon = ({ className }: iconProps) => {
+    return (
+        <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="message">
+            <defs>
+                <circle id="a" cx="8.5" cy="10.5" r="1.5"></circle>
+                <circle id="b" cx="12.5" cy="10.5" r="1.5"></circle>
+                <circle id="c" cx="16.5" cy="10.5" r="1.5"></circle>
+            </defs>
+            <g fill="none" fill-rule="evenodd">
+                <path
+                    stroke="#4A4A4A"
+                    d="m8.888 21.518 5.985-4.489H20a1.5 1.5 0 0 0 1.5-1.5V5A1.5 1.5 0 0 0 20 3.5H5A1.5 1.5 0 0 0 3.5 5v10.53a1.5 1.5 0 0 0 1.5 1.5h3.088v4.088a.5.5 0 0 0 .8.4z"
+                ></path>
+                <use fill="#FFF" xlinkHref="#a"></use>
+                <circle cx="8.5" cy="10.5" r="1" stroke="#4A4A4A"></circle>
+                <use fill="#FFF" xlinkHref="#b"></use>
+                <circle cx="12.5" cy="10.5" r="1" stroke="#4A4A4A"></circle>
+                <use fill="#FFF" xlinkHref="#c"></use>
+                <circle cx="16.5" cy="10.5" r="1" stroke="#4A4A4A"></circle>
+            </g>
+        </svg>
+    );
+};
+const SearchIcon = ({ className }: iconProps) => {
+    return (
+        <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 101 101" id="search">
+            <path
+                fill="currentColor"
+                d="M63.3 59.9c3.8-4.6 6.2-10.5 6.2-17 0-14.6-11.9-26.5-26.5-26.5S16.5 28.3 16.5 42.9 28.4 69.4 43 69.4c6.4 0 12.4-2.3 17-6.2l20.6 20.6c.5.5 1.1.7 1.7.7.6 0 1.2-.2 1.7-.7.9-.9.9-2.5 0-3.4L63.3 59.9zm-20.4 4.7c-12 0-21.7-9.7-21.7-21.7s9.7-21.7 21.7-21.7 21.7 9.7 21.7 21.7-9.7 21.7-21.7 21.7z"
+            ></path>
+        </svg>
+    );
+};
+const FilterIcon = ({ className }: iconProps) => {
+    return (
+        <svg
+            className={className}
+            xmlns="http://www.w3.org/2000/svg"
+            enableBackground="new 0 0 32 32"
+            viewBox="0 0 32 32"
+            id="filter"
+        >
+            <path
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="2"
+                d="M4.8772,4.9216l6.8975,9.1338c0.8371,1.1085,1.2899,2.4597,1.2899,3.8487v10.4141
+c0,0.3546,0.4113,0.5507,0.6868,0.3273l3.371-2.733c0.5032-0.408,0.7955-1.0212,0.7955-1.669v-6.1332
+c0-1.515,0.5386-2.9807,1.5196-4.1352l7.655-9.0095c0.542-0.6379,0.0886-1.618-0.7484-1.618H5.6609
+C4.8502,3.3477,4.3886,4.2746,4.8772,4.9216z"
+            ></path>
+        </svg>
+    );
+};
+const EyeIcon = ({ className }: iconProps) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 576 512">
+            <path
+                fill="currentColor"
+                d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"
+            />
+        </svg>
+    );
+};
+const DownloadIcon = ({ className }: iconProps) => {
+    return (
+        <svg
+            className={className}
+            fill="currentColor"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 29.978 29.978"
+            xmlSpace="preserve"
+        >
+            <g>
+                <path
+                    d="M25.462,19.105v6.848H4.515v-6.848H0.489v8.861c0,1.111,0.9,2.012,2.016,2.012h24.967c1.115,0,2.016-0.9,2.016-2.012
+       v-8.861H25.462z"
+                />
+                <path
+                    d="M14.62,18.426l-5.764-6.965c0,0-0.877-0.828,0.074-0.828s3.248,0,3.248,0s0-0.557,0-1.416c0-2.449,0-6.906,0-8.723
+       c0,0-0.129-0.494,0.615-0.494c0.75,0,4.035,0,4.572,0c0.536,0,0.524,0.416,0.524,0.416c0,1.762,0,6.373,0,8.742
+       c0,0.768,0,1.266,0,1.266s1.842,0,2.998,0c1.154,0,0.285,0.867,0.285,0.867s-4.904,6.51-5.588,7.193
+       C15.092,18.979,14.62,18.426,14.62,18.426z"
+                />
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+            </g>
         </svg>
     );
 };
@@ -184,6 +378,25 @@ const ShieldIcon = ({ className }: iconProps) => {
             <path
                 fill="#404040"
                 d="M128,10L29.5,39.7v74.3c0,48.3,39.9,100.8,98.5,131.9c58.6-31.1,98.5-83.6,98.5-131.9V39.7L128,10z M128,229c-50.3-29-83.6-74.5-83.6-114.9V50.8L128,25.5V229z"
+            />
+        </svg>
+    );
+};
+const ViewDocsIcon = ({ className }: iconProps) => {
+    return (
+        <svg
+            className={className}
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            x="0px"
+            y="0px"
+            viewBox="0 0 100 125"
+            xmlSpace="preserve"
+        >
+            <path
+                className="scale-[2] translate-x-[-40px] translate-y-[-40px]"
+                fill={'currentColor'}
+                d="M42,36h-6.6l6.6-6.6V36z M64,69c0.7,0,1.4-0.1,2-0.3V70c0,1.1-0.9,2-2,2H36c-1.1,0-2-0.9-2-2V38h9c0.6,0,1-0.4,1-1v-9h20  c1.1,0,2,0.9,2,2v23.3c-0.6-0.2-1.3-0.3-2-0.3c-4.4,0-8,3.6-8,8S59.6,69,64,69z M40,51c0,0.6,0.4,1,1,1h18c0.6,0,1-0.4,1-1  s-0.4-1-1-1H41C40.4,50,40,50.4,40,51z M50,63c0-0.6-0.4-1-1-1h-8c-0.6,0-1,0.4-1,1s0.4,1,1,1h8C49.6,64,50,63.6,50,63z M54,57  c0-0.6-0.4-1-1-1H41c-0.6,0-1,0.4-1,1s0.4,1,1,1h12C53.6,58,54,57.6,54,57z M73.6,70.6c-0.2,0.2-0.4,0.3-0.6,0.3s-0.4-0.1-0.6-0.3  l-4.8-4.8c-1,0.8-2.2,1.2-3.6,1.2c-3.3,0-6-2.7-6-6s2.7-6,6-6c3.3,0,6,2.7,6,6c0,1.3-0.5,2.6-1.2,3.6l4.8,4.8  C73.9,69.7,73.9,70.3,73.6,70.6z M68.3,61c0-2.4-1.9-4.3-4.3-4.3s-4.3,1.9-4.3,4.3s1.9,4.3,4.3,4.3C66.4,65.3,68.3,63.4,68.3,61z"
             />
         </svg>
     );
@@ -289,6 +502,16 @@ const ExitIcon = ({ className }: iconProps) => {
             <path
                 fill="currentColor"
                 d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+            />
+        </svg>
+    );
+};
+const SortIcon = ({ className }: iconProps) => {
+    return (
+        <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+            <path
+                fill="currentColor"
+                d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"
             />
         </svg>
     );
@@ -548,6 +771,62 @@ const MinusIcon = ({ className }: iconProps) => {
         </svg>
     );
 };
+const SendMessageIcon = ({ className }: iconProps) => {
+    return (
+        <svg className={className} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill="currentColor"
+                d="m27.45 15.11-22-11a1 1 0 0 0 -1.08.12 1 1 0 0 0 -.33 1l2.65 9.77h11.31v2h-11.31l-2.69 9.74a1 1 0 0 0 1 1.26 1 1 0 0 0 .45-.11l22-11a1 1 0 0 0 0-1.78z"
+            />
+            <path d="m0 0h32v32h-32z" fill="none" />
+        </svg>
+    );
+};
+
+const ArrowLineIcon = ({ className }: iconProps) => {
+    return (
+        <svg
+            className={className}
+            fill="currentColor"
+            height="800px"
+            width="800px"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 31.143 31.143"
+            xmlSpace="preserve"
+        >
+            <g>
+                <g id="c100_arrow">
+                    <path
+                        d="M0,15.571c0.001,1.702,1.383,3.081,3.085,3.083l17.528-0.002l-4.738,4.739c-1.283,1.284-1.349,3.301-0.145,4.507
+                            c1.205,1.201,3.222,1.138,4.507-0.146l9.896-9.898c1.287-1.283,1.352-3.301,0.146-4.506c-0.033-0.029-0.068-0.051-0.1-0.08
+                            c-0.041-0.043-0.07-0.094-0.113-0.139l-9.764-9.762c-1.268-1.266-3.27-1.316-4.474-0.111c-1.205,1.205-1.153,3.208,0.111,4.476
+                            l4.755,4.754H3.085C1.381,12.485,0,13.865,0,15.571z"
+                    />
+                </g>
+                <g id="Capa_1_46_"></g>
+            </g>
+        </svg>
+    );
+};
+const LoadIcon = ({ className }: iconProps) => {
+    return (
+        <svg
+            className={classNames('animate-spin', className)}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+        >
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+        </svg>
+    );
+};
 export type { iconProps };
 export {
     Googleicon,
@@ -560,6 +839,7 @@ export {
     GithubIcon,
     PrayIcon,
     ArrowIcon,
+    ViewDocsIcon,
     OpenIcon,
     ExitIcon,
     MinusIcon,
@@ -577,4 +857,17 @@ export {
     MicroIcon,
     DeleteTextIcon,
     CheckIcon,
+    MessageIcon,
+    TagsIcon,
+    TaskIcon,
+    SearchIcon,
+    FilterIcon,
+    SortIcon,
+    EditIcon,
+    DownloadIcon,
+    EyeIcon,
+    SendMessageIcon,
+    LoadIcon,
+    ArrowLineIcon,
+    ErrorIcon,
 };

@@ -1,47 +1,77 @@
 'use client';
 
-import { CheckIcon } from '@/components/icons';
+import { CheckIcon, LoadIcon, ReloadIcon } from '@/components/icons';
 import classNames from 'classnames';
 import { Dispatch, FormEvent, LegacyRef, MutableRefObject, SetStateAction, useEffect, useRef, useState } from 'react';
 import Input from '../components/input';
 import ReCAPTCHA from 'react-google-recaptcha';
+import axios from 'axios';
+import { mutate } from 'swr';
 function Login() {
+    const [invalidMess, setInvalidMess] = useState<string>('');
     const [captchaCodeRes, setCaptchaCodeRes] = useState<string | null>('');
+    const emailRef = useRef<null | {
+        getValidateMess: () => string | undefined;
+        getInputValue: () => string;
+    }>(null);
+    const passwordRef = useRef<null | {
+        getValidateMess: () => string | undefined;
+        getInputValue: () => string;
+    }>(null);
     const reCaptchaRef = useRef<ReCAPTCHA | null>(null);
+    const [isRemember, setIsRemember] = useState<boolean>(false);
+    const [isWaitingRes, setIsWaitingRes] = useState<boolean>(false);
     const onSubmit = async (ev: FormEvent) => {
         ev.preventDefault();
-        if (captchaCodeRes) {
-            const secretKey = '6LeYOn8pAAAAAHInE4hXY-TL8GiHWVMnx-NTuk1_';
-            const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaCodeRes}`;
-
+        if (captchaCodeRes && emailRef.current && passwordRef.current) {
             try {
-                const response = await fetch(url, { method: 'POST' });
-                const data = await response.json();
+                let validateEmailMess = emailRef.current.getValidateMess();
+                let validatePasswordMess = passwordRef.current.getValidateMess();
+                if (!validateEmailMess && !validatePasswordMess) {
+                    setIsWaitingRes(true);
+                    setInvalidMess('');
+                    const emailInput = ev.currentTarget.querySelector('input[name="email"]') as HTMLInputElement;
+                    const passwordInput = ev.currentTarget.querySelector('input[name="password"]') as HTMLInputElement;
 
-                if (data.success) {
-                    // Valid reCAPTCHA response
-                    // Proceed with your application logic
-                } else {
-                    // Invalid reCAPTCHA response
-                    // Handle accordingly
+                    const response = await axios.post(
+                        'http://localhost:1212/login',
+                        {
+                            [emailInput.name]: emailInput.value,
+                            [passwordInput.name]: passwordInput.value,
+                            recaptchaResponse: captchaCodeRes,
+                        },
+                        { withCredentials: true },
+                    );
+                    setIsWaitingRes(false);
+                    mutate(`${process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string}/user-check`);
                 }
-            } catch (error) {
-                console.error('Error verifying reCAPTCHA:', error);
+            } catch (error: any) {
+                setInvalidMess(error.response.data.message);
+                setIsWaitingRes(false);
             }
         }
     };
 
     return (
-        <form className="border-r-[3px] border-weak pr-[24px]" action="" onSubmit={onSubmit}>
+        <form autoComplete="off" className="border-r-[3px] border-weak pr-[24px]" action="" onSubmit={onSubmit}>
             <h2 className="  text-center text-lg text-tl font-medium mb-5">Sign In</h2>
             <div className="relative">
-                <Input className="login-email-tm " type="email" placeholder="Email address" />
-                <span className="block absolute bottom-[-20px] "> </span>
+                <Input
+                    ref={emailRef}
+                    name="email"
+                    className="login-email-tm "
+                    type="email"
+                    placeholder="Email address"
+                />
             </div>{' '}
             <div className="relative">
-                <Input className="login-pwd-tm " type="password" placeholder="Password " />
-
-                <span className="block absolute bottom-[-20px] "></span>
+                <Input
+                    ref={passwordRef}
+                    name={'password'}
+                    className="login-pwd-tm "
+                    type="password"
+                    placeholder="Password "
+                />
             </div>
             <div className="flex items-center">
                 <input
@@ -49,13 +79,12 @@ function Login() {
                     className="appearance-none remember-checkbox--tm peer/remember "
                     name=""
                     id="desk"
-                />
-                <div
-                    className="border-2  border-weak w-[18px] h-[18px] peer-checked/remember:bg-green-500 mr-[6px] cursor-pointer text-[rgb(var(--background-start-rgb))] peer-checked/remember:text-[rgb(var(--background-start-rgb))]"
-                    onClick={() => {
-                        (document.querySelector('.remember-checkbox--tm') as HTMLInputElement).click();
+                    checked={isRemember}
+                    onChange={() => {
+                        setIsRemember(!isRemember);
                     }}
-                >
+                />
+                <div className="border-2  border-weak w-[18px] h-[18px] peer-checked/remember:bg-green-500 mr-[6px] cursor-pointer text-[rgb(var(--background-start-rgb))] peer-checked/remember:text-[rgb(var(--background-start-rgb))]">
                     <CheckIcon className="w-[14px] ml-[1px]" />
                 </div>
                 <span>Remember account</span>
@@ -67,14 +96,14 @@ function Login() {
                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
                 onChange={setCaptchaCodeRes}
             />
-            <div className="flex mt-4 justify-between items-center">
+            <div className="flex mt-4 justify-between items-center relative">
+                {invalidMess && <span className="text-sm text-red-500 top-[-19px] absolute">{invalidMess}</span>}
                 <input
                     type="submit"
                     value={'Login'}
                     className="text-tl bg-weak hover:bg-green-500 transition-all w-[80px] h-[40px] rounded-full"
                 />
-
-                <button>Forgot your password?</button>
+                {isWaitingRes && <LoadIcon className="w-6 h-6 ml  text-current" />} <p>Forgot your password?</p>
             </div>
         </form>
     );

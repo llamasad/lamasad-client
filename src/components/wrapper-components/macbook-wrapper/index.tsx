@@ -59,7 +59,6 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
     const isTabletScreen = useMediaQuery({ query: '(min-width: 640px)' });
     const isMobileScreen = useMediaQuery({ query: '(max-width: 639px)' });
     const positionRef = useRef<{ x: number; y: number } | null>(null);
-    console.log(routeAhead);
     const getDevice = useCallback(() => {
         if (isDesktopScreen) {
             return 1280;
@@ -72,15 +71,16 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
         }
     }, [isDesktopScreen, isLaptopScreen, isTabletScreen, isMobileScreen]);
     useEffect(() => {
+        console.log(routeAhead);
         const partsBaseUrl = baseUrl.split('/');
         const partsUrl = pathName.split('/');
         const inputValue = document.querySelector('.macbook-search_value') as HTMLInputElement;
         partsUrl.splice(0, 5);
         partsBaseUrl.splice(0, 1);
-
+        console.log(partsUrl, partsBaseUrl);
         if (partsUrl.length !== partsBaseUrl.length && partsUrl.length > 0) {
             inputValue.innerText = `${url}/${partsUrl.join('')}`;
-            dispatch(productUrlSlice.actions.init(`${url}/${partsUrl.join('')}`));
+            dispatch(productUrlSlice.actions.init(`${url}/${partsUrl.join('/')}`));
         } else if (partsUrl.length !== partsBaseUrl.length && partsUrl.length <= 0) {
             dispatch(productUrlSlice.actions.init(url));
             inputValue.innerText = url;
@@ -565,7 +565,7 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                             <span
                                 onClick={() => {
                                     if (baseUrl !== url) {
-                                        dispatch(productUrlSlice.actions.back());
+                                        // dispatch(productUrlSlice.actions.back());
                                         Route.back();
                                         setRouteAhead([baseUrl, ...routeAhead]);
                                     }
@@ -716,17 +716,19 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                         </div>
                     </header>
                 )}
-                <div
-                    className={classNames('mx-auto transition-all', {
-                        'w-dt-body': typeOfDisplay === 'desktop',
-                        'w-lt-body': typeOfDisplay === 'laptop',
-                        'w-tl-body': typeOfDisplay === 'tablet',
-                        'w-mb-body': typeOfDisplay === 'mobile',
-                    })}
-                >
-                    <ResponsiveContext.Provider value={typeOfDisplay}>
-                        <LinkContext.Provider value={setRouteAhead}>{children}</LinkContext.Provider>
-                    </ResponsiveContext.Provider>{' '}
+                <div className="macbook_layout--body overflow-y-scroll h-[calc(100%-36px)] relative  overflow-x-hidden">
+                    <div
+                        className={classNames('mx-auto transition-all ', {
+                            'w-dt-body': typeOfDisplay === 'desktop',
+                            'w-lt-body': typeOfDisplay === 'laptop',
+                            'w-tl-body': typeOfDisplay === 'tablet',
+                            'w-mb-body': typeOfDisplay === 'mobile',
+                        })}
+                    >
+                        <ResponsiveContext.Provider value={typeOfDisplay}>
+                            <LinkContext.Provider value={setRouteAhead}>{children}</LinkContext.Provider>
+                        </ResponsiveContext.Provider>
+                    </div>
                 </div>
             </div>
             <div className="macbook-blue-coating absolute rounded-xl border-[2px] border-solid border-[#1f75e6] z-[21] translate-y-[-6px]"></div>

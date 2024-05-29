@@ -46,3 +46,39 @@ body {
 .macbook-blue-coating.trigger {
     background-color: #1f75e6c0;
 }
+/* Define the initial and final states of the animation */
+.scale-enter {
+    transform: scale(0);
+}
+.scale-enter-active {
+    transition: transform 300ms;
+    transform: scale(1);
+}
+.scale-exit {
+    transform: scale(1);
+}
+.scale-exit-active {
+    transition: transform 300ms;
+    transform: scale(0);
+}
+.gutter {
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+    cursor: col-resize;
+}
+.ant-otp-input {
+    background-color: transparent;
+    border-color: var(--weak-color);
+    color: var(--color);
+}
+.ant-input-outlined:focus {
+    background-color: transparent;
+}
+.ant-input-outlined:hover {
+    background-color: transparent;
+}

@@ -30,7 +30,6 @@ function HeaderTaskManager() {
         setIsTrigger(false);
         const cleanup = scale.onChange((value) => {
             if (value <= initialScale) {
-                console.log('alo');
                 cleanup();
                 unmount();
             }
@@ -44,6 +43,8 @@ function HeaderTaskManager() {
             <div className="flex items-center ">
                 <Image src={images.logo} className="cursor-pointer" width={60} height={60} alt="" />
                 <Link href={'/en/showcase/product/task-manager/home'}> test</Link>
+                <Link href="/en/showcase/product/task-manager/task-detail/123">123</Link>
+
                 <span className="ml-[-10px] rotate-3 text-3xl font-extralight text-weak">/</span>
                 <h2 className={classNames('ml-[5px] text-tl cursor-pointer text-3xl font-medium', jockeyOne.className)}>
                     TManager
