@@ -7,7 +7,17 @@ import SkillBar from '../skill-bar';
 import { skill } from '../skill-bar';
 import Link from 'next/link';
 import gsap from 'gsap';
-function TechnologyItem({ data, index, row }: { data: tech; index: number; row: number }) {
+function TechnologyItem({
+    data,
+    index,
+    row,
+    responsive,
+}: {
+    data: tech;
+    index: number;
+    row: number;
+    responsive: { isDesktopScreen: boolean; isLaptopScreen: boolean; isTabletScreen: boolean; isMobileScreen: boolean };
+}) {
     return (
         <li
             onClick={(ev: React.MouseEvent<HTMLLIElement>) => {
@@ -39,9 +49,22 @@ function TechnologyItem({ data, index, row }: { data: tech; index: number; row: 
                             const rowUnTrigger = (triggerElement.parentNode as HTMLElement).querySelectorAll(
                                 '.technology-item',
                             );
-                            (rowUnTrigger[0].parentNode as HTMLElement).style.width = '80%';
+                            if (responsive.isLaptopScreen) {
+                                (rowUnTrigger[0].parentNode as HTMLElement).style.width = '80%';
+                            } else if (responsive.isTabletScreen) {
+                                (rowUnTrigger[0].parentNode as HTMLElement).style.width = '70%';
+                            } else if (responsive.isMobileScreen) {
+                                (rowUnTrigger[0].parentNode as HTMLElement).style.width = '60%';
+                            }
+
                             rowUnTrigger.forEach((v, i) => {
-                                (v as HTMLLIElement).style.width = 'calc(25% - 12px)';
+                                if (responsive.isLaptopScreen) {
+                                    (v as HTMLElement).style.width = 'calc(25% - 12px) ';
+                                } else if (responsive.isTabletScreen) {
+                                    (v as HTMLElement).style.width = 'calc(50% - 12px) ';
+                                } else if (responsive.isMobileScreen) {
+                                    (v as HTMLElement).style.width = 'calc(100% - 12px) ';
+                                }
                             });
                         }
                     }
@@ -49,35 +72,61 @@ function TechnologyItem({ data, index, row }: { data: tech; index: number; row: 
                     target.classList.add('trigger');
                     // target.style.height = '400px';
                     rowsElement.forEach((v, i) => {
-                        (v as HTMLElement).style.width = 'calc(20% - 12px)';
+                        if (responsive.isLaptopScreen) {
+                            (v as HTMLElement).style.width = 'calc(20% - 12px) ';
+                        } else if (responsive.isTabletScreen) {
+                            (v as HTMLElement).style.width = 'calc(35% - 12px)';
+                        } else if (responsive.isMobileScreen) {
+                            (v as HTMLElement).style.width = 'calc(100% - 12px) ';
+                        }
                     });
 
                     parent.style.width = '100%';
-                    target.style.width = 'calc(40% - 12px)';
+                    if (responsive.isLaptopScreen) {
+                        target.style.width = 'calc(40% - 12px)';
+                    } else if (responsive.isTabletScreen) {
+                        target.style.width = 'calc(65% - 12px) ';
+                    }
                 } else {
                     target.classList.remove('trigger');
                     // target.style.height = '200px';
                     rowsElement.forEach((v, i) => {
-                        (v as HTMLElement).style.width = 'calc(25% - 12px)';
+                        if (responsive.isLaptopScreen) {
+                            (v as HTMLElement).style.width = 'calc(25% - 12px) ';
+                        } else if (responsive.isTabletScreen) {
+                            (v as HTMLElement).style.width = 'calc(50% - 12px) ';
+                        }
                     });
                     gsap.to(target.querySelectorAll('.techonology-item_ref'), {
                         stagger: 0.2,
                         duration: 1,
                         x: 180,
                     });
-                    parent.style.width = '80%';
-                    target.style.width = 'calc(25% - 12px) ';
+                    if (responsive.isLaptopScreen) {
+                        parent.style.width = '80%';
+                    } else if (responsive.isTabletScreen) {
+                        parent.style.width = '70%';
+                    } else if (responsive.isMobileScreen) {
+                        parent.style.width = '60%';
+                    }
+                    if (responsive.isLaptopScreen) {
+                        target.style.width = 'calc(25% - 12px) ';
+                    } else if (responsive.isTabletScreen) {
+                        target.style.width = 'calc(50% - 12px) ';
+                    }
                 }
             }}
             className={classNames(
-                `technology-item technology-item_row-${row} w-[calc(25%-12px)] rounded-lg overflow-hidden cursor-pointer shadow transition-size h-[200px] shadow-weak flex  ease-in-out duration-700`,
+                `technology-item technology-item_row-${row} lt:w-[calc(25%-12px)] tl:w-[calc(50%-12px)] mb:w-[calc(100%-12px)]   rounded-lg overflow-hidden cursor-pointer shadow transition-size h-[200px] shadow-weak flex  ease-in-out duration-700`,
             )}
         >
-            <div className="min-w-[240px]">
-                <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-                    alt="idk"
-                    className="h-[100px] translate-x-[calc(-50%)] relative left-[50%] top-[5%]"
+            <div className="dt:min-w-[240px] lt:min-w-[190px] tl:min-w-[205px] mb:min-w-[192px]">
+                <Image
+                    src={data.image}
+                    alt="something wrong!"
+                    width={100}
+                    height={100}
+                    className="h-[100px] object-contain translate-x-[calc(-50%)] relative left-[50%] top-[5%]"
                 />
                 <h3 className="text-center mt-[30px] text-tl font-normal text-[26px]">{data.title}</h3>
                 <div className="flex items-center justify-center ">

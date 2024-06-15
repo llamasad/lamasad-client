@@ -7,12 +7,11 @@ import UserHeaderTaskManager from '@/components/products/task-manager/user-heade
 import useTypeUserFetch from '@/hooks/use-type-user-fetcher';
 import { useSelector } from '@/lib/redux';
 import { selectTMUser } from '@/lib/redux/slices/tm-user-slice';
+import Footer from '@/components/products/task-manager/footer';
 
 function Layout({ children, auth }: { children: ReactNode; auth: ReactNode }) {
     const { type, isError, isLoading } = useTypeUserFetch();
-    const TMUser = useSelector(selectTMUser);
-    console.log(type, TMUser);
-
+    type;
     return (
         <MacbookWrapper url={'taskmanager.com'}>
             <>
@@ -23,6 +22,7 @@ function Layout({ children, auth }: { children: ReactNode; auth: ReactNode }) {
                 {type === 'userNonAuth' && auth}
                 <OverlayWrapper>{children}</OverlayWrapper>
             </>
+            <Footer />{' '}
         </MacbookWrapper>
     );
 }

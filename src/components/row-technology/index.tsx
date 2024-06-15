@@ -1,8 +1,12 @@
 import { ReactNode } from 'react';
 
 function RowTechnogy({ children }: { children: ReactNode }) {
-    console.log(children);
-    return <div className="space-x-[12px]  w-[80%] flex items-center mx-auto transition-size">{children}</div>;
+    children;
+    return (
+        <div className="space-x-[12px]  lt:w-[80%] tl:w-[70%] mb:w-[60%] flex flex-wrap items-center mx-auto transition-size">
+            {children}
+        </div>
+    );
 }
 
 export default RowTechnogy;

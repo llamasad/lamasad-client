@@ -1,17 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
 import CategoryItem from './category-item';
 
-const array = ['123', '456', '789', '789', '789', '789', '789', '789', '789'];
+const array = ['macro', 'micro', 'inProject', 'notInProject'];
 
-function CategoryContainer({
-    setState,
-    state,
-    ...Props
-}: {
-    setState?: Dispatch<SetStateAction<Array<string>>>;
-    state: Array<string>;
-    Props?: any;
-}) {
+function CategoryContainer({ setState, state, ...Props }: { setState?: Function; state: Array<string>; Props?: any }) {
     return (
         <div
             className="p-2 rounded border-tl border-2 border-solid w-[200px] justify-evenly bg-[rgb(var(--background-start-rgb))] flex flex-wrap"

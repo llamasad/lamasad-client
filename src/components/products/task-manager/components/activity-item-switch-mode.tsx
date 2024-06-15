@@ -1,19 +1,27 @@
 'use client';
 
 import { Dispatch, Reducer, SetStateAction, useState } from 'react';
+import { mutate } from 'swr';
 
 function ActivityItemSwitchMode({
+    saveChange,
     editModeState,
     accessPermission,
+    checkInputChange,
+    resetState,
 }: {
+    saveChange: () => void;
     editModeState: [boolean, Dispatch<SetStateAction<boolean>>];
     accessPermission: boolean;
+    checkInputChange: () => boolean;
+    resetState: () => void;
 }) {
     const [editMode, setEditMode] = editModeState;
     const [onToast, setOnToast] = useState(false);
+
     return (
         <>
-            <div className="absolute w-[100px]  border border-weak rounded-full h-[30px] top-[6px] right-0">
+            <div className="absolute w-[100px]  border border-weak rounded-full h-[30px] top-[22px] right-0">
                 <input
                     type="radio"
                     className="peer/view"
@@ -25,7 +33,11 @@ function ActivityItemSwitchMode({
                 />
                 <label
                     onClick={() => {
-                        setEditMode(false);
+                        if (editMode && checkInputChange()) {
+                            setOnToast(true);
+                        } else if (editMode && !checkInputChange()) {
+                            setEditMode(false);
+                        }
                     }}
                     htmlFor="ActivityItemMode1"
                     className="absolute h-full w-1/2 z-10 cursor-pointer"
@@ -41,7 +53,9 @@ function ActivityItemSwitchMode({
                 />
                 <label
                     onClick={() => {
-                        setOnToast(true);
+                        if (!editMode) {
+                            setOnToast(true);
+                        }
                     }}
                     htmlFor="ActivityItemMode2"
                     className="absolute w-1/2 h-full z-10 cursor-pointer right-0"
@@ -86,7 +100,8 @@ function ActivityItemSwitchMode({
                                     <div
                                         className="cursor-pointer w-1/2 border-r text-center border-weak"
                                         onClick={() => {
-                                            setEditMode(true);
+                                            saveChange();
+                                            setEditMode(false);
                                             setOnToast(false);
                                         }}
                                     >
@@ -97,6 +112,7 @@ function ActivityItemSwitchMode({
                                         onClick={() => {
                                             setEditMode(false);
                                             setOnToast(false);
+                                            resetState();
                                         }}
                                     >
                                         Cancel

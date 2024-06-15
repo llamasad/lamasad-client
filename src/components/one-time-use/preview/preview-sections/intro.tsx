@@ -15,7 +15,7 @@ function Intro({ content }: { content: { description: content; title: string } }
     return (
         <div className="section_scroll-x w-[100vw] relative pb-[65px] flex flex-col justify-center  items-center">
             <AngleBracketsXWrapper
-                className="intro-section--name absolute top-[10px] left-[50%] translate-x-[-50%]"
+                className="intro-section--name absolute top-[10px] tl:left-[310px] mb:left-[170px] lt:left-[452px] dt:left-[630px] translate-x-[-50%]"
                 height="60px"
             >
                 <p className="text-[30px]">{content.title}</p>

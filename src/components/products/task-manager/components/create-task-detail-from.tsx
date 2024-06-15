@@ -9,8 +9,9 @@ import { useSelector } from '@/lib/redux';
 import { selectTMUser } from '@/lib/redux/slices/tm-user-slice';
 import Tippy from '@tippyjs/react/headless';
 import { useRouter } from '@/navigation/next-intl';
+import { mutate } from 'swr';
 const statusOptions = [
-    { value: 'Todo', label: 'Todo' },
+    { value: 'todo', label: 'Todo' },
     { value: 'yetToStart', label: 'Yet to start' },
     { value: 'inProgress', label: 'In progress' },
     { value: 'onHold', label: 'On hold' },
@@ -58,7 +59,7 @@ const hanldeInputValid = (
     input: HTMLInputElement | null,
     setErrorMessages: Dispatch<SetStateAction<string[]>>,
 ) => {
-    console.log(input);
+    input;
     if (isRequired) {
         if (input && input.value) {
             return input.value;
@@ -88,7 +89,7 @@ function CreateTaskDetailForm() {
     const [isSubmiting, setIsSubmiting] = useState<boolean>(false);
     const router = useRouter();
     const validateTimes = useCallback((setValidateMess: Dispatch<SetStateAction<string>>) => {
-        console.log(startTimeRef.current, EndTimeRef.current);
+        startTimeRef.current, EndTimeRef.current;
         if (startTimeRef.current && EndTimeRef.current) {
             if (new Date(startTimeRef.current.value) >= new Date(EndTimeRef.current.value)) {
                 setValidateMess('Invalid time');
@@ -277,7 +278,7 @@ function CreateTaskDetailForm() {
                                 );
 
                                 //
-                                console.log(endTime.split('-').reverse().join('/'));
+                                endTime.split('-').reverse().join('/');
                                 if (
                                     (title &&
                                         startTime &&

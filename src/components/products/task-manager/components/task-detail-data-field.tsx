@@ -7,6 +7,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Select from 'react-select';
 import OverlayWrapper from '../wrappers/overlay-wrapper';
 import classNames from 'classnames';
+import apiFecther from '@/service/task-manger-fetcher/api-fetcher';
+import { mutate } from 'swr';
 
 const selectStyle = {
     control: (baseStyles: any, state: any) => ({
@@ -53,6 +55,13 @@ const selectStyle = {
         color: 'currentcolor', // Change the color of the input text
     }),
 };
+export const status = [
+    { value: 'todo', label: 'Todo' },
+    { value: 'yetToStart', label: 'Yet to start' },
+    { value: 'inProgress', label: 'In progress' },
+    { value: 'onHold', label: 'On hold' },
+    { value: 'completed', label: 'Completed' },
+];
 interface OptionType {
     value: string;
     label: string;
@@ -74,12 +83,16 @@ function TaskDetailDataField({
     name,
     valueOfDetail,
     className,
+    task_id,
+    history_id,
 }: {
     title?: string;
     type: 'text' | 'date' | 'textarea' | 'select';
     name: string;
     valueOfDetail: string;
     className?: string;
+    task_id: string;
+    history_id: number;
 }) {
     const [value, setValue] = useState(() => {
         if (type !== 'date') {
@@ -88,6 +101,7 @@ function TaskDetailDataField({
             return stringToDate(valueOfDetail as string);
         }
     });
+    const [defaultValue, setDefaultValue] = useState(valueOfDetail);
     const selectRef = useRef(null);
     const [onSubmit, setOnSubmit] = useState(false);
     const [onEdit, setOnEdit] = useState(false);
@@ -106,7 +120,7 @@ function TaskDetailDataField({
                 const el1 =
                     onEdit &&
                     (document.querySelector(`input[name="${name}"].task-detail-data_input`) as HTMLInputElement);
-                console.log(document.querySelector('.task-detail-data_input') as HTMLInputElement);
+                document.querySelector('.task-detail-data_input') as HTMLInputElement;
                 if (el1 && onEdit) {
                     el1.focus();
                 }
@@ -122,14 +136,14 @@ function TaskDetailDataField({
             case 'select':
                 const el3 =
                     onEdit && (document.querySelector(`.task-detail-data_input-select-${name}__input`) as HTMLElement);
-                console.log(selectRef.current);
+                selectRef.current;
                 if (el3 && onEdit) {
                     el3.focus();
                 }
             default:
                 break;
         }
-    }, [onEdit]);
+    }, [onEdit, name, type]);
     const inputType = {
         text: (
             <input
@@ -138,7 +152,7 @@ function TaskDetailDataField({
                 }}
                 onBlur={() => {
                     setOnEdit(false);
-                    setOnSubmit(value !== valueOfDetail);
+                    setOnSubmit(value !== defaultValue);
                 }}
                 type={type}
                 name={name}
@@ -174,7 +188,7 @@ function TaskDetailDataField({
                                       (timeObject.getMonth() + 1)
                                   ).slice(-2)}/${timeObject.getFullYear()}`
                                 : '';
-                            setOnSubmit(formattedDate !== valueOfDetail);
+                            setOnSubmit(formattedDate !== defaultValue);
                         }
                     }}
                     name={name}
@@ -195,7 +209,7 @@ function TaskDetailDataField({
                                           (timeObject.getMonth() + 1)
                                       ).slice(-2)}/${timeObject.getFullYear()}`
                                     : '';
-                                setOnSubmit(formattedDate !== valueOfDetail);
+                                setOnSubmit(formattedDate !== defaultValue);
                             }
                         }
                     }}
@@ -207,18 +221,19 @@ function TaskDetailDataField({
             <>
                 <textarea
                     onChange={(ev) => {
-                        console.log(ev.target.value);
+                        ev.target.value;
                         setValue(ev.target.value);
                     }}
                     onBlur={() => {
                         setOnEdit(false);
+                        setOnSubmit(value !== defaultValue);
                     }}
                     disabled={!onEdit}
                     name={name}
                     cols={30}
                     rows={10}
                     className={
-                        ' task-detail-data_textarea w-full bg-cooler outline-none  text-lg rounded resize-none h-[120px] p-[4px]'
+                        ' task-detail-data_textarea w-full my-px bg-cooler outline-none  text-lg rounded resize-none h-[120px] p-[4px]'
                     }
                     onKeyDown={(event) => {
                         if (event.key === 'Enter') {
@@ -237,16 +252,11 @@ function TaskDetailDataField({
                     classNamePrefix={`task-detail-data_input-select-${name}`}
                     styles={selectStyle}
                     placeholder={value as string}
-                    options={[
-                        { value: 'Todo', label: 'Todo' },
-                        { value: 'yetToStart', label: 'Yet to start' },
-                        { value: 'inProgress', label: 'In progress' },
-                        { value: 'onHold', label: 'On hold' },
-                        { value: 'completed', label: 'Completed' },
-                    ]}
+                    value={status.find((item) => item.value === value)}
+                    options={status}
                     onChange={(data) => {
                         setValue(data?.value as string);
-                        console.log(data?.value);
+                        data?.value;
                     }}
                     onBlur={() => {
                         setOnEdit(false);
@@ -254,7 +264,7 @@ function TaskDetailDataField({
                     }}
                     name={name}
                     className={classNames(
-                        ' translate-x-[-10px] w-full bg-cooler outline-none h-[40px] text-lg rounded',
+                        ' translate-x-[-10px] w-full bg-cooler outline-none h-[40px] text-lg rounded my-px',
                         `task-detail-data_input-select-${name}`,
                     )}
                     openMenuOnFocus={true}
@@ -276,8 +286,8 @@ function TaskDetailDataField({
 
     return (
         <div className="w-full">
-            <span className="my-[8px] block">{title}</span>
-            <div className={classNames('flex bg-cooler items-center rounded px-2 relative', className)}>
+            <span className="my-[8px] block ">{title}</span>
+            <div className={classNames('flex bg-cooler items-center rounded px-2 relative ', className)}>
                 {inputType[type]}
                 {!onEdit && (
                     <span
@@ -290,32 +300,54 @@ function TaskDetailDataField({
                     </span>
                 )}
             </div>
-            {value !== valueOfDetail && onSubmit && (
+            {value !== defaultValue && onSubmit && (
                 <OverlayWrapper>
                     <div className="top-[50%] translate-y-[-50%] relative z-[20] mx-auto w-[280px] h-[110px] bg-cooler rounded ">
                         <div className="w-full h-[70px] p-2 flex items-center">
                             {' '}
                             <span>
-                                do you want change form{valueOfDetail}to{' '}
+                                do you want change form {defaultValue} to{' '}
                                 {value instanceof Date ? dateToString(value) : value}
                             </span>
                         </div>
                         <div className="w-full h-[40px] border-t border-weak flex">
                             <div
                                 onClick={() => {
+                                    setOnSubmit(false);
+                                    setOnSubmit(false);
                                     if (type !== 'date') {
-                                        setOnSubmit(false);
-                                        setValue(valueOfDetail);
+                                        setValue(defaultValue);
                                     } else {
-                                        setOnSubmit(false);
-                                        setValue(stringToDate(valueOfDetail));
+                                        setValue(stringToDate(defaultValue));
                                     }
                                 }}
                                 className="w-1/2 text-center leading-[40px] cursor-pointer"
                             >
                                 Cancel
                             </div>
-                            <div className="w-1/2 text-center leading-[40px] cursor-pointer border-l border-weak">
+                            <div
+                                onClick={async () => {
+                                    try {
+                                        if (type !== 'date') {
+                                            await apiFecther(`/api/task/${task_id}?name=${name}`, 'PUT', { value });
+                                            setDefaultValue(value as string);
+                                            setOnSubmit(false);
+                                            mutate(
+                                                `${
+                                                    process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string
+                                                }/api/history?id=${history_id}`,
+                                            );
+                                        } else {
+                                            await apiFecther(`/api/task/${task_id}?name=${name}`, 'PUT', { value });
+                                            setOnSubmit(false);
+                                            setDefaultValue(dateToString(value as Date));
+                                        }
+                                    } catch (err) {
+                                        setOnSubmit(false);
+                                    }
+                                }}
+                                className="w-1/2 text-center leading-[40px] cursor-pointer border-l border-weak"
+                            >
                                 Ok
                             </div>
                         </div>

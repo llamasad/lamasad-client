@@ -17,16 +17,19 @@ function Layout({ children, auth }: { children: ReactNode; auth: ReactNode }) {
             header.style.display = 'none';
         }
         return () => {
+            header.style.display = 'block';
             window.removeEventListener('popstate', popStateHandle);
         };
     }, []);
     if (isLoading) return <div>Loading...</div>;
+    console.log(type);
     return (
         <>
+            {!type && <HeaderTaskManager />}
             {type === 'custom' && <HeaderTaskManager />}
-            {type === 'user' && <UserHeaderTaskManager />}
+            {type === 'user' && <UserHeaderTaskManager hasMacWrap={false} />}
             {type === 'userNonAuth' && auth}
-            {children}
+            <div className="min-h-[calc(100vh-84px)]">{children}</div>
         </>
     );
 }

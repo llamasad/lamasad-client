@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, ForwardedRef } from 'react';
 import interact from 'interactjs';
 import { ArrowIcon } from '@/components/icons';
 import classNames from 'classnames';
 
-const PercentBar = ({ onEditMode }: { onEditMode: boolean }) => {
-    const [percent, setPercent] = useState(0);
-    const [onEdit, setOnEdit] = useState(false);
+const PercentBar = forwardRef(function A(
+    { onEditMode, initState }: { onEditMode: boolean; initState?: number },
+    ref: ForwardedRef<HTMLInputElement>,
+) {
+    const percentBarRef = React.useRef<HTMLDivElement>(null);
+    const percentCursorRef = React.useRef<HTMLDivElement>(null);
+    const percentBarContainerRef = React.useRef<HTMLDivElement>(null);
+    const [percent, setPercent] = useState(initState || 0);
     useEffect(() => {
-        const el = document.querySelector('.scroll-percent-bar') as HTMLDivElement;
-        const container = document.querySelector('.progress-bar-container') as HTMLDivElement;
-        const scrollCusor = document.querySelector('.scroll-percent-bar_cursor') as HTMLDivElement;
+        const el = percentBarRef.current as HTMLDivElement;
+        const container = percentBarContainerRef.current as HTMLDivElement;
+        const scrollCusor = percentCursorRef.current as HTMLDivElement;
+
         if (scrollCusor && container && el) {
             interact(scrollCusor).draggable({
                 onmove: (event) => {
@@ -24,10 +30,11 @@ const PercentBar = ({ onEditMode }: { onEditMode: boolean }) => {
 
     return (
         <div>
-            <h2 className="text-lg">Limits</h2>
             <div className="flex items-center h-[30px] rounded-md border border-weak">
                 <div className="flex  bg-transparent ">
                     <input
+                        name="limits"
+                        ref={ref}
                         type="text"
                         value={Math.round(percent) + '%'}
                         className=" w-[30px] bg-transparent outline-none"
@@ -53,14 +60,19 @@ const PercentBar = ({ onEditMode }: { onEditMode: boolean }) => {
                         </div>
                     )}
                 </div>
-                <div className="progress-bar-container w-full bg-weak h-[12px] flex items-center grow rounded-full">
+                <div
+                    ref={percentBarContainerRef}
+                    className="progress-bar-container w-full bg-weak h-[12px] flex items-center grow rounded-full"
+                >
                     <div
+                        ref={percentBarRef}
                         className={classNames(
                             ' scroll-percent-bar w-[6px] h-[6px] ml-[3px]   bg-green-500 rounded-l-full',
                         )}
                         style={{ width: `${percent}%` }}
                     />
                     <div
+                        ref={percentCursorRef}
                         className={classNames(
                             'scroll-percent-bar_cursor w-[12px] bg-cooler rounded-full cursor-pointer h-[12px] relative ',
                             { 'pointer-events-none': !onEditMode },
@@ -70,6 +82,6 @@ const PercentBar = ({ onEditMode }: { onEditMode: boolean }) => {
             </div>
         </div>
     );
-};
+});
 
 export default PercentBar;

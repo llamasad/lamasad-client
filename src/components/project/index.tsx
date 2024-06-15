@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { OpenIcon } from '../icons';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import MacbookWrapper from '../wrapper-components/macbook-wrapper';
+import StaticLink from '../navigation/staic-link';
 import { memo, useState } from 'react';
 import Link from 'next/link';
 function Project({
@@ -22,8 +23,8 @@ function Project({
     img = JSON.parse(img);
     return (
         <>
-            <Link
-                href={'/en/showcase/product/task-manager'}
+            <StaticLink
+                href={'/showcase/product/task-manager'}
                 className={`w-[calc(33.3%-12px)] px-[20px] bg-no-repeat bg-contain overflow-hidden  rounded-lg hover:shadow text-current hover:shadow-weak  h-[300px] cursor-pointer`}
             >
                 <div className="mt-[20px] flex  h-[70%] bg-weak rounded-lg relative overflow-hidden ">
@@ -34,7 +35,7 @@ function Project({
                 </div>
                 <h2 className="mt-[8px] text-tl text-[18px] font-medium">{title}</h2>
                 <p className="">{description}</p>
-            </Link>
+            </StaticLink>
         </>
     );
 }

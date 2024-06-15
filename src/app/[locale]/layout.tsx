@@ -25,7 +25,7 @@ export default function RootLayout({ children, params }: { children: React.React
     // unstable_setRequestLocale(params.locale);
 
     // const t = useTranslations('Index');
-    // console.log(t('title'));
+    // (t('title'));
     return (
         <html lang={params.locale}>
             <body className={roboto.className} theme-data={theme?.value}>

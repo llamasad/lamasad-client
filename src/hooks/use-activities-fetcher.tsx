@@ -12,7 +12,7 @@ export function fetcher(url: string, ids: number[]) {
             },
         })
         .then((res) => {
-            return res;
+            return res.data;
         })
         .catch((error) => {
             console.error(error);

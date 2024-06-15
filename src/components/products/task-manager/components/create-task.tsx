@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { ComponentChildContext } from '@/components/wrapper-components/overlay-wrapper';
 import { useContext } from 'react';
 import CreateTaskDetail from './create-task-detail';
-function CreateTask({ display }: { display: MacbookDisplayType }) {
+function CreateTask({ display, hasMacWrap }: { display: MacbookDisplayType; hasMacWrap: boolean }) {
     const { ComponentChild, mountChild, unmountChild } = useContext(ComponentChildContext);
     return (
         <div
@@ -21,6 +21,8 @@ function CreateTask({ display }: { display: MacbookDisplayType }) {
                     'w-full-minus-8px': display === 'mobile',
                     'h-37': display === 'desktop' || display === 'laptop',
                     'h-47': display === 'tablet' || display === 'mobile',
+                    'mb:w-full-minus-8px tl:w-1/2-minus-8px lt:w-1/4-minus-8px dt:w-1/5-minus-8px dt:h-37 lt:h-37 tl:h-47 mb:h-47':
+                        !hasMacWrap,
                 },
                 'flex flex-wrap mt-[20px] cursor-pointer select-none px-[8px]  mt-[16px] mx-[8px]  m-[4px] relative',
             )}

@@ -2,6 +2,7 @@ import { ExitIcon } from '@/components/icons';
 import classNames from 'classnames';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
+const status = ['todo', 'yetToStart', 'inProgress', 'onHold', 'completed'];
 function CategoryItem({
     content,
     setState,
@@ -11,7 +12,7 @@ function CategoryItem({
 }: {
     className?: string;
     content: string;
-    setState?: Dispatch<SetStateAction<Array<string>>>;
+    setState?: Function;
     isActived: Boolean;
     state?: Array<string>;
 }) {
@@ -66,6 +67,7 @@ function CategoryItem({
                     onClick={() => {
                         if (setState) {
                             setState((state: Array<string>) => {
+                                if (status.includes(content)) return false;
                                 const index = state.indexOf(content);
                                 const newState = [...state];
                                 newState.splice(index, 1);

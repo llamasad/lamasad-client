@@ -44,3 +44,4 @@ export const localePrefix = undefined;
 export type AppStaticsPathnames = keyof typeof staticPathnames;
 export type AppDynamicPathnames = keyof typeof dynamicPathnames;
 export type AppPathnames = AppStaticsPathnames | AppDynamicPathnames;
+export type AppDynamicKeyParams = 'id';

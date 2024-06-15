@@ -13,17 +13,17 @@ export interface task {
     history_id: number;
     microTasks_id: null | string[];
     overview: null | string;
-    project_id: null | string;
+    project_id: null | number;
     startTime: string;
     status: keyof TypeOfSatatusInterface;
     title: string;
     type: 'micro' | 'macro';
+    limits?: string | null;
 }
 function TaskDetail({ params }: { params: { id: string } }) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [task, setTask] = useState<task | null>(null);
     const [error, setError] = useState<any>(null);
-    console.log(task);
     useEffect(() => {
         apiFecther(`/api/task/${params.id}`, 'GET')
             .then((res: any) => {
@@ -34,9 +34,9 @@ function TaskDetail({ params }: { params: { id: string } }) {
                 setIsLoading(false);
                 setError(err);
             });
-    }, []);
+    }, [params.id]);
     if (error) return <div>something is wrong!!</div>;
-    return <>{isLoading && task && <TaskDetailPage {...task} />}</>;
+    return <>{!isLoading && task && <TaskDetailPage {...task} />}</>;
 }
 
 export default TaskDetail;

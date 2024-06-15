@@ -65,8 +65,8 @@ function Preview({ content }: { content: { description: description; thinking: t
         <div className="relative w-inherit">
             <div ref={wrapRef} className="preview-container h-[100vh]  flex w-max">
                 <div className="absolute h-[inherit] mb:w-mb-body tl:w-tl-body lt:w-lt-body dt:w-dt-body">
-                    <GearSpinOnScroll trigger=".preview-container" className="bottom-[54px] right-[0]" />
-                    <GearSpinOnScroll className="left-[0]" trigger=".preview-container" />
+                    <GearSpinOnScroll trigger=".preview-container" className="bottom-[54px] right-7" />
+                    <GearSpinOnScroll className="left-0" trigger=".preview-container" />
                 </div>
 
                 <Intro content={{ title: content.title, description: content.description }} />

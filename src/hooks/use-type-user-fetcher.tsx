@@ -26,7 +26,8 @@ function userTypeFetcher(url: string, dispatch: Dispatch<any>) {
             },
         })
         .then((res) => {
-            if ((res.data.message = 'user')) {
+            console.log(res);
+            if (res.data.message === 'user') {
                 dispatch(TMUserSlice.actions.setState(res.data.user));
             }
             return res.data.message;
@@ -48,7 +49,7 @@ export default function useTypeUserFetcher(): {
         fetcher,
         { revalidateOnFocus: false, refreshInterval: 0, revalidateOnReconnect: false },
     );
-
+    console.log(data);
     return {
         type: data,
         isLoading,

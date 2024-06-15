@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import images from '@/assets/images';
 import Image from 'next/image';
 function FormWrapper({ children, className }: { children: ReactNode; className?: string }) {
-    console.log(images.loginRegisterBG);
+    images.loginRegisterBG;
     return (
         //
         <div className={classNames('', className)}>

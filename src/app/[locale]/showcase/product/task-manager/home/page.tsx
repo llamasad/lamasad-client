@@ -1,5 +1,7 @@
+import HomePage from '@/components/products/task-manager/home-page';
+
 function Home() {
-    return <div></div>;
+    return <HomePage hasMacWrap={false} />;
 }
 
 export default Home;

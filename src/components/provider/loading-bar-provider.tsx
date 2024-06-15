@@ -3,7 +3,7 @@ import LoadingBar from 'react-top-loading-bar';
 import type { LoadingBarRef } from 'react-top-loading-bar';
 import { createContext, useState, useMemo, useEffect, ReactElement, useLayoutEffect } from 'react';
 import { ReactNode } from 'react';
-import { usePathname } from '@/navigation/next-intl';
+import { usePathname } from 'next/navigation';
 import themeObserver from '@/util/cookies/theme/observers/theme-observer';
 interface ILoadingBarContext {
     progress: number;
@@ -25,10 +25,8 @@ const LoadingLineProvider = ({ children }: { children: ReactNode }) => {
     useLayoutEffect(() => {
         const observer = themeObserver((mutationRecord) => {
             let theme = (mutationRecord[0] as any).target.getAttribute('theme-data');
-            console.log(theme);
             if (theme === 'light') {
                 setHeight(2);
-                console.log(height);
             } else {
                 setHeight(1);
             }

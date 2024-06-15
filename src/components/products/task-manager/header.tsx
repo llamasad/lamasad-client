@@ -10,6 +10,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useSpring, motion } from 'framer-motion';
 import Link from 'next/link';
+import StaticLink from '@/components/navigation/staic-link';
 
 const Box = styled(motion.div)``;
 const jockeyOne = Jockey_One({ weight: '400', preload: false });
@@ -41,10 +42,9 @@ function HeaderTaskManager() {
     return (
         <header className="task-manager_header flex items-center justify-between relative ">
             <div className="flex items-center ">
-                <Image src={images.logo} className="cursor-pointer" width={60} height={60} alt="" />
-                <Link href={'/en/showcase/product/task-manager/home'}> test</Link>
-                <Link href="/en/showcase/product/task-manager/task-detail/123">123</Link>
-
+                <StaticLink href="/">
+                    <Image src={images.logo} className="cursor-pointer" width={60} height={60} alt="" />
+                </StaticLink>
                 <span className="ml-[-10px] rotate-3 text-3xl font-extralight text-weak">/</span>
                 <h2 className={classNames('ml-[5px] text-tl cursor-pointer text-3xl font-medium', jockeyOne.className)}>
                     TManager

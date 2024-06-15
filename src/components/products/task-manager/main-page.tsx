@@ -24,14 +24,14 @@ function MainPage({ hasMacWrap }: { hasMacWrap: boolean }) {
                 <div className="flex items-center justify-center mt-10">
                     {hasMacWrap ? (
                         <LinkForMacWrap
-                            href={'/en/showcase/product/task-manager/login'}
+                            href={'/showcase/product/task-manager/home'}
                             className="border-weak border text-center leading-[28px] rounded-lg px-3 py-1 text-lg"
                         >
                             get start
                         </LinkForMacWrap>
                     ) : (
                         <HardLink
-                            href="/en/showcase/product/task-manager/login"
+                            href="/showcase/product/task-manager/home"
                             className="border-weak border text-center leading-[28px] rounded-lg px-3 py-1 text-lg"
                         >
                             get start

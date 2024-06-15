@@ -5,7 +5,24 @@ import to2dArray from '@/util/cookies/theme/array/to-2d-array';
 import RowTechnogy from '../row-technology';
 import { useEffect, useState } from 'react';
 import gsap from 'gsap';
+import { useMediaQuery } from 'react-responsive';
+import images from '@/assets/images';
 function ListTechnology() {
+    const isDesktopScreen = useMediaQuery({ query: '(min-width: 1280px)' });
+    const isLaptopScreen = useMediaQuery({ query: '(min-width: 1024px)' });
+    const isTabletScreen = useMediaQuery({ query: '(min-width: 640px)' });
+    const isMobileScreen = useMediaQuery({ query: '(max-width: 639px)' });
+    var collum = 4;
+    if (isMobileScreen) {
+        collum = 1;
+    }
+    if (isTabletScreen) {
+        collum = 2;
+    }
+    if (isLaptopScreen) {
+        collum = 4;
+    }
+
     useEffect(() => {
         const handleOnClick = (ev: any) => {
             ev.stopPropagation();
@@ -33,68 +50,98 @@ function ListTechnology() {
     }, []);
     let arr: tech[] = [
         {
-            title: 'react',
+            title: 'React',
             proficiency: 'AboveCompetent',
-            image: '',
+            image: images.reactIcon,
             reference: [
                 { link: 'http://localhost:3000/en', alias: 'link to anything' },
                 { link: 'http://localhost:3000/en', alias: 'link to anything' },
             ],
         },
         {
-            title: 'react',
-            proficiency: 'AboveFamiliar',
+            title: 'NextJs(App)',
+            proficiency: 'AboveCompetent',
             reference: [
                 { link: 'http://localhost:3000/en', alias: 'link to anything' },
                 { link: 'http://localhost:3000/en', alias: 'link to anything' },
             ],
-            image: '',
+            image: images.nextjsIcon,
         },
         {
-            title: 'react',
-            proficiency: 'Expert',
-            reference: [
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-            ],
-            image: '',
+            title: 'Gsap',
+            proficiency: 'Competent',
+            reference: [{ link: 'http://localhost:3000/', alias: 'lamasad project' }],
+            image: images.gsapIcon,
         },
         {
-            title: 'react',
-            proficiency: 'Familiar',
-            reference: [
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-            ],
-            image: '',
-        },
-        {
-            title: 'react',
-            proficiency: 'Familiar',
-            reference: [
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-            ],
-            image: '',
-        },
-        {
-            title: 'react',
+            title: 'Redux',
             proficiency: 'Competent',
             reference: [
                 { link: 'http://localhost:3000/en', alias: 'link to anything' },
                 { link: 'http://localhost:3000/en', alias: 'link to anything' },
             ],
-            image: '',
+            image: images.reduxIcon,
+        },
+        {
+            title: 'MongoDB',
+            proficiency: 'AboveFamiliar',
+            reference: [
+                { link: 'http://localhost:3000/en', alias: 'link to anything' },
+                { link: 'http://localhost:3000/en', alias: 'link to anything' },
+            ],
+            image: images.mongodbIcon,
+        },
+        {
+            title: 'Postgres',
+            proficiency: 'AboveFamiliar',
+            reference: [
+                { link: 'http://localhost:3000/en', alias: 'link to anything' },
+                { link: 'http://localhost:3000/en', alias: 'link to anything' },
+            ],
+            image: images.postgresIcon,
+        },
+        {
+            title: 'Mysql',
+            proficiency: 'AboveFamiliar',
+            reference: [
+                { link: 'http://localhost:3000/en', alias: 'link to anything' },
+                { link: 'http://localhost:3000/en', alias: 'link to anything' },
+            ],
+            image: images.mysqlIcon,
+        },
+        {
+            title: 'Nodejs',
+            proficiency: 'AboveFamiliar',
+            reference: [
+                { link: 'http://localhost:3000/en', alias: 'link to anything' },
+                { link: 'http://localhost:3000/en', alias: 'link to anything' },
+            ],
+            image: images.nodejsIcon,
+        },
+        {
+            title: 'Linux',
+            proficiency: 'AboveFamiliar',
+            reference: [
+                { link: 'http://localhost:3000/en', alias: 'link to anything' },
+                { link: 'http://localhost:3000/en', alias: 'link to anything' },
+            ],
+            image: images.linuxIcon,
         },
     ];
-    let arr2d = to2dArray<tech>(arr, 4);
+    let arr2d = to2dArray<tech>(arr, collum);
     return (
         <ul className="technology-container   space-y-[12px] flex-row mt-[100px] ">
             {arr2d.map((v, index) => (
                 <RowTechnogy key={index}>
                     <>
                         {v.map((v, i) => (
-                            <TechnologyItem data={v} key={i} index={i} row={index + 1} />
+                            <TechnologyItem
+                                responsive={{ isDesktopScreen, isLaptopScreen, isTabletScreen, isMobileScreen }}
+                                data={v}
+                                key={i}
+                                index={i}
+                                row={index + 1}
+                            />
                         ))}
                     </>
                 </RowTechnogy>

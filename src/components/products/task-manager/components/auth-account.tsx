@@ -10,6 +10,7 @@ import $ from 'jquery';
 import Image from 'next/image';
 import interact from 'interactjs';
 import { getCookie } from '@/hooks/use-type-user-fetcher';
+import { mutate } from 'swr';
 
 function dataURItoBlob(dataURI: string) {
     const byteString = atob(dataURI.split(',')[1]);
@@ -197,6 +198,7 @@ function AuthAccount() {
                             contentType: false,
                             success: function (response) {
                                 // Handle success response
+                                mutate(`${process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string}/user-check`);
                             },
                             beforeSend: function (xhr) {
                                 xhr.setRequestHeader('Authorization', `Bearer ${getCookie('access-token')}`); // Replace 'YOUR_ACCESS_TOKEN' with your actual token
@@ -239,12 +241,12 @@ function AuthAccount() {
                         <ArrowLineIcon className="w-[24px] h-[24px]" />
                     </div>
                 </div>
-                <div className="w-full h-full relative flex flex-col items-center justify-center shrink bg-[rgb(var(--background-start-rgb))]">
+                <div className="w-full  h-full relative flex flex-col items-center justify-center shrink bg-[rgb(var(--background-start-rgb))]">
                     <span
                         onClick={() => {
                             setX('0');
                         }}
-                        className="absolute top-1 left-1 flex text-tl cursor-pointer"
+                        className="absolute top-14 left-14 flex text-tl cursor-pointer"
                     >
                         <ArrowIcon className="rotate-90 w-6 h-6 mr-1" />
                         Back to username
@@ -279,7 +281,7 @@ function AuthAccount() {
                         onClick={() => {
                             setX('-33.33%');
                         }}
-                        className="absolute top-1 left-1 flex text-tl cursor-pointer"
+                        className="absolute top-14 left-14 flex text-tl cursor-pointer"
                     >
                         <ArrowIcon className="rotate-90 w-6 h-6 mr-1" />
                         Back to Birthday
@@ -293,7 +295,7 @@ function AuthAccount() {
                                 { flex: imgSrc === '' },
                             )}
                         >
-                            <label htmlFor="tsm-auth-account_input-file">
+                            <label htmlFor="tsm-auth-account_input-file" className="cursor-pointer">
                                 <PlusIcon className="w-8 h-8" />
                                 <input
                                     accept="image/png,image/jpeg,image/jpg"
@@ -301,7 +303,7 @@ function AuthAccount() {
                                     onChange={function (ev) {
                                         const files = ev.currentTarget.files;
 
-                                        console.log(files?.length);
+                                        files?.length;
                                         const canvas = canvasRef.current;
                                         if (
                                             files?.length &&

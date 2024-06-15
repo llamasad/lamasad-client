@@ -86,7 +86,7 @@ function IconThemeTrans() {
         changeTheme(theme);
     }, []);
     useEffect(() => {
-        console.log(theme);
+        theme;
         const eleRefCur = eleRef.current;
         if (eleRefCur) {
             var handleMouseEnter = () => {
