@@ -38,10 +38,10 @@ function Showcase({ getSectionSpace, content }: { getSectionSpace: Function; con
         <>
             <div className="section_scroll-x w-[100vw] relative mb-[100px] flex flex-row justify-center  items-center">
                 <BorderSolidScale getSectionSpace={getSectionSpace} index={6} />
-                <AngleBracket className="showcase-bracket--left " height="120px" />
+                <AngleBracket className="showcase-bracket--left text-tl" height="120px" />
                 <p className="showcase-header font-bold text-tl text-[0px]"> {content.title}</p>
                 <AngleBracket
-                    className="showcase-bracket--right  relative top-[-1px]"
+                    className="showcase-bracket--right text-tl relative top-[-1px]"
                     height="120px "
                     direction="left"
                 />

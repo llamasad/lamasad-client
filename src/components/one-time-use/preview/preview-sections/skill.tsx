@@ -38,9 +38,13 @@ function Skill({ getSectionSpace, content }: { getSectionSpace: Function; conten
         <>
             <div className="section_scroll-x w-[100vw] relative mb-[100px] flex flex-row justify-center  items-center">
                 <BorderSolidScale getSectionSpace={getSectionSpace} index={4} />
-                <AngleBracket className="skill-bracket--left " height="120px" />
+                <AngleBracket className="skill-bracket--left text-tl" height="120px" />
                 <p className="skill-header font-bold text-tl text-[0px]"> {content.title}</p>
-                <AngleBracket className="skill-bracket--right  relative top-[-1px]" height="120px " direction="left" />
+                <AngleBracket
+                    className="skill-bracket--right text-tl relative top-[-1px]"
+                    height="120px "
+                    direction="left"
+                />
             </div>
             <div className="section_scroll-x w-[100vw] relative mb-[100px] flex flex-col justify-center  items-center">
                 <Image

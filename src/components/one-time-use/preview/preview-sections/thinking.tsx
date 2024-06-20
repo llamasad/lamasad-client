@@ -116,9 +116,13 @@ function Thinking({ getSectionSpace, content }: { content: content; getSectionSp
         <>
             <div className="section_scroll-x w-[100vw] relative mb-[100px] flex flex-row justify-center  items-center">
                 <BorderSolidScale getSectionSpace={getSectionSpace} index={1} />
-                <AngleBracket className="think-bracket--left " height="120px" />
-                <p className="thinking-header font-bold text-[0] "> {content.title}</p>
-                <AngleBracket className="think-bracket--right  relative top-[-1px]" height="120px " direction="left" />
+                <AngleBracket className="think-bracket--left text-tl" height="120px" />
+                <p className="thinking-header font-bold text-[0] text-tl"> {content.title}</p>
+                <AngleBracket
+                    className="think-bracket--right text-tl relative top-[-1px]"
+                    height="120px "
+                    direction="left"
+                />
             </div>
             <div className="overflow-hidden z-10 section_scroll-x w-[100vw] relative mb-[100px] flex flex-col justify-center  items-center">
                 <Image

@@ -8,8 +8,8 @@ function SummarySkillSection({ content }: { content: skillContentType }) {
     return (
         <div className="relative flex border-weak lt:h-[364px]">
             <div className="lt:w-1/2 mb:w-full mt-10">
-                <AngleBracketsXWrapper className="mb:mb-[292px] lt:mb-0" width="20">
-                    <p className="text-lg text-xl font-semibold">{content.title} </p>
+                <AngleBracketsXWrapper className="mb:mb-[292px] text-tl lt:mb-0" width="20">
+                    <p className="text-lg text-tl text-xl font-semibold">{content.title} </p>
                 </AngleBracketsXWrapper>
                 <p className="mt-12 text-xl w-[96%]">{content.description}</p>{' '}
                 <StaticLink href="/skill" className="mt-12 mb-8 p-2 inline-block border-weak border rounded text-xl">

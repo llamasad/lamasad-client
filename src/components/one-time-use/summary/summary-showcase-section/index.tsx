@@ -9,8 +9,8 @@ function SummarySection({ content }: { content: showcaseContentType }) {
     return (
         <div className="relative border-y flex border-weak lt:h-[364px]">
             <div className="lt:w-1/2  mb:w-full mt-10">
-                <AngleBracketsXWrapper className="mb:mb-64 lt:mb-0" width="20">
-                    <p className="text-lg text-xl font-semibold">{content.title} </p>
+                <AngleBracketsXWrapper className="mb:mb-64 lt:mb-0 text-tl" width="20">
+                    <p className="text-lg text-tl text-xl font-semibold">{content.title} </p>
                 </AngleBracketsXWrapper>
                 <p className="mt-12 text-xl w-[96%]">{content.description}</p>{' '}
                 <StaticLink

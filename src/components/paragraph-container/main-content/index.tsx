@@ -7,7 +7,7 @@ function MainContent({ content }: { content: { description: string; extraDescrip
     return (
         <div className="flex flex-wrap">
             <div className="mb:hidden tl:block w-1/3 text-center">
-                <LogoIcon className="w-auto mx-auto  mb-[40px]" />
+                <LogoIcon fill="currentColor" className="w-auto mx-auto text-black mb-[40px]" />
             </div>
             <div className="mb:w-full tl:w-2/3">
                 <p className="lt:text-[60px]  lt:font-bold tl:text-[40px] mb:text-[24px] mb:font-semibold tl:text-right mb:text-center text-tl">
