@@ -1,7 +1,7 @@
 'use client';
 import { useLayoutEffect, useTransition } from 'react';
 import { locales } from '@/config/language';
-import { usePathname, useRouter } from '@/navigation/next-intl';
+import { useRouter } from '@/navigation/next-intl';
 import { languageSlice, selectLanguage } from '@/lib/redux/slices/language-slice';
 import { useDispatch, useSelector } from '@/lib/redux';
 
@@ -9,18 +9,16 @@ function LanguageOption() {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
     const dispatch = useDispatch();
-    const pathname = usePathname();
     const language = useSelector(selectLanguage);
     useLayoutEffect(() => {
         let lang = window.location.pathname.split('/')[1] as 'vi' | 'en';
         if (lang !== language) {
             dispatch(languageSlice.actions.switch(lang));
         }
-    }, []);
+    }, [dispatch, language]);
     const switchLanguage = (ev: React.ChangeEvent<HTMLSelectElement>) => {
         const nextLocale = ev.target.value as 'en' | 'vi';
         startTransition(() => {
-            nextLocale;
             router.replace('/', { locale: nextLocale });
             dispatch(languageSlice.actions.switch(nextLocale));
         });

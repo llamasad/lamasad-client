@@ -18,7 +18,7 @@ function Thinking({ getSectionSpace, content }: { content: content; getSectionSp
         let tlForHeader = gsap.timeline({
             scrollTrigger: {
                 trigger: '.preview-container',
-                start: `${getSectionSpace(1) - 200}px 65px`,
+                start: `${getSectionSpace(1) + 200}px 65px`,
                 end: () => '+=10px',
             },
         });
@@ -31,13 +31,7 @@ function Thinking({ getSectionSpace, content }: { content: content; getSectionSp
         let tlForAnimation = gsap.timeline({
             scrollTrigger: {
                 trigger: '.preview-container',
-                start: `${
-                    getSectionSpace(2) +
-                    ((document.querySelector('.section_scroll-x') as HTMLElement).offsetWidth +
-                        (document.querySelector('.section_scroll-x') as HTMLElement).offsetWidth / 2) /
-                        2 -
-                    100
-                }px 65px`,
+                start: `${getSectionSpace(2) + 400}px 65px`,
                 scrub: 1,
                 end: () => '+=' + (document.querySelector('.section_scroll-x') as HTMLElement).offsetWidth,
                 pinSpacing: false,
@@ -75,11 +69,7 @@ function Thinking({ getSectionSpace, content }: { content: content; getSectionSp
         let tlForText = gsap.timeline({
             scrollTrigger: {
                 trigger: '.preview-container',
-                start: `${
-                    getSectionSpace(2) +
-                    (document.querySelector('.section_scroll-x') as HTMLElement).offsetWidth / 2 -
-                    400
-                }px 65px`,
+                start: `${getSectionSpace(2) - 200}px 65px`,
 
                 end: () => '+=10px',
             },
@@ -95,10 +85,7 @@ function Thinking({ getSectionSpace, content }: { content: content; getSectionSp
                 y: 0,
                 scrollTrigger: {
                     trigger: '.preview-container',
-                    start: `${
-                        getSectionSpace(2) +
-                        (document.querySelector('.section_scroll-x') as HTMLElement).offsetWidth / 2
-                    }px 65px`,
+                    start: `${getSectionSpace(2) + 360}px 65px`,
 
                     end: () => '+=10px',
                 },
@@ -111,10 +98,7 @@ function Thinking({ getSectionSpace, content }: { content: content; getSectionSp
                 xPercent: 0,
                 scrollTrigger: {
                     trigger: '.preview-container',
-                    start: `${
-                        getSectionSpace(3) +
-                        (document.querySelector('.section_scroll-x') as HTMLElement).offsetWidth / 2
-                    }px 65px`,
+                    start: `${getSectionSpace(3) + 200}px 65px`,
                     end: () => '+=10px',
                 },
             },

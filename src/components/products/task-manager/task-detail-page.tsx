@@ -4,7 +4,7 @@ import { TypeOfSatatusInterface } from './components/status';
 import Split from 'react-split';
 import TaskDetailSide from './components/task-detail-side';
 import TaskActivitySide from './components/task-activity-side';
-import { task } from '@/app/[locale]/showcase/@modal/(.)product/task-manager/task-detail/[id]/page';
+import { task } from '@/app/[locale]/showcase/product/task-manager/task-detail/[id]/page';
 import { useContext } from 'react';
 import { ResponsiveContext } from '@/components/wrapper-components/macbook-wrapper';
 import { useMediaQuery } from 'react-responsive';

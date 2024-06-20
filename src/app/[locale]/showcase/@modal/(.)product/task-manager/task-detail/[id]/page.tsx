@@ -32,10 +32,15 @@ function TaskDetail({ params }: { params: { id: string } }) {
             })
             .catch((err) => {
                 setIsLoading(false);
-                setError(err);
+                if (err.response && err.response.status === 403) {
+                    setError('Forbiden');
+                }
             });
     }, [params.id]);
-    if (error) return <div>something is wrong!!</div>;
+    console.log(error);
+    if (error === 'Forbiden') {
+        throw new Error('You are not authorized to access this page');
+    }
     return <>{!isLoading && task && <TaskDetailPage {...task} />}</>;
 }
 

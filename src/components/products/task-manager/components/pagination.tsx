@@ -16,7 +16,6 @@ function Pagination({
     pageCountInit: number;
     state: { setParams: Dispatch<SetStateAction<params>>; params: params };
 }) {
-    console.log(pageCountInit);
     const handlePageClick = (event: any) => {
         state.setParams((prev) => ({ ...prev, page: event.selected + 1 }));
     };

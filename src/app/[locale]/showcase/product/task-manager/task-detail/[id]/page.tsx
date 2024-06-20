@@ -29,13 +29,20 @@ function TaskDetail({ params }: { params: { id: string } }) {
             .then((res: any) => {
                 setIsLoading(false);
                 setTask(res);
+                console.log(res);
             })
             .catch((err) => {
+                console.log(err);
                 setIsLoading(false);
-                setError(err);
+                if (err.response && err.response.status === 403) {
+                    setError('Forbiden');
+                }
             });
     }, [params.id]);
-    if (error) return <div>something is wrong!!</div>;
+
+    if (error === 'Forbiden') {
+        throw new Error('You are not authorized to access this page');
+    }
     return <>{!isLoading && task && <TaskDetailPage hasMacWrap={false} {...task} />}</>;
 }
 

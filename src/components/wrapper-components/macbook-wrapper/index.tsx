@@ -37,8 +37,8 @@ import gsap from 'gsap';
 import interact from 'interactjs';
 import Overlay from '@/components/overlay';
 import resizeObserver from '@/util/cookies/theme/observers/resize-observer';
-import { useRouter, usePathname } from 'next/navigation';
-
+import { usePathname } from 'next/navigation';
+import { useRouter } from '@/navigation/next-intl';
 import { productUrlSlice, selectUrl } from '@/lib/redux/slices/product-url-slice';
 import { useDispatch, useSelector } from '@/lib/redux';
 import Link from 'next/link';
@@ -54,6 +54,7 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
     const baseUrl = useSelector(selectUrl);
     const dispatch = useDispatch();
     const [typeOfDisplay, setTypeOfDisplay] = useState<MacbookDisplayType>(null);
+
     const [fullSize, setFullSize] = useState<boolean>(true);
     const isDesktopScreen = useMediaQuery({ query: '(min-width: 1280px)' });
     const isLaptopScreen = useMediaQuery({ query: '(min-width: 1024px)' });
@@ -71,8 +72,8 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
             return 360;
         }
     }, [isDesktopScreen, isLaptopScreen, isTabletScreen, isMobileScreen]);
+
     useEffect(() => {
-        routeAhead;
         const partsBaseUrl = baseUrl.split('/');
         const partsUrl = pathName.split('/');
         const inputValue = document.querySelector('.macbook-search_value') as HTMLInputElement;
@@ -92,11 +93,25 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
     useLayoutEffect(() => {
         var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-        gsap.fromTo(
-            '.macbook-wrapper',
-            { width: 0, height: 0, x: windowWidth / 2, y: windowHeight / 2 },
-            { width: getDevice(), height: '90%', x: (windowWidth - (getDevice() as number)) / 2, y: windowHeight / 20 },
-        );
+        if (!isMobileScreen) {
+            gsap.fromTo(
+                '.macbook-wrapper',
+                { width: 0, height: 0, x: windowWidth / 2, y: windowHeight / 2 },
+                {
+                    width: getDevice(),
+                    height: '90%',
+                    x: (windowWidth - (getDevice() as number)) / 2,
+                    y: windowHeight / 20,
+                },
+            );
+        } else {
+            setFullSize(false);
+            gsap.fromTo(
+                '.macbook-wrapper',
+                { width: 0, height: 0, x: windowWidth / 2, y: windowHeight / 2 },
+                { width: '100%', height: '100%', x: 0, y: 0 },
+            );
+        }
     }, []);
     useEffect(() => {
         var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -154,7 +169,6 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                         }
                         const macbookWrapper = document.querySelector('.macbook-search-wrapper') as HTMLElement;
                         let padding = ((macbookWrapper.offsetWidth - inputValue.offsetWidth) / 2) as number;
-                        padding;
                         input.style.paddingLeft = padding + 'px';
                         lockIcon.style.left = padding - 15 + 'px';
                     }
@@ -331,25 +345,6 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                                         borderColor: 'transparent',
                                     });
                                 }, 500));
-                            //         tweenClose &&
-                            //         (tweenClose = gsap.to(coatingEl, {
-                            //             width: event.target.parentNode.offsetWidth - 2 + 'px',
-                            //             height: event.target.parentNode.offsetHeight - 2 + 'px',
-                            //             x: position.x,
-                            //             y: position.y,
-                            //             duration: 0.5,
-                            //             onStart: () => {},
-                            //             onComplete: () => {
-                            //                 tweenClose.kill();
-                            //                 tweenClose = gsap.to(coatingEl, { paused: true });
-                            //                 coatingEl.style.transform = `translate(${position.x}px, ${position.y}px`;
-
-                            //                 ('cc');
-                            //                 coatingEl.style.width = event.target.parentNode.offsetWidth - 2 + 'px';
-                            //                 coatingEl.style.height = event.target.parentNode.offsetHeight - 2 + 'px';
-                            //                 tweenOpen.progress() && (tweenOpen = gsap.to(coatingEl, { paused: true }));
-                            //             },
-                            //         }));
                         }
                     }
 
@@ -392,10 +387,19 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
             input.classList.remove('text-center');
         }
         if (input && inputValue && macbookWrapper && lockIcon) {
-            let padding = ((macbookWrapper.offsetWidth - inputValue.offsetWidth) / 2) as number;
-            padding;
-            input.style.paddingLeft = padding + 'px';
-            lockIcon.style.left = padding - 15 + 'px';
+            if (isMobileScreen) {
+                setTimeout(() => {
+                    let padding = ((macbookWrapper.offsetWidth - inputValue.offsetWidth) / 2) as number;
+                    input.style.paddingLeft = padding + 'px';
+                    lockIcon.style.left = -15 + 'px';
+                }, 300);
+            } else {
+                let padding = ((macbookWrapper.offsetWidth - inputValue.offsetWidth) / 2) as number;
+                input.style.paddingLeft = padding + 'px';
+                lockIcon.style.left = padding - 15 + 'px';
+            }
+        } else if (macbookWrapper && input && inputValue) {
+            input.style.paddingLeft = (macbookWrapper.offsetWidth - inputValue.offsetWidth) / 2 + 'px';
         }
     });
     return (
@@ -468,7 +472,7 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                                                             const parts = pathName.split('/');
                                                             parts.splice(0, 4);
                                                             parts.forEach(() => {
-                                                                Route.back();
+                                                                Route.push('/showcase');
                                                             });
                                                         },
                                                     });
@@ -688,17 +692,19 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                                     }
                                 }}
                                 onBlur={(ev) => {
-                                    ev.target.style.paddingLeft =
+                                    const paddingLeft =
                                         ((document.querySelector('.macbook-search-wrapper') as HTMLElement)
                                             .offsetWidth -
                                             (document.querySelector('.macbook-search_value') as HTMLSpanElement)
                                                 .offsetWidth) /
-                                            2 +
-                                        'px';
+                                        2;
+                                    ev.target.style.paddingLeft = paddingLeft + 'px';
 
                                     setTimeout(() => {
                                         document.querySelector('.macbook-language')?.classList.remove('hidden');
                                         document.querySelector('.macbook-lock')?.classList.remove('hidden');
+                                        (document.querySelector('.macbook-lock') as HTMLElement).style.left =
+                                            paddingLeft - 15 + 'px';
                                     }, 100);
 
                                     document.querySelector('.macbook-delete-text')?.classList.add('hidden');

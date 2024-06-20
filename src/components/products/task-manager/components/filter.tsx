@@ -67,8 +67,12 @@ function Filter({ state }: { state: { setParams: Dispatch<SetStateAction<params>
                                         const newState = statee(state.params.filter);
                                         statee = newState;
                                     }
-                                    state.setParams((params) => {
-                                        return { ...params, filter: statee, page: 1 };
+                                    state.setParams((params: params) => {
+                                        return {
+                                            ...params,
+                                            filter: statee as Array<'macro' | 'micro' | 'inProject' | 'notInProject'>,
+                                            page: 1,
+                                        };
                                     });
                                 }}
                                 state={state.params.filter}
@@ -97,7 +101,7 @@ function Filter({ state }: { state: { setParams: Dispatch<SetStateAction<params>
                         statee = newState;
                     }
                     state.setParams((params) => {
-                        return { ...params, sort: statee, page: 1 };
+                        return { ...params, sort: statee as 'a-z' | 'z-a' | 'latest' | 'oldest', page: 1 };
                     });
                 }}
             >
@@ -125,7 +129,11 @@ function Filter({ state }: { state: { setParams: Dispatch<SetStateAction<params>
                                 }
 
                                 state.setParams((params) => {
-                                    return { ...params, filter: statee, page: 1 };
+                                    return {
+                                        ...params,
+                                        filter: statee as Array<'macro' | 'micro' | 'inProject' | 'notInProject'>,
+                                        page: 1,
+                                    };
                                 });
                             }}
                             key={index}

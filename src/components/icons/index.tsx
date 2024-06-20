@@ -16,7 +16,7 @@ interface iconProps {
 
 const EditIcon = ({ className }: iconProps) => {
     return (
-        <svg className={className} xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="edit">
+        <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="edit">
             <path
                 fill="currentColor"
                 d="M3.5,24h15A3.51,3.51,0,0,0,22,20.487V12.95a1,1,0,0,0-2,0v7.537A1.508,1.508,0,0,1,18.5,22H3.5A1.508,1.508,0,0,1,2,20.487V5.513A1.508,1.508,0,0,1,3.5,4H11a1,1,0,0,0,0-2H3.5A3.51,3.51,0,0,0,0,5.513V20.487A3.51,3.51,0,0,0,3.5,24Z"
@@ -30,7 +30,7 @@ const EditIcon = ({ className }: iconProps) => {
 };
 const GithubIconTemp = ({ className }: iconProps, ref: ForwardedRef<SVGSVGElement>) => {
     return (
-        <svg ref={ref} viewBox="0 0 16 16" className={className} fill="currentColor" aria-hidden="true">
+        <svg ref={ref} viewBox="0 0 16 16" className={className} fill="currentColor">
             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
         </svg>
     );
@@ -62,7 +62,6 @@ const AngleBracket = ({ direction = 'right', width, height, className, translate
             style={{ transform: `rotate(${direct[direction]}deg) ${translateX ? `translateX(${translateX}px)` : ''}` }}
             fill="none"
             viewBox="0 0 27 78"
-            aria-hidden="true"
         >
             <path
                 fill="currentColor"
@@ -71,7 +70,7 @@ const AngleBracket = ({ direction = 'right', width, height, className, translate
         </svg>
     );
 };
-const LogoIcon = ({ className }: { className?: string }) => {
+const LogoIcon = ({ className, fill }: { className?: string; fill?: string }) => {
     return (
         <svg viewBox="50 100 300 300" className={className} xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -88,7 +87,7 @@ const LogoIcon = ({ className }: { className?: string }) => {
                 </radialGradient>
             </defs>
             <path
-                style={{ strokeWidth: '10px', fill: "url('#gradient-0')", stroke: 'rgb(255, 255, 255)' }}
+                style={{ strokeWidth: '10px', fill: fill ? fill : "url('#gradient-0')", stroke: 'rgb(255, 255, 255)' }}
                 d="M 77.257 380.383 L 78.125 257.395 L 213.488 122.342 L 323.439 247.902 L 323.439 120.661 L 262.374 179.861 L 202.734 242.764 L 162.09 178.695 L 262.374 180.403 L 323.439 249.625 L 323.439 383.855 L 202.844 242.765 L 77.257 380.383 Z"
             />
         </svg>
@@ -260,13 +259,7 @@ const TagsIcon = ({ className }: iconProps) => {
 };
 const TaskIcon = ({ className }: iconProps) => {
     return (
-        <svg
-            className={className}
-            xmlns="http://www.w3.org/2000/svg"
-            data-name="LINE COLOR"
-            viewBox="0 0 24 24"
-            id="task"
-        >
+        <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="task">
             <path
                 fill="currentColor"
                 d="M7,9.75a.75.75,0,0,1-.53-.22.78.78,0,0,1-.16-.24.73.73,0,0,1,0-.58.75.75,0,0,1,1.38,0A.75.75,0,0,1,7.75,9a.72.72,0,0,1-.06.29.78.78,0,0,1-.16.24A.75.75,0,0,1,7,9.75Z"
@@ -297,7 +290,7 @@ const MessageIcon = ({ className }: iconProps) => {
                 <circle id="b" cx="12.5" cy="10.5" r="1.5"></circle>
                 <circle id="c" cx="16.5" cy="10.5" r="1.5"></circle>
             </defs>
-            <g fill="none" fill-rule="evenodd">
+            <g fill="none" fillRule="evenodd">
                 <path
                     stroke="#4A4A4A"
                     d="m8.888 21.518 5.985-4.489H20a1.5 1.5 0 0 0 1.5-1.5V5A1.5 1.5 0 0 0 20 3.5H5A1.5 1.5 0 0 0 3.5 5v10.53a1.5 1.5 0 0 0 1.5 1.5h3.088v4.088a.5.5 0 0 0 .8.4z"
@@ -739,7 +732,7 @@ const LockIcon = ({ className }: iconProps) => {
             x="0px"
             y="0px"
             viewBox="0 0 72 90"
-            enable-background="new 0 0 72 72"
+            enableBackground="new 0 0 72 72"
         >
             <g>
                 <path

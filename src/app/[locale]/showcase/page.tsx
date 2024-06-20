@@ -1,16 +1,17 @@
 import { unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import Respositories from '@/components/respositories';
+import { useTranslations } from 'next-intl';
 type Props = {
     params: { locale: string };
 };
-function showcasePage({ params: { locale } }: Props) {
+function ShowcasePage({ params: { locale } }: Props) {
     unstable_setRequestLocale(locale);
-
+    const t = useTranslations('Showcase');
     return (
         <div>
-            <h1 className="text-[48px] text-tl w-[80%] font-semibold mx-auto mt-[100px] text-center">
-                This serves as a showcase for my projects and also functions as a comprehensive repositories
+            <h1 className="lt:text-[48px] text-tl lt:w-4/5 mb:w-full tl:text-[36px] mb:text-[28px] font-semibold mx-auto mt-[100px] text-center">
+                {t('description')}{' '}
             </h1>
 
             <Respositories />
@@ -18,4 +19,4 @@ function showcasePage({ params: { locale } }: Props) {
     );
 }
 
-export default showcasePage;
+export default ShowcasePage;

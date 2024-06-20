@@ -3,6 +3,8 @@ import DashedWrap from '@/components/wrapper-components/dashed-wrap';
 import MainContent from '@/components/paragraph-container/main-content';
 import ExplainWhy from '@/components/paragraph-container/explain-why.tsx';
 import { useTranslations } from 'next-intl';
+import Summary from '@/components/one-time-use/summary';
+import { zoomies } from 'ldrs';
 type Props = {
     params: { locale: string };
 };
@@ -35,9 +37,30 @@ export default function Home() {
                         thirdContent: t('BrieIntroduction.thinking.thirdContent'),
                         fourthContent: t('BrieIntroduction.thinking.fourthContent'),
                     },
+                    skill: {
+                        title: t('BrieIntroduction.skill.title'),
+                        firstContent: t('BrieIntroduction.skill.firstContent'),
+                    },
+                    showcase: {
+                        title: t('BrieIntroduction.showcase.title'),
+                        firstContent: t('BrieIntroduction.showcase.firstContent'),
+                    },
                 }}
             />
-            <div className="h-[500vw]"></div>
+            <Summary
+                content={{
+                    skill: {
+                        title: t('summary.skill.title'),
+                        description: t('summary.skill.description'),
+                        button: t('summary.skill.button'),
+                    },
+                    showcase: {
+                        title: t('summary.showcase.title'),
+                        description: t('summary.showcase.description'),
+                        button: t('summary.showcase.button'),
+                    },
+                }}
+            />
         </div>
     );
 }

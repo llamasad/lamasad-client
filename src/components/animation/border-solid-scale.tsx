@@ -8,7 +8,7 @@ function BorderSolidScale({ getSectionSpace, index }: { getSectionSpace: Functio
         let tl = gsap.timeline({
             scrollTrigger: {
                 trigger: '.preview-container',
-                start: `${getSectionSpace(index) - 200}px 65px`,
+                start: `${getSectionSpace(index) + 200}px 65px`,
                 end: () => '+=10px',
             },
         });

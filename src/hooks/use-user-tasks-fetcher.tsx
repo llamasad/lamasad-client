@@ -14,7 +14,7 @@ export function fetcher(url: string, data: any) {
             return res.data;
         })
         .catch((error) => {
-            console.error(error);
+            throw error;
         });
 }
 

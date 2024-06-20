@@ -82,3 +82,15 @@ body {
 .ant-input-outlined:hover {
     background-color: transparent;
 }
+.home-loading-move {
+    animation: home-loading 1s infinite;
+}
+@keyframes home-loading {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateX(128px);
+    }
+}

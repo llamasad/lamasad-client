@@ -2,33 +2,52 @@
 import classNames from 'classnames';
 import { Link } from '@/navigation/next-intl';
 import type { AppDynamicPathnames, AppStaticsPathnames, AppDynamicKeyParams } from '@/config/language';
-import { ReactNode, useContext, useLayoutEffect, useState } from 'react';
-import { usePathname } from '@/navigation/next-intl';
+import { ReactNode, use, useContext, useLayoutEffect, useState } from 'react';
+
+import { usePathname } from 'next/navigation';
+import { usePathname as usePath } from '@/navigation/next-intl';
+import { staticPathnames } from '@/config/language';
 import { LoadingBarContext } from '../provider/loading-bar-provider';
 function StaticLink({
     href,
     children,
     className,
     isHighlight = true,
+    locale,
 }: {
     href: AppStaticsPathnames;
     children: ReactNode;
     className?: string;
     isHighlight?: boolean;
+    locale?: 'en' | 'vi';
 }) {
     const loadingbarState = useContext(LoadingBarContext);
     const [trigger, setTrigger] = useState<boolean>(false);
     const pn = usePathname();
+    const pnArray = pn.split('/');
+    pnArray.splice(0, 1);
+    const lg = pnArray.shift();
+    var path = '/' + pnArray.join('/');
+
+    if (lg === 'vi') {
+        path = Object.entries(staticPathnames).find(
+            ([key, value]: [string, any]) => value[lg as 'vi' | 'en'] === path,
+        ) as any;
+        if (path) {
+            path = path[0];
+        }
+    }
     useLayoutEffect(() => {
-        if (pn !== href) {
+        if (path !== href) {
             setTrigger(false);
         } else {
             setTrigger(true);
         }
-    }, [pn]);
+    }, [path]);
 
     return (
         <Link
+            locale={locale}
             className={classNames(className, {
                 'text-pimary': trigger && isHighlight,
                 'font-semibold': trigger && isHighlight,
@@ -43,7 +62,7 @@ function StaticLink({
                 });
                 setTrigger(true);
                 {
-                    if (pn === href) {
+                    if (path === href) {
                         loadingbarState.setProgress(100);
                     } else {
                         loadingbarState.setProgress(70);

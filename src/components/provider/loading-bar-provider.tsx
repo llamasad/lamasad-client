@@ -9,7 +9,7 @@ interface ILoadingBarContext {
     progress: number;
     setProgress: (value: number) => void;
 }
-
+import { useMediaQuery } from 'react-responsive';
 // Create the context with default values
 export const LoadingBarContext = createContext<ILoadingBarContext>({
     progress: 0,
@@ -18,23 +18,31 @@ export const LoadingBarContext = createContext<ILoadingBarContext>({
 
 const LoadingLineProvider = ({ children }: { children: ReactNode }) => {
     const [progress, setProgress] = useState<number>(0);
-    const [height, setHeight] = useState<1 | 2>(() =>
+    const [height, setHeight] = useState<number>(() =>
         (document.body as any).getAttribute('theme-data') === 'light' ? 2 : 1,
     );
+    const isMobileScreen = useMediaQuery({ query: '(max-width: 639px)' });
     const pathname = usePathname();
-    useLayoutEffect(() => {
+    useEffect(() => {
+        const el = document.querySelector('.home-loading') as HTMLDivElement;
+
+        if (el) {
+            el.style.display = 'none';
+        }
+    }, []);
+    useEffect(() => {
         const observer = themeObserver((mutationRecord) => {
             let theme = (mutationRecord[0] as any).target.getAttribute('theme-data');
             if (theme === 'light') {
-                setHeight(2);
+                isMobileScreen ? setHeight(3) : setHeight(2);
             } else {
-                setHeight(1);
+                isMobileScreen ? setHeight(2) : setHeight(1);
             }
         });
         return () => {
             observer.disconnect();
         };
-    }, []);
+    }, [isMobileScreen]);
     const provided = useMemo(
         () => ({
             progress: progress,

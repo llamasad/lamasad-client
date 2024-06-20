@@ -2,8 +2,9 @@ import { Pathnames } from 'next-intl/navigation';
 
 export const locales = ['en', 'vi'] as const;
 
-const staticPathnames = {
+export const staticPathnames = {
     '/': '/',
+
     '/skill': {
         en: '/skill',
         vi: '/k%E1%BB%B9%20n%C4%83ng',
@@ -24,12 +25,16 @@ const staticPathnames = {
         en: '/showcase/product/task-manager/home',
         vi: '/tr%C6%B0ng%20b%C3%A0y/s%E1%BA%A3n%20ph%E1%BA%A9m/qu%E1%BA%A3n%20l%C3%BD%20c%C3%B4ng%20vi%E1%BB%87c/trang%20ch%E1%BB%A7',
     },
+    '/showcase/product/happy-new-year-game': {
+        en: '/showcase/product/happy-new-year-game',
+        vi: '/tr%C6%B0ng%20b%C3%A0y/s%E1%BA%A3n%20ph%E1%BA%A9m/tr%C3%B2%20ch%C6%A1i%20n%C4%83m%20m%E1%BB%9Bi',
+    },
 } satisfies Pathnames<typeof locales>;
 
-const dynamicPathnames = {
+export const dynamicPathnames = {
     '/showcase/product/task-manager/task-detail/[id]': {
         en: '/showcase/product/task-manager/task-detail/[id]',
-        vi: '/tr%C6%B0ng%20b%C3%A0y/s%E1%BA%A3n%20ph%E1%BA%A9m/qu%E1%BA%A3n%20l%C3%BD%20c%C3%B4ng%20vi%E1%BB%87c/chi%20ti%E1%BA%BFt%20c%C3%B4ng%20vi%E1%BB%87c/[id]',
+        vi: '/showcase/s%E1%BA%A3n%20ph%E1%BA%A9m/qu%E1%BA%A3n%20l%C3%BD%20c%C3%B4ng%20vi%E1%BB%87c/chi%20ti%E1%BA%BFt%20c%C3%B4ng%20vi%E1%BB%87c/[id]',
     },
 } satisfies Pathnames<typeof locales>;
 

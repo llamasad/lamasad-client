@@ -30,7 +30,39 @@
                 "secondContent": "things that float on the surface we see.",
                 "thirdContent": "driven by a desire to understand the “why” behind their functionality.",
                 "fourthContent": "My inside-out approach enables me to build solutions that are robust and effective while continuously expanding my knowledge base"
+            },
+            "skill": {
+                "title": "Skill",
+                "firstContent": "demonstrates the technologies I utilize and references the projects in which they have been applied"
+            },
+            "showcase": {
+                "title": "Showcase",
+                "firstContent": "Showcase of My Personal Projects "
+            }
+        },
+        "summary": {
+            "skill": {
+                "title": "Skill",
+                "description": "The list will include some of the tools I utilize, and will exclude certain tools such as Tailwind, Sass, Next Intl, Framer Motion, SWR, Sequelize, and others.",
+                "button": "Explore skill"
+            },
+            "showcase": {
+                "title": "Showcase",
+                "description": " explore my project showcase. It provides a comprehensive overview of my work, highlighting key projects and accomplishments.",
+                "button": "Explore showcase"
             }
         }
+    },
+    "Skill": {
+        "title": "My process for developing an application",
+        "step": {
+            "stepOne": "Have idea and consider",
+            "stepTwo": "Think and plan ",
+            "stepThree": "Coding",
+            "stepFour": "Pray"
+        }
+    },
+    "Showcase": {
+        "description": "This serves as a showcase for my projects and also functions as a comprehensive repositories"
     }
 }

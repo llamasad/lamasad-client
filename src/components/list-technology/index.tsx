@@ -53,51 +53,36 @@ function ListTechnology() {
             title: 'React',
             proficiency: 'AboveCompetent',
             image: images.reactIcon,
-            reference: [
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-            ],
+            reference: [{ link: 'https://github.com/llamasad/webmanga', alias: 'website manga' }],
         },
         {
             title: 'NextJs(App)',
             proficiency: 'AboveCompetent',
-            reference: [
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-            ],
+            reference: [{ link: 'https://github.com/llamasad/lamasad-client', alias: 'lamasad app' }],
             image: images.nextjsIcon,
         },
         {
             title: 'Gsap',
             proficiency: 'Competent',
-            reference: [{ link: 'http://localhost:3000/', alias: 'lamasad project' }],
+            reference: [{ link: 'https://github.com/llamasad/lamasad-client', alias: 'lamasad app' }],
             image: images.gsapIcon,
         },
         {
             title: 'Redux',
             proficiency: 'Competent',
-            reference: [
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-            ],
+            reference: [{ link: 'https://github.com/llamasad/lamasad-client', alias: 'lamasad app' }],
             image: images.reduxIcon,
         },
         {
             title: 'MongoDB',
             proficiency: 'AboveFamiliar',
-            reference: [
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-            ],
+            reference: [{ link: 'https://github.com/llamasad/halloween', alias: 'Hallowin FaceAPI' }],
             image: images.mongodbIcon,
         },
         {
             title: 'Postgres',
             proficiency: 'AboveFamiliar',
-            reference: [
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-            ],
+            reference: [{ link: 'https://github.com/llamasad/lamasad-server', alias: 'lamasad server' }],
             image: images.postgresIcon,
         },
         {
@@ -113,19 +98,25 @@ function ListTechnology() {
             title: 'Nodejs',
             proficiency: 'AboveFamiliar',
             reference: [
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
+                { link: 'https://github.com/llamasad/lamasad-server', alias: 'lamasad sever' },
+                { link: 'https://github.com/llamasad/halloween', alias: 'Hallowin FaceAPI' },
             ],
             image: images.nodejsIcon,
         },
         {
             title: 'Linux',
             proficiency: 'AboveFamiliar',
-            reference: [
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-                { link: 'http://localhost:3000/en', alias: 'link to anything' },
-            ],
+            reference: [],
             image: images.linuxIcon,
+        },
+        {
+            title: 'Socket.io',
+            proficiency: 'AboveFamiliar',
+            reference: [
+                { link: 'https://github.com/llamasad/lamasad-server', alias: 'lamasad sever' },
+                { link: 'https://github.com/llamasad/lamasad-client', alias: 'lamasad client' },
+            ],
+            image: images.socketIcon,
         },
     ];
     let arr2d = to2dArray<tech>(arr, collum);

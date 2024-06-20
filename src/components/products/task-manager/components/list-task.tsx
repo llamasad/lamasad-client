@@ -35,7 +35,6 @@ const ListTask = forwardRef(function A(
                 setTimeout(
                     () =>
                         setTrigger((prev) => {
-                            console.log('trigger', prev);
                             return prev + 1;
                         }),
                     0,
@@ -50,10 +49,15 @@ const ListTask = forwardRef(function A(
         },
         [tasks, setTrigger],
     );
+    if (isError && isError.response && isError.response.status === 403) {
+        throw new Error('You are not authorized to access this page');
+    }
     return (
         <>
             {isLoading ? (
-                <LoadIcon className="animate-spin w-10 h-10" />
+                <div className={'flex items-center justify-center mt-8 '}>
+                    <l-tail-chase size="80" speed="1.75" color="currentColor"></l-tail-chase>{' '}
+                </div>
             ) : tasks && Array.isArray(tasks.data) ? ( // Check if tasks is an array
                 <div className="flex flex-wrap mt-[20px]  ">
                     <CreateTask hasMacWrap={hasMacWrap} display={display} />

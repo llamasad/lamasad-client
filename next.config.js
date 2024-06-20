@@ -10,6 +10,7 @@ const nextConfig = {
             },
         ],
     },
+
     async headers() {
         return [
             {

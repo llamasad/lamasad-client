@@ -1,5 +1,5 @@
 function TaskDetail() {
-    return <div>1234</div>;
+    return <div>null</div>;
 }
 
 export default TaskDetail;

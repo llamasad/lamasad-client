@@ -30,7 +30,39 @@
                 "secondContent": "Trôi nổi trên bề mặt mà chúng tôi thấy.",
                 "thirdContent": "Được thúc đẩy bởi mong muốn hiểu “lý do” đằng sau chức năng của chúng.",
                 "fourthContent": "Cách tiếp cận từ trong ra ngoài của tôi cho phép tôi xây dựng các giải pháp mạnh mẽ và hiệu quả đồng thời liên tục mở rộng nền tảng kiến thức của mình"
+            },
+            "skill": {
+                "title": "Kỹ năng",
+                "firstContent": "trình bày các công nghệ tôi sử dụng và tham khảo tới các dự án mà tôi đã được áp dụng"
+            },
+            "showcase": {
+                "title": "Trưng bày",
+                "firstContent": "Nơi trưng bày các dự án cá nhân của tôi"
+            }
+        },
+        "summary": {
+            "skill": {
+                "title": "Kỹ năng",
+                "description": "Danh sách này sẽ bao gồm một số công cụ tôi sử dụng và sẽ loại trừ một số công cụ nhất định như Tailwind, Sass, Next Intl, Framer Motion, SWR, Sequelize và các công cụ khác.",
+                "button": "Trang kỹ năng"
+            },
+            "showcase": {
+                "title": "Trưng bày",
+                "description": "khám phá phòng trưng bày dự án của tôi. Nó cung cấp một cái nhìn tổng quan toàn diện về công việc của tôi, nêu bật các dự án và thành tựu quan trọng.",
+                "button": "Trang trưng bày"
             }
         }
+    },
+    "Skill": {
+        "title": "Quy trình phát triển ứng dụng của tôi",
+        "step": {
+            "stepOne": "Có ý tương và xem xét",
+            "stepTwo": "Suy nghĩ và lên kế hoạch",
+            "stepThree": "Lập trình",
+            "stepFour": "Cầu nguyện"
+        }
+    },
+    "Showcase": {
+        "description": "Đây đóng vai trò là nơi giới thiệu các dự án của tôi và cũng có chức năng như một kho lưu trữ"
     }
 }

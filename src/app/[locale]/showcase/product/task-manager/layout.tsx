@@ -22,14 +22,14 @@ function Layout({ children, auth }: { children: ReactNode; auth: ReactNode }) {
         };
     }, []);
     if (isLoading) return <div>Loading...</div>;
-    console.log(type);
+
     return (
         <>
             {!type && <HeaderTaskManager />}
             {type === 'custom' && <HeaderTaskManager />}
             {type === 'user' && <UserHeaderTaskManager hasMacWrap={false} />}
             {type === 'userNonAuth' && auth}
-            <div className="min-h-[calc(100vh-84px)]">{children}</div>
+            <div className="min-h-[calc(100vh-171px)]">{children}</div>
         </>
     );
 }

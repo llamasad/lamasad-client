@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 /* Instruments */
 import { reduxStore, persistor } from './redux';
+import { useEffect } from 'react';
 
 export const Providers = (props: React.PropsWithChildren) => {
     return (

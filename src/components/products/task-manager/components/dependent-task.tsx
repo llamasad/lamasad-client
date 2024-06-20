@@ -92,11 +92,7 @@ function DependentTasks({ project_id, dependent }: { project_id: number | null; 
         defaultValue && defaultValue.length > 0 ? true : false,
     );
 
-    const {
-        tasks,
-        isLoading: isTasksLoading,
-        isError: isTasksError,
-    } = useUserTasksFetcher(project_id ? true : false, project_id ? { project_id: project_id } : undefined);
+    const { tasks, isLoading: isTasksLoading, isError: isTasksError } = useUserTasksFetcher(false);
 
     useEffect(() => {
         const el3 = selectRef.current;

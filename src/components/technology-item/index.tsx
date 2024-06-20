@@ -141,6 +141,7 @@ function TechnologyItem({
                     {data.reference.map((v, i) => (
                         <li key={i} className="ml-[10px] translate-x-[180px] techonology-item_ref">
                             <Link
+                                target="_blank"
                                 onClick={(ev) => {
                                     ev.stopPropagation();
                                 }}

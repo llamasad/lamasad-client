@@ -21,7 +21,6 @@ function HomePage({ hasMacWrap = true }: { hasMacWrap?: boolean }) {
         search?: string;
     }>({ filter: [], status: 'all', sort: 'latest', page: 1 });
     const [trigger, setTrigger] = useState<number>(0);
-    console.log('trigger', statusRef.current.pageCount, trigger);
     return (
         <div className="flex flex-col ">
             <Filter state={{ params, setParams }} />

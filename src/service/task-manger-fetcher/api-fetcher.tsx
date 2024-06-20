@@ -52,8 +52,7 @@ async function apiFecther<T>(
                 return undefined;
         }
     } catch (err) {
-        console.error(err);
-        return undefined;
+        throw err;
     }
 }
 
