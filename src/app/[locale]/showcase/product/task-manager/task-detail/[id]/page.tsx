@@ -29,10 +29,8 @@ function TaskDetail({ params }: { params: { id: string } }) {
             .then((res: any) => {
                 setIsLoading(false);
                 setTask(res);
-                console.log(res);
             })
             .catch((err) => {
-                console.log(err);
                 setIsLoading(false);
                 if (err.response && err.response.status === 403) {
                     setError('Forbiden');

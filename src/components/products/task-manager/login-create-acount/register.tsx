@@ -186,9 +186,7 @@ function Register({ setX }: { setX: Dispatch<SetStateAction<number>> }) {
                                 .then((res) => {
                                     mutate(`${process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string}/user-check`);
                                 })
-                                .catch((error) => {
-                                    console.error(error);
-                                });
+                                .catch((error) => {});
                         }
                     }}
                     className={classNames('text-tl transition-all w-[150px] h-[40px] rounded-full', {

@@ -12,9 +12,7 @@ export function fetcher(url: string) {
         .then((res) => {
             return res.data;
         })
-        .catch((error) => {
-            console.error(error);
-        });
+        .catch((error) => {});
 }
 
 function useChatFetcher(chat_id: number) {

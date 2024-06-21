@@ -37,7 +37,6 @@ function TaskDetail({ params }: { params: { id: string } }) {
                 }
             });
     }, [params.id]);
-    console.log(error);
     if (error === 'Forbiden') {
         throw new Error('You are not authorized to access this page');
     }

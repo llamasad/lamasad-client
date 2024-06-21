@@ -31,9 +31,7 @@ function userTypeFetcher(url: string, dispatch: Dispatch<any>) {
             }
             return res.data.message;
         })
-        .catch((error) => {
-            console.error(error);
-        });
+        .catch((error) => {});
 }
 export default function useTypeUserFetcher(): {
     type: 'user' | 'custom' | 'userNonAuth';

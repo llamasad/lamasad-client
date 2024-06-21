@@ -44,9 +44,7 @@ function TaskActivitySide({
                     setActivities(res.data.activites);
                     setMicroTasks(res.data.microsTasks);
                 })
-                .catch((err) => {
-                    console.error(err);
-                });
+                .catch((err) => {});
         } else {
             apiFecther(
                 `/api/tasks-activities-child${`${
@@ -57,9 +55,7 @@ function TaskActivitySide({
                 .then((res: any) => {
                     setActivities(res.data.activites);
                 })
-                .catch((err) => {
-                    console.error(err);
-                });
+                .catch((err) => {});
         }
     }, [activities_id, microTasks_id, type, trigger]);
     return (

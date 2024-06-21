@@ -10,7 +10,6 @@ import { mutate } from 'swr';
 function Login() {
     const [invalidMess, setInvalidMess] = useState<string>('');
     const [captchaCodeRes, setCaptchaCodeRes] = useState<string | null>('');
-    console.log('key', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
     const emailRef = useRef<null | {
         getValidateMess: () => string | undefined;
         getInputValue: () => string;
