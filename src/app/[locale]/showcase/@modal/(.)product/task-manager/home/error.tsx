@@ -17,7 +17,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
                 <h2 className=" mb-2 ">Forbiden,login before access</h2>
                 <p className=" text-weak mb-2">
                     <span
-                        className="pointer-cursor text-green-500"
+                        className="cursor-pointer text-green-500"
                         onClick={() => {
                             reset();
                             router.refresh();
