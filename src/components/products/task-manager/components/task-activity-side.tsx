@@ -25,8 +25,8 @@ function TaskActivitySide({
     project_id?: number | null;
     hasMacWrap: boolean;
 }) {
-    const [activities, setActivities] = useState<any>([]);
-    const [microTasks, setMicroTasks] = useState<any>([]);
+    const [activities, setActivities] = useState<Array<any>>([]);
+    const [microTasks, setMicroTasks] = useState<Array<any>>([]);
     const [trigger, setTrigger] = useState<boolean>(false);
     useEffect(() => {
         if (type === 'macro') {
@@ -34,9 +34,21 @@ function TaskActivitySide({
                 `/api/tasks-activities-child${
                     microTasks_id && microTasks_id.length > 0
                         ? `?tasks=${microTasks_id.join(',')}${`${
-                              activities_id && activities_id.length > 0 ? `&activities=${activities_id.join(',')}` : ''
+                              activities_id && activities_id.length > 0
+                                  ? `&activities=${
+                                        (activities && activities.map((el) => el._id).join(',')) ||
+                                        activities_id.join(',')
+                                    }`
+                                  : ''
                           }`}`
-                        : `${activities_id && activities_id.length > 0 ? `?activities=${activities_id.join(',')}` : ''}`
+                        : `${
+                              activities_id && activities_id.length > 0
+                                  ? `?activities=${
+                                        (activities && activities.map((el) => el._id).join(',')) ||
+                                        activities_id.join(',')
+                                    }`
+                                  : ''
+                          }`
                 }`,
                 'GET',
             )
