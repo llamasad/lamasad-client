@@ -17,7 +17,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
 
                 <HardLink
                     href="/showcase/product/task-manager"
-                    className="mt-4 rounded-md bg-green-500 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-400"
+                    className="mt-4 rounded-md bg-green-500 px-4 py-2 text-sm text-white transition-colors "
                 >
                     Back to home
                 </HardLink>
