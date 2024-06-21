@@ -31,7 +31,7 @@ function UserHeaderTaskManager({ hasMacWrap = true }: { hasMacWrap?: boolean }) 
         <header className="flex items-center justify-between relative">
             <div className="flex items-center ">
                 <StaticLink href="/">
-                    <Image unoptimized src={images.logo} className="cursor-pointer" width={60} height={60} alt="" />
+                    <Image src={images.logo} className="cursor-pointer" width={60} height={60} alt="" />
                 </StaticLink>
                 <span className="ml-[-10px] rotate-3 text-3xl font-extralight text-weak">/</span>
                 <h2 className={classNames('ml-[5px] text-tl cursor-pointer text-3xl font-medium', jockeyOne.className)}>
@@ -68,6 +68,7 @@ function UserHeaderTaskManager({ hasMacWrap = true }: { hasMacWrap?: boolean }) 
                 >
                     <div className="flex items-center cursor-pointer">
                         <Image
+                            unoptimized
                             src={userData.imgSrc}
                             width={36}
                             height={36}
