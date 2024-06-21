@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import axios from 'axios';
-import { getCookie } from './use-type-user-fetcher';
+import { getAccessToken } from './use-type-user-fetcher';
 export function fetcher(url: string, ids: number[]) {
     return axios //send a get request to the server with array task id to get the task details
         .get(url, {
@@ -8,7 +8,7 @@ export function fetcher(url: string, ids: number[]) {
                 data: ids,
             },
             headers: {
-                Authorization: `Bearer ${getCookie('access-token') as string}`,
+                Authorization: `Bearer ${getAccessToken('access-token') as string}`,
             },
         })
         .then((res) => {

@@ -1,13 +1,13 @@
 import useSWR from 'swr';
 import axios from 'axios';
-import { getCookie } from './use-type-user-fetcher';
+import { getAccessToken } from './use-type-user-fetcher';
 import { TypeOfSatatusInterface } from '@/components/products/task-manager/components/status';
 export function fetcher(url: string, data: any) {
     return axios
         .get(url, {
             params: data,
             headers: {
-                Authorization: `Bearer ${getCookie('access-token') as string}`,
+                Authorization: `Bearer ${getAccessToken('access-token') as string}`,
             },
         })
         .then((res) => {

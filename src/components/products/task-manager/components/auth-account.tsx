@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import $ from 'jquery';
 import Image from 'next/image';
 import interact from 'interactjs';
-import { getCookie } from '@/hooks/use-type-user-fetcher';
+import { getAccessToken } from '@/hooks/use-type-user-fetcher';
 import { mutate } from 'swr';
 
 function dataURItoBlob(dataURI: string) {
@@ -202,7 +202,7 @@ function AuthAccount() {
                                 mutate(`${process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string}/user-check`);
                             },
                             beforeSend: function (xhr) {
-                                xhr.setRequestHeader('Authorization', `Bearer ${getCookie('access-token')}`); // Replace 'YOUR_ACCESS_TOKEN' with your actual token
+                                xhr.setRequestHeader('Authorization', `Bearer ${getAccessToken('access-token')}`); // Replace 'YOUR_ACCESS_TOKEN' with your actual token
                             },
                             error: function (xhr, status, error) {
                                 // Handle error response

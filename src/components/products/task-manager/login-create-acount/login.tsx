@@ -43,6 +43,7 @@ function Login() {
                         { withCredentials: true },
                     );
                     setIsWaitingRes(false);
+                    response.data.accessToken && localStorage.setItem('access-token', response.data.accessToken);
                     mutate(`${process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string}/user-check`);
                 }
             } catch (error: any) {

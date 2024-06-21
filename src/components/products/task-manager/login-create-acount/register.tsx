@@ -184,6 +184,7 @@ function Register({ setX }: { setX: Dispatch<SetStateAction<number>> }) {
                                     },
                                 )
                                 .then((res) => {
+                                    res.data.accessToken && localStorage.setItem('access-token', res.data.accessToken);
                                     mutate(`${process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string}/user-check`);
                                 })
                                 .catch((error) => {});

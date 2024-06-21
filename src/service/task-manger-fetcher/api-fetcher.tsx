@@ -1,4 +1,4 @@
-import { getCookie } from '@/hooks/use-type-user-fetcher';
+import { getAccessToken } from '@/hooks/use-type-user-fetcher';
 import axios from 'axios';
 export interface UserData {
     username: string;
@@ -16,7 +16,7 @@ async function apiFecther<T>(
     try {
         const url = (process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string) + pathname;
         const headers = {
-            Authorization: `Bearer ${getCookie('access-token') as string}`,
+            Authorization: `Bearer ${getAccessToken('access-token') as string}`,
             'Content-Type': Content_Type,
         };
         switch (method) {

@@ -1,12 +1,12 @@
 import useSWR from 'swr';
 import axios from 'axios';
-import { getCookie } from './use-type-user-fetcher';
+import { getAccessToken } from './use-type-user-fetcher';
 
 export function fetcher(url: string) {
     return axios
         .get(url, {
             headers: {
-                Authorization: `Bearer ${getCookie('access-token') as string}`,
+                Authorization: `Bearer ${getAccessToken('access-token') as string}`,
             },
         })
         .then((res) => {

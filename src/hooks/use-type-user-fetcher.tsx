@@ -4,25 +4,14 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from '@reduxjs/toolkit';
 import { TMUserSlice } from '@/lib/redux/slices/tm-user-slice';
 import { TMUserSliceState } from '@/lib/redux/slices/tm-user-slice';
-export function getCookie(cookieName: string) {
-    const name = cookieName + '=';
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookieArray = decodedCookie.split(';');
-    const cookie = cookieArray.find((el) => {
-        return el.includes(name);
-    });
-    if (cookie) {
-        let rs = cookie.split(name);
-        return rs[rs.length - 1];
-    }
-
-    return '';
+export function getAccessToken(cookieName: string) {
+    return localStorage.getItem(cookieName) || '';
 }
 function userTypeFetcher(url: string, dispatch: Dispatch<any>) {
     return axios
         .get(url, {
             headers: {
-                Authorization: `Bearer ${getCookie('access-token') as string}`,
+                Authorization: `Bearer ${getAccessToken('access-token') as string}`,
             },
         })
         .then((res) => {
