@@ -4,8 +4,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'http',
-                hostname: 'localhost',
-                port: '1212',
+                hostname: process.env.NEXT_PUBLIC_SERVER_SIDE_URL,
                 pathname: '/**',
             },
         ],

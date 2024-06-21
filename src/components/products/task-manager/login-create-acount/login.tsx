@@ -35,7 +35,7 @@ function Login() {
                     const passwordInput = ev.currentTarget.querySelector('input[name="password"]') as HTMLInputElement;
 
                     const response = await axios.post(
-                        'http://localhost:1212/login',
+                        process.env.NEXT_PUBLIC_SERVER_SIDE_URL + '/login',
                         {
                             [emailInput.name]: emailInput.value,
                             [passwordInput.name]: passwordInput.value,
