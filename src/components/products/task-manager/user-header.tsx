@@ -10,8 +10,8 @@ const jockeyOne = Jockey_One({ weight: '400', preload: false });
 import Tippy from '@tippyjs/react/headless';
 import { useRouter } from '@/navigation/next-intl';
 import { mutate } from 'swr';
-function deleteCookie(name: string) {
-    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+function deleteAccessToken(name: string) {
+    localStorage.removeItem(name);
 }
 
 function UserHeaderTaskManager({ hasMacWrap = true }: { hasMacWrap?: boolean }) {
@@ -54,7 +54,7 @@ function UserHeaderTaskManager({ hasMacWrap = true }: { hasMacWrap?: boolean }) 
                             <li
                                 className="text-tl cursor-pointer"
                                 onClick={() => {
-                                    deleteCookie('access-token');
+                                    deleteAccessToken('access-token');
                                     hasMacWrap
                                         ? route.push('/showcase/product/task-manager')
                                         : (window.location.href = '/showcase/product/task-manager');
