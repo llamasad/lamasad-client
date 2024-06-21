@@ -13,8 +13,18 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
                 <p className="text-lg text-tl font-semibold">403</p>
             </div>
             <div>
-                <h2 className="text-center mb-3">Forbiden,login before access</h2>
-
+                <h2 className="text-center mb-2">Forbiden,login before access</h2>
+                <p className="text-center  text-weak mb-2">
+                    <span
+                        className="text-green-500"
+                        onClick={() => {
+                            reset();
+                        }}
+                    >
+                        reset
+                    </span>{' '}
+                    if you logged
+                </p>
                 <StaticLink
                     isHighlight={false}
                     href="/showcase/product/task-manager"

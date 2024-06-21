@@ -58,6 +58,7 @@ function UserHeaderTaskManager({ hasMacWrap = true }: { hasMacWrap?: boolean }) 
                                     hasMacWrap
                                         ? route.push('/showcase/product/task-manager')
                                         : (window.location.href = '/showcase/product/task-manager');
+
                                     mutate(`${process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string}/user-check`);
                                 }}
                             >

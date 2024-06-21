@@ -6,10 +6,8 @@ import OverlayWrapper from '@/components/wrapper-components/overlay-wrapper';
 import UserHeaderTaskManager from '@/components/products/task-manager/user-header';
 import useTypeUserFetch from '@/hooks/use-type-user-fetcher';
 import Footer from '@/components/products/task-manager/footer';
-
 function Layout({ children, auth }: { children: ReactNode; auth: ReactNode }) {
     const { type, isError, isLoading } = useTypeUserFetch();
-    type;
     return (
         <MacbookWrapper url={'taskmanager.com'}>
             <>
