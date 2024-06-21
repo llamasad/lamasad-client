@@ -19,7 +19,6 @@ function UserHeaderTaskManager({ hasMacWrap = true }: { hasMacWrap?: boolean }) 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const route = useRouter();
-    console.log('userData', userData);
     useEffect(() => {
         apiFecther<UserData>('/api/user', 'GET')
             .then((res) => {
