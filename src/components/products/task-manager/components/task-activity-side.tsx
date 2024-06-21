@@ -74,6 +74,7 @@ function TaskActivitySide({
         <div className="relative w-full flex flex-col mx-[10px]">
             <h2 className="text-xl text-center  font-semibold ">Activity</h2>
             <AddActitvity
+                hasMacWrap={hasMacWrap}
                 setState={{ setActivities, setMicroTasks }}
                 project_id={project_id}
                 type={type}

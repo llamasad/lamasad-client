@@ -23,6 +23,7 @@ function AddActitvity({
     task_id,
     type,
     project_id,
+    hasMacWrap,
 }: {
     setState: {
         setActivities: Dispatch<SetStateAction<any>>;
@@ -31,6 +32,7 @@ function AddActitvity({
     task_id: string;
     type: 'macro' | 'micro';
     project_id?: number | null;
+    hasMacWrap: boolean;
 }) {
     const [isShow, setIsShow] = useState(false);
     return (
@@ -91,6 +93,7 @@ function AddActitvity({
                                             <ArrowIcon className="w-[20px] rotate-90 h-[20px]" />
                                         </span>
                                         <AddActivityTaskItemForm
+                                            hasMacWrap={hasMacWrap}
                                             setIsShow={setIsShow}
                                             setState={setState}
                                             project_id={project_id}

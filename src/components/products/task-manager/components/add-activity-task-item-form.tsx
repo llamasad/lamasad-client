@@ -7,6 +7,7 @@ function AddActivityTaskItemForm({
     project_id,
     setState,
     setIsShow,
+    hasMacWrap,
 }: {
     task_id: string;
     project_id?: number | null;
@@ -15,6 +16,7 @@ function AddActivityTaskItemForm({
         setMicroTasks: Dispatch<SetStateAction<any>>;
     };
     setIsShow: Dispatch<SetStateAction<boolean>>;
+    hasMacWrap: boolean;
 }) {
     const [type, setType] = useState<'activity' | 'task'>('activity');
 
@@ -60,7 +62,12 @@ function AddActivityTaskItemForm({
                 <AddActivityItemForm setIsShow={setIsShow} setActivities={setState.setActivities} task_id={task_id} />
             )}
             {type === 'task' && (
-                <AddTaskItemForm project_id={project_id} setMicroTasks={setState.setMicroTasks} task_id={task_id} />
+                <AddTaskItemForm
+                    hasMacWrap={hasMacWrap}
+                    project_id={project_id}
+                    setMicroTasks={setState.setMicroTasks}
+                    task_id={task_id}
+                />
             )}
         </div>
     );

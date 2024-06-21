@@ -80,10 +80,12 @@ function AddTaskItemForm({
     task_id,
     project_id,
     setMicroTasks,
+    hasMacWrap,
 }: {
     task_id: string;
     project_id?: number | null;
     setMicroTasks: Dispatch<SetStateAction<any>>;
+    hasMacWrap: boolean;
 }) {
     const [errorMessages, setErrorMessages] = useState<string[]>([]);
     const [isProjectLoading, setIsProjectLoading] = useState<boolean>(true);
@@ -178,10 +180,15 @@ function AddTaskItemForm({
                                         .then((rs: any) => {
                                             setIsSubmiting(false);
                                             if (rs) {
-                                                router.push({
-                                                    pathname: '/showcase/product/task-manager/task-detail/[id]',
-                                                    params: { id: 'micro' + '-' + rs._id },
-                                                });
+                                                if (hasMacWrap) {
+                                                    router.push({
+                                                        pathname: '/showcase/product/task-manager/task-detail/[id]',
+                                                        params: { id: 'micro' + '-' + rs._id },
+                                                    });
+                                                } else {
+                                                    window.location.href =
+                                                        '/showcase/product/task-manager/task-detail/micro-' + rs._id;
+                                                }
                                             }
                                         })
                                         .catch((err) => {
