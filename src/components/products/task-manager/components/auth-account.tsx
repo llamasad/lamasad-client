@@ -12,6 +12,7 @@ import Image from 'next/image';
 import interact from 'interactjs';
 import { getAccessToken } from '@/hooks/use-type-user-fetcher';
 import { mutate } from 'swr';
+import { useRouter } from '@/navigation/next-intl';
 
 function dataURItoBlob(dataURI: string) {
     const byteString = atob(dataURI.split(',')[1]);
@@ -26,7 +27,8 @@ function dataURItoBlob(dataURI: string) {
     return new Blob([ab], { type: mimeString });
 }
 
-function AuthAccount() {
+function AuthAccount({ hasMacWrap = true }: { hasMacWrap?: boolean }) {
+    const route = useRouter();
     const [x, setX] = useState<string>('0');
     const [username, setUsername] = useState('');
     const [date, setDate] = useState<Date>();
@@ -199,6 +201,11 @@ function AuthAccount() {
                             contentType: false,
                             success: function (response) {
                                 // Handle success response
+                                if (hasMacWrap) {
+                                    route.refresh();
+                                } else {
+                                    window.location.reload();
+                                }
                                 mutate(`${process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string}/user-check`);
                             },
                             beforeSend: function (xhr) {
