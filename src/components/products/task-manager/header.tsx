@@ -15,7 +15,7 @@ import StaticLink from '@/components/navigation/staic-link';
 const Box = styled(motion.div)``;
 const jockeyOne = Jockey_One({ weight: '400', preload: false });
 
-function HeaderTaskManager() {
+function HeaderTaskManager({ hasMacWrap = true }: { hasMacWrap?: boolean }) {
     const [isTrigger, setIsTrigger] = useState<boolean>(false);
     const springConfig = { damping: 15 };
     const initialScale = 0.5;
@@ -63,7 +63,7 @@ function HeaderTaskManager() {
                         render={(attrs) =>
                             isTrigger && (
                                 <Box style={{ scale, opacity }} {...attrs}>
-                                    <LoginCreateAcount />
+                                    <LoginCreateAcount hasMacWrap={hasMacWrap} />
                                 </Box>
                             )
                         }

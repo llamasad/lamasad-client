@@ -7,7 +7,9 @@ import Input from '../components/input';
 import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
 import { mutate } from 'swr';
-function Login() {
+import { useRouter } from '@/navigation/next-intl';
+function Login({ hasMacWrap = true }: { hasMacWrap?: boolean }) {
+    const router = useRouter();
     const [invalidMess, setInvalidMess] = useState<string>('');
     const [captchaCodeRes, setCaptchaCodeRes] = useState<string | null>('');
     const emailRef = useRef<null | {
@@ -45,6 +47,11 @@ function Login() {
                     setIsWaitingRes(false);
                     response.data.accessToken && localStorage.setItem('access-token', response.data.accessToken);
                     mutate(`${process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string}/user-check`);
+                    if (hasMacWrap) {
+                        router.refresh();
+                    } else {
+                        window.location.reload();
+                    }
                 }
             } catch (error: any) {
                 setInvalidMess(error.response.data.message);
