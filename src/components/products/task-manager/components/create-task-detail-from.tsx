@@ -76,7 +76,11 @@ const hanldeInputValid = (
     }
 };
 
-function CreateTaskDetailForm() {
+function CreateTaskDetailForm({
+    setIsCreateTaskDetail,
+}: {
+    setIsCreateTaskDetail?: Dispatch<SetStateAction<boolean>>;
+}) {
     // const [show, setShow] = useState(false);
     const TMUser = useSelector(selectTMUser);
     const [errorMessages, setErrorMessages] = useState<string[]>([]);
@@ -148,7 +152,8 @@ function CreateTaskDetailForm() {
             >
                 <span
                     onClick={() => {
-                        unmountChild();
+                        unmountChild && unmountChild();
+                        setIsCreateTaskDetail && setIsCreateTaskDetail(false);
                     }}
                 >
                     <ExitIcon className="absolute w-[20px] h-[20px] right-[8px] top-[8px] cursor-pointer" />
@@ -307,7 +312,8 @@ function CreateTaskDetailForm() {
                                                     pathname: '/showcase/product/task-manager/task-detail/[id]',
                                                     params: { id: type.toLowerCase() + '-' + rs._id },
                                                 });
-                                                unmountChild();
+                                                unmountChild && unmountChild();
+                                                setIsCreateTaskDetail && setIsCreateTaskDetail(false);
                                             }
                                         })
                                         .catch((err) => {

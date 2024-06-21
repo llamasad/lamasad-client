@@ -4,11 +4,18 @@ import { useRef, useEffect, useState } from 'react';
 import images from '@/assets/images';
 import observerTheme from '@/util/cookies/theme/observers/theme-observer';
 import gsap from 'gsap';
+import { escape } from 'querystring';
 function LogoIcon() {
     const logoTween = useRef<gsap.core.Timeline | null>(null);
     const [iconKey, setIconKey] = useState(() => {
         const theme = document.body.getAttribute('theme-data');
-        let key = `${theme}Logo` as 'darkLogo' | 'lightLogo';
+        let key;
+        if (theme) {
+            key = `${theme}Logo` as 'darkLogo' | 'lightLogo';
+        } else {
+            key = 'lightLogo' as 'darkLogo' | 'lightLogo';
+        }
+
         return key;
     });
 
