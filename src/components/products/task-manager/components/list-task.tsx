@@ -6,6 +6,7 @@ import useUserTasksFetcher from '@/hooks/use-user-tasks-fetcher';
 import { LoadIcon } from '@/components/icons';
 import { TypeOfSatatusInterface } from './status';
 import { Dispatch, ForwardedRef, SetStateAction, forwardRef, memo, useImperativeHandle } from 'react';
+import { useSWRConfig } from 'swr';
 interface params {
     filter: Array<'macro' | 'micro' | 'inProject' | 'notInProject'>;
     status: keyof TypeOfSatatusInterface | 'all';
@@ -27,6 +28,7 @@ const ListTask = forwardRef(function A(
     },
     ref: ForwardedRef<any>,
 ) {
+    const { cache, mutate, ...extraConfig } = useSWRConfig();
     const { tasks, isLoading, isError } = useUserTasksFetcher(true, params);
     useImperativeHandle(
         ref,
@@ -50,12 +52,13 @@ const ListTask = forwardRef(function A(
         [tasks, setTrigger],
     );
     if (isError && isError.response && isError.response.status === 403) {
+        cache.delete(`${process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string}/api/tasks`);
         throw new Error('You are not authorized to access this page');
     }
     return (
         <>
             {isLoading ? (
-                <div className={'flex items-center justify-center mt-8 '}>
+                <div className={'flex items-center min-h-[120px] justify-center mt-8 '}>
                     <l-tail-chase size="80" speed="1.75" color="currentColor"></l-tail-chase>{' '}
                 </div>
             ) : tasks && Array.isArray(tasks.data) ? ( // Check if tasks is an array

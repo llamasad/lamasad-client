@@ -8,6 +8,14 @@ import useTypeUserFetch from '@/hooks/use-type-user-fetcher';
 import Footer from '@/components/products/task-manager/footer';
 function Layout({ children, auth }: { children: ReactNode; auth: ReactNode }) {
     const { type, isError, isLoading } = useTypeUserFetch();
+    if (isLoading)
+        return (
+            <div className="min-h-[calc(100vh-171px)] flex justify-center items-center">
+                <div>
+                    <l-tail-chase size="80" speed="1.75" color="currentColor"></l-tail-chase>{' '}
+                </div>
+            </div>
+        );
     return (
         <MacbookWrapper url={'taskmanager.com'}>
             <>

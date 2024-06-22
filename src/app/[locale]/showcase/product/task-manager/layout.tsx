@@ -21,7 +21,14 @@ function Layout({ children, auth }: { children: ReactNode; auth: ReactNode }) {
             window.removeEventListener('popstate', popStateHandle);
         };
     }, []);
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading)
+        return (
+            <div className="min-h-[calc(100vh-171px)] flex justify-center items-center">
+                <div>
+                    <l-tail-chase size="80" speed="1.75" color="currentColor"></l-tail-chase>{' '}
+                </div>
+            </div>
+        );
 
     return (
         <>
