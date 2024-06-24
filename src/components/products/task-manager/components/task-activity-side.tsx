@@ -53,7 +53,7 @@ function TaskActivitySide({
                 'GET',
             )
                 .then((res: any) => {
-                    setActivities(res.data.activites);
+                    setActivities(res.data.activities);
                     setMicroTasks(res.data.microsTasks);
                 })
                 .catch((err) => {});
@@ -65,7 +65,7 @@ function TaskActivitySide({
                 'GET',
             )
                 .then((res: any) => {
-                    setActivities(res.data.activites);
+                    setActivities(res.data.activities);
                 })
                 .catch((err) => {});
         }

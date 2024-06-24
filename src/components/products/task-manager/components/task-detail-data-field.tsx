@@ -302,7 +302,7 @@ function TaskDetailDataField({
             </div>
             {value !== defaultValue && onSubmit && (
                 <OverlayWrapper>
-                    <div className="top-[50%] translate-y-[-50%] relative z-[20] mx-auto w-[280px] h-[110px] bg-cooler rounded ">
+                    <div className="top-[50%] translate-y-[-50%] relative z-50 mx-auto w-[280px] h-[110px] bg-cooler rounded ">
                         <div className="w-full h-[70px] p-2 flex items-center">
                             {' '}
                             <span>

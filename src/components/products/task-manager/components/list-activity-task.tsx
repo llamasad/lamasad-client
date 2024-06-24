@@ -18,22 +18,23 @@ function ListActivityTask({
 }) {
     return (
         <ul className="space-y-[10px] h-[33%] overflow-y-auto py-[10px] border-y border-current">
-            {activities
-                .map((activity: any) => (
-                    <ActivityItem
-                        setTrigger={setTrigger}
-                        _id={activity._id}
-                        key={activity._id}
-                        request={activity.request}
-                        title={activity.title}
-                        limits={activity.limits}
-                        status={activity.status}
-                        chat_id={activity.chat_id}
-                        history_id={activity.history_id}
-                        fileAttach_id={activity.fileAttach_id}
-                    />
-                ))
-                .reverse()}
+            {activities &&
+                activities
+                    .map((activity: any) => (
+                        <ActivityItem
+                            setTrigger={setTrigger}
+                            _id={activity._id}
+                            key={activity._id}
+                            request={activity.request}
+                            title={activity.title}
+                            limits={activity.limits}
+                            status={activity.status}
+                            chat_id={activity.chat_id}
+                            history_id={activity.history_id}
+                            fileAttach_id={activity.fileAttach_id}
+                        />
+                    ))
+                    .reverse()}
             {microTasks
                 .map((microTask: any) => (
                     <TaskItem

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import apiFecther from '@/service/task-manger-fetcher/api-fetcher';
 import { useRouter } from '@/navigation/next-intl';
 import classNames from 'classnames';
-function RemoveTask({ task_id }: { task_id: string }) {
+function RemoveTask({ task_id, hasMacWrap }: { task_id: string; hasMacWrap: boolean }) {
     const [isTrigger, setIsTrigger] = useState(false);
     const router = useRouter();
     const [onDelete, setOnDelete] = useState(false);
@@ -21,7 +21,7 @@ function RemoveTask({ task_id }: { task_id: string }) {
             </span>
             {isTrigger && (
                 <OverlayWrapper>
-                    <div className="top-[50%] translate-y-[-50%] relative z-[20] mx-auto w-[280px] h-[110px] bg-cooler rounded ">
+                    <div className="top-[50%] translate-y-[-50%] relative z-50 mx-auto w-[280px] h-[110px] bg-cooler rounded ">
                         <div className="w-full h-[70px] p-2 flex items-center">
                             <span>do you want to remove this task?</span>
                         </div>
@@ -38,7 +38,8 @@ function RemoveTask({ task_id }: { task_id: string }) {
                                 onClick={() => {
                                     setOnDelete(true);
                                     apiFecther(`/api/task/${task_id}`, 'DELETE').then((res) => {
-                                        router.push('/showcase/product/task-manager/home');
+                                        hasMacWrap && router.push('/showcase/product/task-manager/home');
+                                        !hasMacWrap && (window.location.href = '/showcase/product/task-manager/home ');
                                         setOnDelete(false);
                                     });
                                 }}

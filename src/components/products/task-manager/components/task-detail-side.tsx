@@ -8,6 +8,7 @@ import AddUserToTask from './add-user-to-task';
 import { GarbageIcon } from '@/components/icons';
 import RemoveTask from './remove-task';
 function TaskDetailSide({
+    hasMacWrap,
     tilte,
     overview,
     type,
@@ -20,6 +21,7 @@ function TaskDetailSide({
     task_id,
     history_id,
 }: {
+    hasMacWrap: boolean;
     tilte: string;
     overview: string | null;
     type: 'macro' | 'micro';
@@ -92,7 +94,7 @@ function TaskDetailSide({
                 valueOfDetail={project ? 'cc' : 'No project'}
             />
             <DependentTasks dependent={dependent} project_id={project} />
-            <RemoveTask task_id={task_id} />
+            <RemoveTask task_id={task_id} hasMacWrap={hasMacWrap} />
         </div>
     );
 }

@@ -13,6 +13,7 @@ function AddUserToTask({ task_id }: { task_id: string }) {
     const [isSearching, setIsSearching] = useState(false);
     const [user, setUser] = useState<any>(null);
     const debouncedValue = useDebounce(value, 500);
+
     useEffect(() => {
         if (debouncedValue) {
             setIsSearching(true);
@@ -129,8 +130,16 @@ function AddUserToTask({ task_id }: { task_id: string }) {
                     {user && (
                         <>
                             <div className="flex justify-center">
-                                <input type="radio" id="radio-permission-1" name="permission" value={'1'} checked />
-                                <label htmlFor="radio-permission-1 mr-3">view</label>
+                                <input
+                                    type="radio"
+                                    id="radio-permission-1"
+                                    name="permission"
+                                    value={'1'}
+                                    defaultChecked
+                                />
+                                <label htmlFor="radio-permission-1" className=" mr-3 curs">
+                                    view
+                                </label>
                                 <input type="radio" id="radio-permission-3" name="permission" value={'3'} />
                                 <label htmlFor="radio-permission-3">view + edit</label>
                             </div>

@@ -52,6 +52,7 @@ function TaskDetailPage({
                     direction="horizontal"
                 >
                     <TaskDetailSide
+                        hasMacWrap={hasMacWrap}
                         tilte={title}
                         overview={overview}
                         type={type}
@@ -78,6 +79,7 @@ function TaskDetailPage({
             ) : (
                 <div>
                     <TaskDetailSide
+                        hasMacWrap={hasMacWrap}
                         tilte={title}
                         overview={overview}
                         type={type}
