@@ -452,12 +452,7 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                                                             x: positionRef.current.x + macbookWidth / 2,
                                                             y: positionRef.current.y + macbookHeight / 2,
                                                             onComplete: () => {
-                                                                const parts = pathName.split('/');
-                                                                parts.splice(0, 4);
-
-                                                                parts.forEach(() => {
-                                                                    Route.back();
-                                                                });
+                                                                Route.push('/showcase');
                                                             },
                                                         },
                                                     );
@@ -469,11 +464,7 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                                                         x: macbookWidth / 2,
                                                         y: macbookHeight / 2,
                                                         onComplete: () => {
-                                                            const parts = pathName.split('/');
-                                                            parts.splice(0, 4);
-                                                            parts.forEach(() => {
-                                                                Route.push('/showcase');
-                                                            });
+                                                            Route.push('/showcase');
                                                         },
                                                     });
                                                 }
