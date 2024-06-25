@@ -28,6 +28,7 @@ function dataURItoBlob(dataURI: string) {
 }
 
 function AuthAccount({ hasMacWrap = true }: { hasMacWrap?: boolean }) {
+    const [isFire, setIsFire] = useState(false);
     const route = useRouter();
     const [x, setX] = useState<string>('0');
     const [username, setUsername] = useState('');
@@ -192,7 +193,7 @@ function AuthAccount({ hasMacWrap = true }: { hasMacWrap?: boolean }) {
                         formArray.forEach(([key, value]) => {
                             formData.append(key, value as any);
                         });
-
+                        setIsFire(true);
                         $.ajax({
                             type: 'POST',
                             url: process.env.NEXT_PUBLIC_SERVER_SIDE_URL + '/auth', // Replace with your server endpoint
@@ -201,6 +202,8 @@ function AuthAccount({ hasMacWrap = true }: { hasMacWrap?: boolean }) {
                             contentType: false,
                             success: function (response) {
                                 // Handle success response
+                                setIsFire(false);
+
                                 if (hasMacWrap) {
                                     route.refresh();
                                 } else {
@@ -212,6 +215,8 @@ function AuthAccount({ hasMacWrap = true }: { hasMacWrap?: boolean }) {
                                 xhr.setRequestHeader('Authorization', `Bearer ${getAccessToken('access-token')}`); // Replace 'YOUR_ACCESS_TOKEN' with your actual token
                             },
                             error: function (xhr, status, error) {
+                                setIsFire(false);
+
                                 // Handle error response
                             },
                         });
@@ -402,7 +407,12 @@ function AuthAccount({ hasMacWrap = true }: { hasMacWrap?: boolean }) {
                         </div>
                     </div>
 
-                    <button className="mb-3 hover:bg-green-500 mt-5 rounded-full flex items-center justify-center bg-weak w-[56px] h-[56px]">
+                    <button
+                        className={classNames(
+                            'mb-3 hover:bg-green-500 mt-5 rounded-full flex items-center justify-center bg-weak w-[56px] h-[56px]',
+                            { 'pointer-events-none': isFire },
+                        )}
+                    >
                         <ArrowLineIcon className="w-[24px] h-[24px]" />
                     </button>
                 </div>

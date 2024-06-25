@@ -10,6 +10,7 @@ import { selectTMUser } from '@/lib/redux/slices/tm-user-slice';
 import Tippy from '@tippyjs/react/headless';
 import { useRouter } from '@/navigation/next-intl';
 import PercentBar from './percent-bar';
+import classNames from 'classnames';
 const statusOptions = [
     { value: 'todo', label: 'Todo' },
     { value: 'yetToStart', label: 'Yet to start' },
@@ -198,7 +199,10 @@ function AddTaskItemForm({
                             }}
                             type="submit"
                             value="submit"
-                            className="bg-cooler rounded w-1/2 h-[38px] cursor-pointer hover:bg-green-500"
+                            className={classNames(
+                                'bg-cooler rounded w-1/2 h-[38px] cursor-pointer hover:bg-green-500',
+                                { 'pointer-events-none': isSubmiting },
+                            )}
                         />
                         <div>
                             {isSubmiting && <LoadIcon className="w-6 h-6 ml-2" />}

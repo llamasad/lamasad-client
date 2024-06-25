@@ -5,6 +5,7 @@ import PercentBar from './percent-bar';
 import type { InputRef } from 'antd';
 import apiFecther from '@/service/task-manger-fetcher/api-fetcher';
 import HistoryApiDispatch from '@/service/task-manger-fetcher/history-api-dispatch';
+import classNames from 'classnames';
 
 function AddActivityItemForm({
     task_id,
@@ -19,6 +20,7 @@ function AddActivityItemForm({
     const titleRef = useRef<InputRef>(null);
     const requestRef = useRef<any>(null);
     const percentRef = useRef<HTMLInputElement>(null);
+    const [isFire, setIsFire] = useState<boolean>(true);
     return (
         <div>
             <ActivityFormField
@@ -54,6 +56,7 @@ function AddActivityItemForm({
                     }
                     setErrorMessages('');
                     // add atcivity
+                    setIsFire(true);
                     apiFecther('/api/activity?task_id=' + task_id, 'POST', {
                         title: titleRef.current?.input?.value,
                         request: requestRef.current?.resizableTextArea?.textArea.value,
@@ -64,13 +67,16 @@ function AddActivityItemForm({
                                 return [...prev, res];
                             });
                             setIsShow(false);
+                            setIsFire(false);
                         })
                         .catch((err) => {
-                            err;
+                            setIsFire(false);
                             setErrorMessages('Something went wrong');
                         });
                 }}
-                className="hover:bg-green-500 border border-current w-full py-2 rounded-md mt-4"
+                className={classNames('hover:bg-green-500 border border-current w-full py-2 rounded-md mt-4', {
+                    'pointer-events-none': isFire,
+                })}
             >
                 Add
             </button>

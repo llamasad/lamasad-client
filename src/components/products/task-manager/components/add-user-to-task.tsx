@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import Image from 'next/image';
 import apiFecther from '@/service/task-manger-fetcher/api-fetcher';
+import classNames from 'classnames';
 
 function AddUserToTask({ task_id }: { task_id: string }) {
     const [isFocus, setIsFocus] = useState(false);
@@ -13,7 +14,7 @@ function AddUserToTask({ task_id }: { task_id: string }) {
     const [isSearching, setIsSearching] = useState(false);
     const [user, setUser] = useState<any>(null);
     const debouncedValue = useDebounce(value, 500);
-
+    const [isFire, setIsFire] = useState<boolean>(true);
     useEffect(() => {
         if (debouncedValue) {
             setIsSearching(true);
@@ -154,16 +155,22 @@ function AddUserToTask({ task_id }: { task_id: string }) {
                                         permission = (raidoIp.find((el: any) => el.checked) as HTMLInputElement).value;
                                     }
                                     if (permission) {
+                                        setIsFire(true);
                                         setIsFocus(false);
                                         setUser(null);
                                         setValue('');
                                         setResult([]);
                                         apiFecther('/api/user-permission', 'POST', { ...user, permission, task_id })
-                                            .then(() => {})
-                                            .catch((err) => {});
+                                            .then(() => {
+                                                setIsFire(false);
+                                            })
+                                            .catch((err) => {
+                                                setIsFire(false);
+                                                alert('Something went wrong');
+                                            });
                                     }
                                 }}
-                                className="bg-cooler w-28 rounded h-8"
+                                className={classNames('bg-cooler w-28 rounded h-8', { 'pointer-events-none': isFire })}
                             >
                                 Add
                             </button>

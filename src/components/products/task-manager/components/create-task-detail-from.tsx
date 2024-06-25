@@ -10,6 +10,7 @@ import { selectTMUser } from '@/lib/redux/slices/tm-user-slice';
 import Tippy from '@tippyjs/react/headless';
 import { useRouter } from '@/navigation/next-intl';
 import { mutate } from 'swr';
+import classNames from 'classnames';
 const statusOptions = [
     { value: 'todo', label: 'Todo' },
     { value: 'yetToStart', label: 'Yet to start' },
@@ -78,8 +79,10 @@ const hanldeInputValid = (
 
 function CreateTaskDetailForm({
     setIsCreateTaskDetail,
+    hasMacWrap,
 }: {
     setIsCreateTaskDetail?: Dispatch<SetStateAction<boolean>>;
+    hasMacWrap: boolean;
 }) {
     // const [show, setShow] = useState(false);
     const TMUser = useSelector(selectTMUser);
@@ -91,6 +94,7 @@ function CreateTaskDetailForm({
     const startTimeRef = useRef<HTMLInputElement>(null);
     const EndTimeRef = useRef<HTMLInputElement>(null);
     const [isSubmiting, setIsSubmiting] = useState<boolean>(false);
+    const [isFire, setIsFire] = useState<boolean>(false);
     const router = useRouter();
     const validateTimes = useCallback((setValidateMess: Dispatch<SetStateAction<string>>) => {
         startTimeRef.current, EndTimeRef.current;
@@ -295,6 +299,7 @@ function CreateTaskDetailForm({
                                         : false
                                 ) {
                                     setIsSubmiting(true);
+                                    setIsFire(true);
                                     apiFecther('/api/task', 'POST', {
                                         title: title,
                                         project: project,
@@ -308,22 +313,32 @@ function CreateTaskDetailForm({
                                         .then((rs: any) => {
                                             setIsSubmiting(false);
                                             if (rs) {
-                                                router.push({
-                                                    pathname: '/showcase/product/task-manager/task-detail/[id]',
-                                                    params: { id: type.toLowerCase() + '-' + rs._id },
-                                                });
+                                                hasMacWrap &&
+                                                    router.push({
+                                                        pathname: '/showcase/product/task-manager/task-detail/[id]',
+                                                        params: { id: type.toLowerCase() + '-' + rs._id },
+                                                    });
+                                                !hasMacWrap &&
+                                                    (window.location.href = `/showcase/product/task-manager/task-detail/${type.toLowerCase()}-${
+                                                        rs._id
+                                                    }`);
                                                 unmountChild && unmountChild();
                                                 setIsCreateTaskDetail && setIsCreateTaskDetail(false);
+                                                setIsFire(false);
                                             }
                                         })
                                         .catch((err) => {
                                             setIsSubmiting(false);
+                                            setIsFire(false);
                                         });
                                 }
                             }}
                             type="submit"
                             value="submit"
-                            className="bg-cooler rounded w-1/2 h-[38px] cursor-pointer hover:bg-green-500"
+                            className={classNames(
+                                'bg-cooler rounded w-1/2 h-[38px] cursor-pointer hover:bg-green-500',
+                                { 'pointer-events-none': isFire },
+                            )}
                         />
                         <div>
                             {isSubmiting && <LoadIcon className="w-6 h-6 ml-2" />}

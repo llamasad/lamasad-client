@@ -44,7 +44,7 @@ function CreateTask({ display, hasMacWrap }: { display: MacbookDisplayType; hasM
                 <>
                     <Overlay />
                     <div className="z-50 absolute top-8 left-[50vw] translate-x-[-50%]">
-                        <CreateTaskDetail setIsCreateTaskDetail={setIsCreateTaskDetail} />
+                        <CreateTaskDetail hasMacWrap={hasMacWrap} setIsCreateTaskDetail={setIsCreateTaskDetail} />
                     </div>
                 </>
             )}
