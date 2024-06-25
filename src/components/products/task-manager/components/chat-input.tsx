@@ -8,13 +8,13 @@ function ChatInput({ socket, chat_id, TMUser }: { socket: Socket; chat_id: numbe
     const [value, setValue] = useState<string>('');
     const onSendMessage = () => {
         if (value.trim() && TMUser) {
-            socket.emit('chatMessage', {
-                room: chat_id,
-                message: value,
-                user_id: TMUser._id,
-                username: TMUser.username,
-                avatar: TMUser.imgSrc,
-            });
+            // socket.emit('chatMessage', {
+            //     room: chat_id,
+            //     message: value,
+            //     user_id: TMUser._id,
+            //     username: TMUser.username,
+            //     avatar: TMUser.imgSrc,
+            // });
             setValue('');
         }
     };

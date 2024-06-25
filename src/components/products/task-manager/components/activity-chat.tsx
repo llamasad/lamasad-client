@@ -22,45 +22,45 @@ function ActivityChat({ chat_id }: { chat_id: number }) {
             });
         }
     }, [messages]);
-    useEffect(() => {
-        socketRef.current = io(process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string, {
-            auth: {
-                serverOffset: 0,
-            },
-        });
+    // useEffect(() => {
+    //     socketRef.current = io(process.env.NEXT_PUBLIC_SERVER_SIDE_URL as string, {
+    //         auth: {
+    //             serverOffset: 0,
+    //         },
+    //     });
 
-        const socket: Socket = socketRef.current; // Assign the Socket type to the 'socket' variable
+    //     const socket: Socket = socketRef.current; // Assign the Socket type to the 'socket' variable
 
-        // ...
+    //     // ...
 
-        // Listen for incoming chat messages
-        socket.on('chatMessage', (data, serverOffset) => {
-            setMessages((prev) => [...prev, data]);
-        });
-        // Listen for latest messages when joining the room
-        socket.on('latestMessages', (data) => {
-            data;
-            setMessages((prev) => [
-                ...prev,
-                ...data.map((item: any) => ({
-                    username: item.username,
-                    message: item.messageText,
-                    user_id: item.user_id,
-                    avatar: item.imgSrc,
-                    created_at: item.createdAt,
-                })),
-            ]);
-        });
-        socket.emit('joinBoxChat', chat_id);
+    //     // Listen for incoming chat messages
+    //     // socket.on('chatMessage', (data, serverOffset) => {
+    //     //     setMessages((prev) => [...prev, data]);
+    //     // });
+    //     // // Listen for latest messages when joining the room
+    //     // socket.on('latestMessages', (data) => {
+    //     //     data;
+    //     //     setMessages((prev) => [
+    //     //         ...prev,
+    //     //         ...data.map((item: any) => ({
+    //     //             username: item.username,
+    //     //             message: item.messageText,
+    //     //             user_id: item.user_id,
+    //     //             avatar: item.imgSrc,
+    //     //             created_at: item.createdAt,
+    //     //         })),
+    //     //     ]);
+    //     // });
+    //     // socket.emit('joinBoxChat', chat_id);
 
-        // Clean up on component unmount
-        return () => {
-            socket.off('chatMessage'); // Remove the specific event listener
-            socket.off('latestMessages'); // Remove the specific event listener
-            socket.disconnect();
-            socketRef.current = null;
-        };
-    }, [chat_id]);
+    //     // Clean up on component unmount
+    //     return () => {
+    //         socket.off('chatMessage'); // Remove the specific event listener
+    //         socket.off('latestMessages'); // Remove the specific event listener
+    //         socket.disconnect();
+    //         socketRef.current = null;
+    //     };
+    // }, [chat_id]);
     return (
         <div className=" flex flex-col ">
             <h2 className="mb-[10px] text-lg text-tl"> Activity chat</h2>
