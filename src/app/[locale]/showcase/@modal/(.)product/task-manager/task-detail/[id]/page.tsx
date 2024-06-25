@@ -40,6 +40,12 @@ function TaskDetail({ params }: { params: { id: string } }) {
     if (error === 'Forbiden') {
         throw new Error('You are not authorized to access this page');
     }
+    if (isLoading)
+        return (
+            <div className={'flex items-center min-h-[120px] justify-center mt-8 '}>
+                <l-tail-chase size="80" speed="1.75" color="currentColor"></l-tail-chase>{' '}
+            </div>
+        );
     return <>{!isLoading && task && <TaskDetailPage {...task} />}</>;
 }
 
