@@ -452,12 +452,17 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                                                             x: positionRef.current.x + macbookWidth / 2,
                                                             y: positionRef.current.y + macbookHeight / 2,
                                                             onComplete: () => {
-                                                                Route.push('/showcase');
-                                                                document.body.style.overflow = 'auto';
+                                                                const parts = pathName.split('/');
+                                                                parts.splice(0, 4);
+                                                                console.log('parts', parts);
+
+                                                                parts.forEach(() => {
+                                                                    Route.back();
+                                                                });
                                                             },
                                                         },
                                                     );
-                                                    tl.to('.overlay', { opacity: 0, display: 'none' }, '<');
+                                                    tl.to('.overlay', { opacity: 0 }, '<');
                                                 } else {
                                                     tl.to(macbook, {
                                                         width: 0,
@@ -465,12 +470,17 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                                                         x: macbookWidth / 2,
                                                         y: macbookHeight / 2,
                                                         onComplete: () => {
-                                                            Route.push('/showcase');
-                                                            document.body.style.overflow = 'auto';
+                                                            const parts = pathName.split('/');
+                                                            parts.splice(0, 4);
+                                                            console.log('parts', parts);
+
+                                                            parts.forEach(() => {
+                                                                Route.back();
+                                                            });
                                                         },
                                                     });
                                                 }
-                                                tl.to('.overlay', { opacity: 0, display: 'none' }, '<');
+                                                tl.to('.overlay', { opacity: 0 }, '<');
                                             }
                                         }}
                                         className="macbook-header_item group exit-macbook bg-[#ff605c] cursor-pointer w-[15px]  rounded-full inline-block h-[15px]"
