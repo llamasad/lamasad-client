@@ -4,7 +4,7 @@ import CreateTaskDetail from '@/components/products/task-manager/components/crea
 import { Transition } from 'react-transition-group';
 export const ComponentChildContext = createContext<{
     ComponentChild: FC | undefined | ReactNode;
-    mountChild: (fc: FC<any>) => void;
+    mountChild: (fc: ReactNode) => void;
     unmountChild: () => void;
 }>({ ComponentChild: undefined, mountChild: () => {}, unmountChild: () => {} });
 
@@ -18,7 +18,7 @@ function OverlayWrapper({ children }: { children: ReactNode }) {
         opacity: 0,
         transform: 'scale(0)',
     };
-    const mountChild = (fc: FC) => {
+    const mountChild = (fc: ReactNode) => {
         setComponentChild(fc);
         setShow(true);
     };

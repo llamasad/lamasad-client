@@ -4,8 +4,13 @@ interface CreateTaskDetailProps {
     setIsCreateTaskDetail?: Dispatch<SetStateAction<boolean>>;
     hasMacWrap: boolean;
 }
-function CreateTaskDetail({ setIsCreateTaskDetail }: { setIsCreateTaskDetail?: Dispatch<SetStateAction<boolean>> }) {
-    const hasMacWrap = true;
+function CreateTaskDetail({
+    setIsCreateTaskDetail,
+    hasMacWrap = true,
+}: {
+    setIsCreateTaskDetail?: Dispatch<SetStateAction<boolean>>;
+    hasMacWrap: boolean;
+}) {
     return <CreateTaskDetailForm hasMacWrap={hasMacWrap} setIsCreateTaskDetail={setIsCreateTaskDetail} />;
 }
 

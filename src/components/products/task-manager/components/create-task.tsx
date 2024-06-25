@@ -16,7 +16,7 @@ function CreateTask({ display, hasMacWrap }: { display: MacbookDisplayType; hasM
                 onClick={() => {
                     console.log('component2', CreateTaskDetail);
 
-                    if (hasMacWrap) mountChild(CreateTaskDetail);
+                    if (hasMacWrap) mountChild(<CreateTaskDetail hasMacWrap={hasMacWrap} />);
                     else setIsCreateTaskDetail(true);
                 }}
                 className={classNames(
@@ -46,7 +46,7 @@ function CreateTask({ display, hasMacWrap }: { display: MacbookDisplayType; hasM
                 <>
                     <Overlay />
                     <div className="z-50 absolute top-8 left-[50vw] translate-x-[-50%]">
-                        <CreateTaskDetail setIsCreateTaskDetail={setIsCreateTaskDetail} />
+                        <CreateTaskDetail hasMacWrap={hasMacWrap} setIsCreateTaskDetail={setIsCreateTaskDetail} />
                     </div>
                 </>
             )}
