@@ -11,7 +11,7 @@ export const ComponentChildContext = createContext<{
 function OverlayWrapper({ children }: { children: ReactNode }) {
     const [ComponentChild, setComponentChild] = useState<FC | undefined | ReactNode>();
     const [show, setShow] = useState<boolean>(false);
-    console.log(ComponentChild);
+    console.log('component1', ComponentChild);
     const duration = 300;
     const defaultStyle = {
         transition: `transform ${duration}ms ease-in-out, opacity ${duration}ms ease-in-out`,

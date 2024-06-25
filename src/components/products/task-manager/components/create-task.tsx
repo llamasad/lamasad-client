@@ -14,6 +14,8 @@ function CreateTask({ display, hasMacWrap }: { display: MacbookDisplayType; hasM
         <>
             <div
                 onClick={() => {
+                    console.log('component2', CreateTaskDetail);
+
                     if (hasMacWrap) mountChild(CreateTaskDetail);
                     else setIsCreateTaskDetail(true);
                 }}
