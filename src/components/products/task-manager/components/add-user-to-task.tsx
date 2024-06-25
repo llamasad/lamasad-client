@@ -14,7 +14,7 @@ function AddUserToTask({ task_id }: { task_id: string }) {
     const [isSearching, setIsSearching] = useState(false);
     const [user, setUser] = useState<any>(null);
     const debouncedValue = useDebounce(value, 500);
-    const [isFire, setIsFire] = useState<boolean>(true);
+    const [isFire, setIsFire] = useState<boolean>(false);
     useEffect(() => {
         if (debouncedValue) {
             setIsSearching(true);

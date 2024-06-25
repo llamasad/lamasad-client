@@ -20,7 +20,7 @@ function AddActivityItemForm({
     const titleRef = useRef<InputRef>(null);
     const requestRef = useRef<any>(null);
     const percentRef = useRef<HTMLInputElement>(null);
-    const [isFire, setIsFire] = useState<boolean>(true);
+    const [isFire, setIsFire] = useState<boolean>(false);
     return (
         <div>
             <ActivityFormField
