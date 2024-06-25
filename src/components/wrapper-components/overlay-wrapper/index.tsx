@@ -4,7 +4,7 @@ import CreateTaskDetail from '@/components/products/task-manager/components/crea
 import { Transition } from 'react-transition-group';
 export const ComponentChildContext = createContext<{
     ComponentChild: FC | undefined | ReactNode;
-    mountChild: (fc: FC) => void;
+    mountChild: (fc: FC<any>) => void;
     unmountChild: () => void;
 }>({ ComponentChild: undefined, mountChild: () => {}, unmountChild: () => {} });
 
