@@ -453,6 +453,7 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                                                             y: positionRef.current.y + macbookHeight / 2,
                                                             onComplete: () => {
                                                                 Route.push('/showcase');
+                                                                document.body.style.overflow = 'auto';
                                                             },
                                                         },
                                                     );
@@ -465,6 +466,7 @@ function MacbookWrapper({ children, url }: { children: ReactNode; url: string })
                                                         y: macbookHeight / 2,
                                                         onComplete: () => {
                                                             Route.push('/showcase');
+                                                            document.body.style.overflow = 'auto';
                                                         },
                                                     });
                                                 }
