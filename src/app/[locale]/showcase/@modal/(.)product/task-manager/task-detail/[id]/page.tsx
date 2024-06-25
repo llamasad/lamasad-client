@@ -25,6 +25,7 @@ function TaskDetail({ params }: { params: { id: string } }) {
     const [task, setTask] = useState<task | null>(null);
     const [error, setError] = useState<any>(null);
     useEffect(() => {
+        setIsLoading(true);
         apiFecther(`/api/task/${params.id}`, 'GET')
             .then((res: any) => {
                 setIsLoading(false);
