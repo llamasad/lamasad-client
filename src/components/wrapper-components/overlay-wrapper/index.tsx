@@ -11,7 +11,7 @@ export const ComponentChildContext = createContext<{
 function OverlayWrapper({ children }: { children: ReactNode }) {
     const [ComponentChild, setComponentChild] = useState<FC | undefined | ReactNode>();
     const [show, setShow] = useState<boolean>(false);
-
+    console.log(ComponentChild);
     const duration = 300;
     const defaultStyle = {
         transition: `transform ${duration}ms ease-in-out, opacity ${duration}ms ease-in-out`,
@@ -61,7 +61,7 @@ function OverlayWrapper({ children }: { children: ReactNode }) {
                             className="mx-auto relative z-20  overflow-y-scroll h-full"
                         >
                             {' '}
-                            {ComponentChild as ReactNode}
+                            {ComponentChild && (ComponentChild as ReactNode)}
                         </div>
                     </div>
                 )}
