@@ -1,17 +1,12 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import CreateTaskDetailForm from './create-task-detail-from';
 interface CreateTaskDetailProps {
     setIsCreateTaskDetail?: Dispatch<SetStateAction<boolean>>;
     hasMacWrap: boolean;
 }
-const CreateTaskDetail: FC<CreateTaskDetailProps> = function ({
-    setIsCreateTaskDetail,
-    hasMacWrap = true,
-}: {
-    setIsCreateTaskDetail?: Dispatch<SetStateAction<boolean>>;
-    hasMacWrap: boolean;
-}) {
+function CreateTaskDetail({ setIsCreateTaskDetail }: { setIsCreateTaskDetail?: Dispatch<SetStateAction<boolean>> }) {
+    const hasMacWrap = true;
     return <CreateTaskDetailForm hasMacWrap={hasMacWrap} setIsCreateTaskDetail={setIsCreateTaskDetail} />;
-};
+}
 
 export default CreateTaskDetail;
