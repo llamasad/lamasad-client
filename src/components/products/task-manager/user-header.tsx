@@ -30,10 +30,10 @@ function UserHeaderTaskManager({ hasMacWrap = true }: { hasMacWrap?: boolean }) 
     return (
         <header className="flex items-center justify-between relative">
             <div className="flex items-center ">
-                <StaticLink href="/">
+                <StaticLink className="tl:block mb:hidden" href="/">
                     <Image src={images.logo} className="cursor-pointer" width={60} height={60} alt="" />
                 </StaticLink>
-                <span className="ml-[-10px] rotate-3 text-3xl font-extralight text-weak">/</span>
+                <span className="ml-[-10px] tl:block mb:hidden rotate-3 text-3xl font-extralight text-weak">/</span>
                 <h2 className={classNames('ml-[5px] text-tl cursor-pointer text-3xl font-medium', jockeyOne.className)}>
                     TManager
                 </h2>

@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import { useSpring, motion } from 'framer-motion';
 import Link from 'next/link';
 import StaticLink from '@/components/navigation/staic-link';
+import HardLink from '@/components/hard-link';
 
 const Box = styled(motion.div)``;
 const jockeyOne = Jockey_One({ weight: '400', preload: false });
@@ -42,13 +43,33 @@ function HeaderTaskManager({ hasMacWrap = true }: { hasMacWrap?: boolean }) {
     return (
         <header className="task-manager_header flex items-center justify-between relative ">
             <div className="flex items-center ">
-                <StaticLink href="/">
+                <StaticLink href="/" className="tl:block mb:hidden">
                     <Image src={images.logo} className="cursor-pointer" width={60} height={60} alt="" />
                 </StaticLink>
-                <span className="ml-[-10px] rotate-3 text-3xl font-extralight text-weak">/</span>
-                <h2 className={classNames('ml-[5px] text-tl cursor-pointer text-3xl font-medium', jockeyOne.className)}>
-                    TManager
-                </h2>
+                <span className="ml-[-10px] tl:block mb:hidden rotate-3 text-3xl font-extralight text-weak">/</span>
+                {(hasMacWrap && (
+                    <StaticLink href="/showcase/product/task-manager">
+                        <h2
+                            className={classNames(
+                                'ml-[5px] text-tl cursor-pointer text-3xl font-medium',
+                                jockeyOne.className,
+                            )}
+                        >
+                            TManager
+                        </h2>
+                    </StaticLink>
+                )) || (
+                    <HardLink href="/showcase/product/task-manager">
+                        <h2
+                            className={classNames(
+                                'ml-[5px] text-tl cursor-pointer text-3xl font-medium',
+                                jockeyOne.className,
+                            )}
+                        >
+                            TManager
+                        </h2>
+                    </HardLink>
+                )}
                 <div className="border-b border-thin w-screen absolute bottom-0 border-weak  inset-x-[50%] mx-[-50vw] l-0"></div>
             </div>
             <div className="flex items-center">
