@@ -10,6 +10,7 @@ const jockeyOne = Jockey_One({ weight: '400', preload: false });
 import Tippy from '@tippyjs/react/headless';
 import { useRouter } from '@/navigation/next-intl';
 import { mutate } from 'swr';
+import HardLink from '@/components/hard-link';
 function deleteAccessToken(name: string) {
     localStorage.removeItem(name);
 }
@@ -34,9 +35,29 @@ function UserHeaderTaskManager({ hasMacWrap = true }: { hasMacWrap?: boolean }) 
                     <Image src={images.logo} className="cursor-pointer" width={60} height={60} alt="" />
                 </StaticLink>
                 <span className="ml-[-10px] tl:block mb:hidden rotate-3 text-3xl font-extralight text-weak">/</span>
-                <h2 className={classNames('ml-[5px] text-tl cursor-pointer text-3xl font-medium', jockeyOne.className)}>
-                    TManager
-                </h2>
+                {(hasMacWrap && (
+                    <StaticLink href="/showcase/product/task-manager">
+                        <h2
+                            className={classNames(
+                                'ml-[5px] text-tl cursor-pointer text-3xl font-medium',
+                                jockeyOne.className,
+                            )}
+                        >
+                            TManager
+                        </h2>
+                    </StaticLink>
+                )) || (
+                    <HardLink href="/showcase/product/task-manager">
+                        <h2
+                            className={classNames(
+                                'ml-[5px] text-tl cursor-pointer text-3xl font-medium',
+                                jockeyOne.className,
+                            )}
+                        >
+                            TManager
+                        </h2>
+                    </HardLink>
+                )}
                 <div className="border-b border-thin w-screen absolute bottom-0 border-weak  inset-x-[50%] mx-[-50vw] l-0"></div>
             </div>
             {userData && (
